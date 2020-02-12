@@ -4,9 +4,7 @@
   "description": "Backend server for free food app.",
   "main": "src/server/index.js",
   "scripts": {
-    "start": "npm run build && node src/server/index.js",
-    "server": "nodemon src/server/index.js",
-    "dev": "npm run server"
+    "start": "node src/server/index.js"
   },
   "engines": {
     "node": "12.x"
