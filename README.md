@@ -25,3 +25,17 @@ npm start
 mongoimport --db=free_food --collection:places --file=dbutil/foodPlaces.json --jsonArray
 
 ```
+
+```bash
+# Hello world
+GET http://localhost:8080/api/food/helloworld
+
+# Basic server -> mongodb call
+POST  http://localhost:8080/api/food/getPlaces
+{
+	"city": "Ann Harbor",
+	"state": "MI"
+}
+```
+
+
