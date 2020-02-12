@@ -13,5 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use('/api/food', foodRoutes);
+app.get("/", (request, response) => {
+  response.sendFile(__dirname+"/index.html");
+});
 
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
