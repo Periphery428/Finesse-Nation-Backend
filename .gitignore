@@ -1,0 +1,8 @@
+#ignore nodemodules
+node_modules/
+.idea/**
+.vscode
+dist
+*.log
+yarn.lock
+package-lock.json

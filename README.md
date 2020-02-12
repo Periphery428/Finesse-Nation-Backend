@@ -1,1 +1,27 @@
 # Finesse-Nation-Backend
+
+Backend for the free food service.
+
+## Quick Start
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server (Use for developing with live code reloading)
+npm run dev
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+```bash
+# Developer Notes Only
+
+# Import test data on mongo database
+mongoimport --db=free_food --collection:places --file=dbutil/foodPlaces.json --jsonArray
+
+```
