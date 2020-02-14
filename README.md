@@ -28,6 +28,9 @@ mongoimport --db=free_food --collection:places --file=dbutil/foodPlaces.json --j
 mongoimport --uri "mongodb+srv://<username>:<password>@mongoclustercs428-pijzh.mongodb.net/free_food" --collection
  places
  --drop --file dbutil/foodPlaces.json --jsonArray
+
+# Connect to mongodb atlas
+mongo "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/test"  --username <username> --password <password>
 ```
 
 ```bash
