@@ -1,5 +1,6 @@
 let MongoClient = require("mongodb").MongoClient;
-let mongoUrl = "mongodb://localhost:27017/free_food";
+// let mongoUrl = "mongodb://localhost:27017/free_food";
+let mongoUrl = "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/test";
 
 exports.helloWorld = (req, res, next) => {
     res.send("hello there, its working...");

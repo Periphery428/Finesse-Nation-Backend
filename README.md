@@ -24,6 +24,10 @@ npm start
 # Import test data on mongo database
 mongoimport --db=free_food --collection:places --file=dbutil/foodPlaces.json --jsonArray
 
+# Import data into mongodb atlas
+mongoimport --uri "mongodb+srv://<username>:<password>@mongoclustercs428-pijzh.mongodb.net/free_food" --collection
+ places
+ --drop --file dbutil/foodPlaces.json --jsonArray
 ```
 
 ```bash
