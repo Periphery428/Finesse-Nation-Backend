@@ -2,6 +2,12 @@ let MongoClient = require("mongodb").MongoClient;
 // let mongoUrl = "mongodb://localhost:27017/free_food";
 let mongoUrl = "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/free_food";
 
+MongoClient.connect(mongoUrl, function(err, client) {
+    if(!err) {
+        console.log("We are connected to mongodb atlas...");
+    }
+});
+
 exports.helloWorld = (req, res, next) => {
     res.send("hello there, its working...");
 };
