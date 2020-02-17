@@ -1,6 +1,6 @@
 let MongoClient = require("mongodb").MongoClient;
 // let mongoUrl = "mongodb://localhost:27017/free_food";
-let mongoUrl = "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/free_food";
+let mongoUrl = "mongodb+srv://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongoclustercs428-pijzh.mongodb.net/free_food?retryWrites=true&w=majority";
 
 MongoClient.connect(mongoUrl, function(err, client) {
     if(!err) {

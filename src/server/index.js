@@ -3,6 +3,7 @@ const express = require('express');
 const os = require('os');
 const bodyParser = require('body-parser');
 // const cors = require('cors');
+require('dotenv').config();
 const app = express();
 
 const foodRoutes = require('./routes/food');
