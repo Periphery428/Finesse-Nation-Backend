@@ -21,4 +21,6 @@ app.get("/", (request, response) => {
   response.sendFile(__dirname+"/index.html");
 });
 
-app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
+let server = app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
+
+module.exports = server;
