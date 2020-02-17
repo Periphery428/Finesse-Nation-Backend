@@ -8,11 +8,8 @@ Backend for the free food service.
 # Install dependencies
 npm install
 
-# Start development server (Use for developing with live code reloading)
-npm run dev
-
-# Build for production
-npm run build
+# Run mocha tests
+npm test
 
 # Start production server
 npm start
