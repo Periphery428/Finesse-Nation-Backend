@@ -32,3 +32,34 @@ exports.getPlaces = (req, res, next) => {
         client.close();
     });
 };
+
+exports.getEvents = (req, res, next) => {
+    MongoClient.connect(mongoUrl, mongoOptions, function (err, client) {
+        let db = client.db("free_food");
+        db.collection("events").find().toArray(function(err, arr) {
+            res.json(arr);
+        });
+        client.close();
+    });
+};
+
+exports.addEvent = (req, res, next) => {
+    MongoClient.connect(mongoUrl, mongoOptions, function (err, client) {
+        let db = client.db("free_food");
+        let newEvent = {
+            "name": req.body.name,
+            "description": req.body.description,
+            "location": req.body.location,
+            "duration": req.body.duration
+        };
+        db.collection("events").insertOne(newEvent, function(err, result) {
+            if(err) {
+                res.send({"Error": "adding new event = " + req.body.name});
+            } else {
+                console.log("Success: added new event = " + req.body.name);
+                res.send(result[0]);
+            }
+        });
+        client.close();
+    });
+};
