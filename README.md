@@ -47,10 +47,10 @@ POST  http://localhost:8080/api/food/getPlaces
 
 ```bash
 # Environment variables
-Place credential in .env file located in root dir:
+# Place credential in .env file located in root dir:
 MONGODB_USERNAME=<username>
 MONGODB_PASSWORD=<password>
 
-Use in nodejs:
+# Use in nodejs:
 let password = process.env.MONGODB_PASSWORD;
 ```
