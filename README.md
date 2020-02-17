@@ -31,6 +31,13 @@ mongoimport --uri "mongodb+srv://<username>:<password>@mongoclustercs428-pijzh.m
 
 # Connect to mongodb atlas
 mongo "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/test"  --username <username> --password <password>
+
+# Environment variables
+# Place credential in .env file located in root dir:
+MONGODB_USERNAME=<username>
+MONGODB_PASSWORD=<password>
+# Use in nodejs:
+let password = process.env.MONGODB_PASSWORD;
 ```
 
 ```bash
@@ -38,19 +45,15 @@ mongo "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/test"  --username <user
 GET http://localhost:8080/api/food/helloworld
 
 # Basic server -> mongodb call
-POST  http://localhost:8080/api/food/getPlaces
+GET  https://finesse-nation.herokuapp.com/api/food/getEvents
+
+POST https://finesse-nation.herokuapp.com/api/food/addEvent
 {
-	"city": "Ann Harbor",
-	"state": "MI"
+    "name": "Adobe Talking Points",
+    "description": "Seminar by Adobe about jobs. Will have salad.",
+    "location": "DCL",
+    "duration": "2.5 hrs"
 }
+
 ```
 
-```bash
-# Environment variables
-# Place credential in .env file located in root dir:
-MONGODB_USERNAME=<username>
-MONGODB_PASSWORD=<password>
-
-# Use in nodejs:
-let password = process.env.MONGODB_PASSWORD;
-```
