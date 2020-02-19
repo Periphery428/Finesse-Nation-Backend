@@ -1,6 +1,7 @@
 # Finesse-Nation-Backend
 
-[![Finesse Nation CI/CD](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Finesse%20Nation%20Backend%20CI
+[![Finesse Nation Backend CI/CD](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Finesse%20Nation
+%20Backend%20CI
 %2FCD
 /badge.svg)](https://github.com/Periphery428/Finesse-Nation-Backend/actions)
 
