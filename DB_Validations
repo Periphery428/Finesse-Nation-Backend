@@ -1,0 +1,34 @@
+db.createCollection("Fineese_Nation_Users", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: [ "emailId", "password", "school" ],
+         properties: {
+            emailId: {
+               bsonType: "string",
+               description: "Email ID is the unique key"
+            },
+            userName: {
+               bsonType: "string",
+               description: "Username deafults to Email ID, if not provided."
+            },
+            password: {
+               bsonType: "string",
+               description: "Password is mandatory."
+            },
+            school: {
+               bsonType: "string",
+               description: "School Name should be mentioned."
+            },
+            points: {
+               bsonType: "int",
+               minimum: 0,
+               maximum: 10000,
+               description: "must be an integer in [ 0, 10000 ] and is required"
+            }
+         }
+      }
+   }
+})
+
+db.Fineese_Nation_Users.insert( { emailId: "shilpar2@illinois.edu", password: "pass123", school: "UIUC" } )
