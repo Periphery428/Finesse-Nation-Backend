@@ -1,6 +1,6 @@
 # Finesse-Nation-Backend
 
-![Node.js CI](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Node.js%20CI/badge.svg?branch=master)
+[![Node.js CI](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Node.js%20CI/badge.svg?branch=master)]
 (https://github.com/Periphery428/Finesse-Nation-Backend/actions)
 
 Backend for the free food service.
