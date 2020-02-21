@@ -38,8 +38,8 @@ exports.getEvents = (req, res, next) => {
         let db = client.db("free_food");
         db.collection("events").find().toArray(function(err, arr) {
             res.json(arr);
+            client.close();
         });
-        // client.close();
     });
 };
 
@@ -59,7 +59,7 @@ exports.addEvent = (req, res, next) => {
                 console.log("Success: added new event = " + req.body.name);
                 res.send(result[0]);
             }
+            client.close();
         });
-        client.close();
     });
 };
