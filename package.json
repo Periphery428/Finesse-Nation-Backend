@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node src/server/index.js",
     "server": "node src/server/index.js",
-    "test": "mocha"
+    "test": "mocha --exit"
   },
   "engines": {
     "node": "12.x"
