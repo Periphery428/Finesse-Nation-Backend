@@ -17,6 +17,17 @@ describe("helloworld", () => {
     });
 });
 
+describe("connection", () => {
+    it("it should connect to mongodb atlas", (done) => {
+        chai.request(server)
+            .get("/api/food/testMongoConnection")
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+            });
+    });
+});
+
 describe("events", () => {
     it("it should return list of events", (done) => {
         chai.request(server)

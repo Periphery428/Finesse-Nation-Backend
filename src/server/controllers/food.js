@@ -16,6 +16,18 @@ exports.helloWorld = (req, res, next) => {
     res.send("hello there, its working...");
 };
 
+exports.testMongoConnection = (req, res, next) => {
+    MongoClient.connect(mongoUrl, function(err, client) {
+        if(!err) {
+            console.log("We are connected to mongodb atlas...");
+            res.send("Connected to mongodb atlas.");
+        } else {
+            console.log("Failed to connect to mongodb atlas...");
+        }
+        client.close();
+    });
+};
+
 exports.getPlaces = (req, res, next) => {
     MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
         let db = client.db("free_food");
