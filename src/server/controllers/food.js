@@ -17,8 +17,6 @@ exports.helloWorld = (req, res, next) => {
 };
 
 exports.testMongoConnection = (req, res, next) => {
-    console.log("process.env.MONGODB_USERNAME = " + process.env.MONGODB_USERNAME + ", process.env.MONGODB_PASSWORD =" +
-        " " + process.env.MONGODB_PASSWORD);
     MongoClient.connect(mongoUrl, function(err, client) {
         if(!err) {
             console.log("We are connected to mongodb atlas...");
