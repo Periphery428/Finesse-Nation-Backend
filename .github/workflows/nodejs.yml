@@ -21,3 +21,5 @@ jobs:
     - run: npm test
       env:
         CI: true
+        MONGODB_USERNAME: ${{ secrets.cs428User ]}
+        MONGODB_PASSWORD: ${{ secrets.cs428Pass ]}
