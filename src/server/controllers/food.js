@@ -39,7 +39,7 @@ exports.getEvents = (req, res, next) => {
         db.collection("events").find().toArray(function(err, arr) {
             res.json(arr);
         });
-        client.close();
+        // client.close();
     });
 };
 
