@@ -40,10 +40,11 @@ let password = process.env.MONGODB_PASSWORD;
 ```
 
 ```bash
+# Server REST APIs
+
 # Hello world
 GET http://localhost:8080/api/food/helloworld
 
-# Basic server -> mongodb call
 GET  https://finesse-nation.herokuapp.com/api/food/getEvents
 
 POST https://finesse-nation.herokuapp.com/api/food/addEvent
@@ -54,5 +55,18 @@ POST https://finesse-nation.herokuapp.com/api/food/addEvent
     "duration": "2.5 hrs"
 }
 
+POST https://finesse-nation.herokuapp.com/api/food/updateEvent
+{
+	"currentName": "Adobe Talking Points",
+    "name": "Facebook Talking Points",
+    "description": "Crawfish broil",
+    "location": "DCL",
+    "duration": "3 hrs"
+}
+
+POST https://finesse-nation.herokuapp.com/api/food/deleteEvent
+{
+	"name": "Josol Event Test 1"
+}
 ```
 

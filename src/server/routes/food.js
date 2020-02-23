@@ -6,7 +6,8 @@ const foodController = require('../controllers/food');
 router.get('/helloworld', foodController.helloWorld);
 router.get('/testMongoConnection', foodController.testMongoConnection);
 router.get('/getEvents', foodController.getEvents);
-router.post('/getPlaces', foodController.getPlaces);
 router.post('/addEvent', foodController.addEvent);
+router.post('/updateEvent', foodController.updateEvent);
+router.post('/deleteEvent', foodController.deleteEvent);
 
 module.exports = router;

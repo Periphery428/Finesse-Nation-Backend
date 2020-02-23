@@ -39,3 +39,54 @@ describe("events", () => {
     });
 });
 
+describe("events", () => {
+    it("it should create an event", (done) => {
+        let event = {
+            "name": "Mocha Test Event",
+            "description": "Mocha test event description.",
+            "location": "Mocha location",
+            "duration": "2 hrs"
+        };
+        chai.request(server)
+            .post("/api/food/addEvent")
+            .send(event)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+            });
+    });
+});
+
+describe("events", () => {
+    it("it should update an event", (done) => {
+        let eventUpdate = {
+            "currentName": "Mocha Test Event",
+            "name": "Mocha Test Event 2",
+            "description": "Mocha Crawfish broil",
+            "location": "Mocha location",
+            "duration": "3 hrs"
+        };
+        chai.request(server)
+            .post("/api/food/updateEvent")
+            .send(eventUpdate)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+            });
+    });
+});
+
+describe("events", () => {
+    it("it should delete an event", (done) => {
+        let eventDelete = {
+            "name": "Mocha Test Event 2"
+        };
+        chai.request(server)
+            .post("/api/food/deleteEvent")
+            .send(eventDelete)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                done();
+            });
+    });
+});
