@@ -35,12 +35,14 @@ mongo "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/test"  --username <user
 # Place credential in .env file located in root dir:
 MONGODB_USERNAME=<username>
 MONGODB_PASSWORD=<password>
+API_TOKEN=<api_token>
 # Use in nodejs:
 let password = process.env.MONGODB_PASSWORD;
 ```
 
 ```bash
 # Server REST APIs
+Must use API Key to use API.
 
 # Hello world
 GET http://localhost:8080/api/food/helloworld

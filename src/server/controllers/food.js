@@ -1,6 +1,7 @@
 let MongoClient = require("mongodb").MongoClient;
 // let mongoUrl = "mongodb://localhost:27017/free_food";
 let mongoUrl = "mongodb+srv://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongoclustercs428-pijzh.mongodb.net/free_food?retryWrites=true&w=majority";
+let apiToken = process.env.API_TOKEN
 
 MongoClient.connect(mongoUrl, function(err, client) {
     if(!err) {
@@ -33,13 +34,18 @@ exports.getEvents = (req, res, next) => {
     MongoClient.connect(mongoUrl, mongoOptions, function (err, client) {
         let db = client.db("free_food");
         db.collection("events").find().toArray(function(err, arr) {
-            if(err) {
-                res.send({"Error": "adding getting events"});
-                res.status(400).end();
+            if(req.headers.api_token === apiToken) {
+                if(err) {
+                    console.log("Error: unable to get events");
+                    res.status(400).end();
+                } else {
+                    res.json(arr);
+                }
             } else {
-                res.json(arr);
-                client.close();
+                console.log("Request is not authorized.");
+                res.status(401).end();
             }
+            client.close();
         });
     });
 };
@@ -54,12 +60,17 @@ exports.addEvent = (req, res, next) => {
             "duration": req.body.duration
         };
         db.collection("events").insertOne(newEvent, function(err, result) {
-            if(err) {
-                res.send({"Error": "adding new event = " + req.body.name});
-                res.status(400).end();
+            if(req.headers.api_token === apiToken) {
+                if(err) {
+                    res.send({"Error": "adding new event = " + req.body.name});
+                    res.status(400).end();
+                } else {
+                    console.log("Success: added new event = " + req.body.name);
+                    res.send(result[0]);
+                }
             } else {
-                console.log("Success: added new event = " + req.body.name);
-                res.send(result[0]);
+                console.log("Request is not authorized.");
+                res.status(401).end();
             }
             client.close();
         });
@@ -79,17 +90,22 @@ exports.updateEvent = (req, res, next) => {
             }
         };
         db.collection("events").updateOne(query, updateVals, function(err, result) {
-            if(err) {
-                console.log("Error: failed to update event = " + req.body.currentName);
-                res.status(400).end();
-            } else {
-                if(result.matchedCount >= 1) {
-                    console.log("Success: updated event = " + req.body.name);
-                    res.send(result[0]);
-                } else {
-                    console.log("Error: unable to find event to update = " + req.body.currentName);
+            if(req.headers.api_token === apiToken) {
+                if(err) {
+                    console.log("Error: failed to update event = " + req.body.currentName);
                     res.status(400).end();
+                } else {
+                    if(result.matchedCount >= 1) {
+                        console.log("Success: updated event = " + req.body.name);
+                        res.send(result[0]);
+                    } else {
+                        console.log("Error: unable to find event to update = " + req.body.currentName);
+                        res.status(400).end();
+                    }
                 }
+            } else {
+                console.log("Request is not authorized.");
+                res.status(401).end();
             }
             client.close();
         });
@@ -101,12 +117,17 @@ exports.deleteEvent = (req, res, next) => {
         let db = client.db("free_food");
         let query = {name: req.body.name};
         db.collection("events").deleteOne(query, function(err, result) {
-            if(err) {
-                res.send({"Error": "deleting event = " + req.body.name});
-                res.status(400).end();
+            if(req.headers.api_token === apiToken) {
+                if(err) {
+                    res.send({"Error": "deleting event = " + req.body.name});
+                    res.status(400).end();
+                } else {
+                    console.log("Success: deleted event = " + req.body.name);
+                    res.send(result[0]);
+                }
             } else {
-                console.log("Success: deleted event = " + req.body.name);
-                res.send(result[0]);
+                console.log("Request is not authorized.");
+                res.status(401).end();
             }
             client.close();
         });

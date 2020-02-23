@@ -32,6 +32,7 @@ describe("events", () => {
     it("it should return list of events", (done) => {
         chai.request(server)
             .get("/api/food/getEvents")
+            .set("api_token", process.env.API_TOKEN)
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 done();
@@ -49,6 +50,7 @@ describe("events", () => {
         };
         chai.request(server)
             .post("/api/food/addEvent")
+            .set("api_token", process.env.API_TOKEN)
             .send(event)
             .end((err, res) => {
                 expect(res).to.have.status(200);
@@ -68,6 +70,7 @@ describe("events", () => {
         };
         chai.request(server)
             .post("/api/food/updateEvent")
+            .set("api_token", process.env.API_TOKEN)
             .send(eventUpdate)
             .end((err, res) => {
                 expect(res).to.have.status(200);
@@ -83,6 +86,7 @@ describe("events", () => {
         };
         chai.request(server)
             .post("/api/food/deleteEvent")
+            .set("api_token", process.env.API_TOKEN)
             .send(eventDelete)
             .end((err, res) => {
                 expect(res).to.have.status(200);
