@@ -61,7 +61,7 @@ POST https://finesse-nation.herokuapp.com/api/food/addEvent
 
 POST https://finesse-nation.herokuapp.com/api/food/updateEvent
 {
-	"currentName": "Adobe Talking Points",
+    "currentName": "Adobe Talking Points",
     "name": "Facebook Talking Points",
     "description": "Crawfish broil",
     "location": "DCL",
