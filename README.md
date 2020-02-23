@@ -70,7 +70,7 @@ POST https://finesse-nation.herokuapp.com/api/food/updateEvent
 
 POST https://finesse-nation.herokuapp.com/api/food/deleteEvent
 {
-	"name": "Josol Event Test 1"
+    "name": "Josol Event Test 1"
 }
 ```
 
