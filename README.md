@@ -42,7 +42,9 @@ let password = process.env.MONGODB_PASSWORD;
 
 ```bash
 # Server REST APIs
-Must use API Key to use API.
+
+# Must use API Key to use API.
+Add to all headers: "api_token":"<api_token>"
 
 # Hello world
 GET http://localhost:8080/api/food/helloworld
