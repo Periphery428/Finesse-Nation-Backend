@@ -48,7 +48,7 @@ exports.getPlaces = (req, res, next) => {
 exports.getEvents = (req, res, next) => {
     MongoClient.connect(mongoUrl, mongoOptions, function (err, client) {
         let db = client.db("free_food");
-        db.collection("events").find().toArray(function(err, arr) {
+        db.collection("temp_events").find().toArray(function(err, arr) {
             res.json(arr);
             client.close();
         });
