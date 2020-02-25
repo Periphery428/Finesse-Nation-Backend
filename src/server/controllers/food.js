@@ -64,7 +64,7 @@ exports.addEvent = (req, res, next) => {
             "location": req.body.location,
             "duration": req.body.duration
         };
-        db.collection("events").insertOne(newEvent, function(err, result) {
+        db.collection("temp_events").insertOne(newEvent, function(err, result) {
             if(err) {
                 res.send({"Error": "adding new event = " + req.body.name});
             } else {
