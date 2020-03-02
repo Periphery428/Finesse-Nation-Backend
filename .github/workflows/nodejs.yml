@@ -23,3 +23,4 @@ jobs:
         CI: true
         MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
         MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+        API_TOKEN: ${{ secrets.API_TOKEN }}

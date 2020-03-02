@@ -35,15 +35,20 @@ mongo "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/test"  --username <user
 # Place credential in .env file located in root dir:
 MONGODB_USERNAME=<username>
 MONGODB_PASSWORD=<password>
+API_TOKEN=<api_token>
 # Use in nodejs:
 let password = process.env.MONGODB_PASSWORD;
 ```
 
 ```bash
+# Server REST APIs
+
+# Must use API Key to use API.
+Add to all headers: "api_token":"<api_token>"
+
 # Hello world
 GET http://localhost:8080/api/food/helloworld
 
-# Basic server -> mongodb call
 GET  https://finesse-nation.herokuapp.com/api/food/getEvents
 
 POST https://finesse-nation.herokuapp.com/api/food/addEvent
@@ -54,5 +59,18 @@ POST https://finesse-nation.herokuapp.com/api/food/addEvent
     "duration": "2.5 hrs"
 }
 
+POST https://finesse-nation.herokuapp.com/api/food/updateEvent
+{
+    "currentName": "Adobe Talking Points",
+    "name": "Facebook Talking Points",
+    "description": "Crawfish broil",
+    "location": "DCL",
+    "duration": "3 hrs"
+}
+
+POST https://finesse-nation.herokuapp.com/api/food/deleteEvent
+{
+    "name": "Josol Event Test 1"
+}
 ```
 
