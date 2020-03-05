@@ -26,7 +26,7 @@ exports.testMongoConnection = (req, res, next) => {
             console.log("We are connected to mongodb atlas...");
             res.send("Connected to mongodb atlas.");
         }
-        //client.close();
+        client.close();
     });
 };
 
