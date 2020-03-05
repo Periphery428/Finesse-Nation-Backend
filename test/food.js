@@ -46,7 +46,8 @@ describe("events", () => {
             "name": "Mocha Test Event",
             "description": "Mocha test event description.",
             "location": "Mocha location",
-            "duration": "2 hrs"
+            "duration": "2 hrs",
+            "timePosted": "Wed Aug 21 2019 01:58:52 GMT+0200"
         };
         chai.request(server)
             .post("/api/food/addEvent")
@@ -66,7 +67,9 @@ describe("events", () => {
             "name": "Mocha Test Event 2",
             "description": "Mocha Crawfish broil",
             "location": "Mocha location",
-            "duration": "3 hrs"
+            "duration": "3 hrs",
+            "timePosted": "Thu Aug 22 2019 01:58:52 GMT+0200"
+
         };
         chai.request(server)
             .post("/api/food/updateEvent")

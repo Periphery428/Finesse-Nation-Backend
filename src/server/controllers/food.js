@@ -57,7 +57,8 @@ exports.addEvent = (req, res, next) => {
             "name": req.body.name,
             "description": req.body.description,
             "location": req.body.location,
-            "duration": req.body.duration
+            "duration": req.body.duration,
+            "timePosted": req.body.timePosted,
         };
         db.collection("events").insertOne(newEvent, function(err, result) {
             if(req.headers.api_token === apiToken) {
