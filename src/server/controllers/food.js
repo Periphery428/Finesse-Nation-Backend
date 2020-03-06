@@ -1,4 +1,5 @@
 let MongoClient = require("mongodb").MongoClient;
+let MongoObjectId = require("mongodb").ObjectID;
 // let mongoUrl = "mongodb://localhost:27017/free_food";
 let mongoUrl = "mongodb+srv://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongoclustercs428-pijzh.mongodb.net/free_food?retryWrites=true&w=majority";
 let apiToken = process.env.API_TOKEN
@@ -81,7 +82,8 @@ exports.addEvent = (req, res, next) => {
 exports.updateEvent = (req, res, next) => {
     MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
         let db = client.db("free_food");
-        let query = {name: req.body.currentName};
+        let eventId = new MongoObjectId(req.body.eventId);
+        let query = {_id: eventId};
         let updateVals = {
             $set:{
                 name: req.body.name,
@@ -93,14 +95,14 @@ exports.updateEvent = (req, res, next) => {
         db.collection("events").updateOne(query, updateVals, function(err, result) {
             if(req.headers.api_token === apiToken) {
                 if(err) {
-                    console.log("Error: failed to update event = " + req.body.currentName);
+                    console.log("Error: failed to update event _id = " + req.body.eventId);
                     res.status(400).end();
                 } else {
                     if(result.matchedCount >= 1) {
-                        console.log("Success: updated event = " + req.body.name);
+                        console.log("Success: updated event _id = " + req.body.eventId);
                         res.send(result[0]);
                     } else {
-                        console.log("Error: unable to find event to update = " + req.body.currentName);
+                        console.log("Error: unable to find event to update _id = " + req.body.eventId);
                         res.status(400).end();
                     }
                 }
@@ -116,14 +118,15 @@ exports.updateEvent = (req, res, next) => {
 exports.deleteEvent = (req, res, next) => {
     MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
         let db = client.db("free_food");
-        let query = {name: req.body.name};
+        let eventId = new MongoObjectId(req.body.eventId);
+        let query = {_id: eventId};
         db.collection("events").deleteOne(query, function(err, result) {
             if(req.headers.api_token === apiToken) {
                 if(err) {
-                    res.send({"Error": "deleting event = " + req.body.name});
+                    res.send({"Error": "deleting event _id = " + req.body.eventId});
                     res.status(400).end();
                 } else {
-                    console.log("Success: deleted event = " + req.body.name);
+                    console.log("Success: deleted event _id = " + req.body.eventId);
                     res.send(result[0]);
                 }
             } else {

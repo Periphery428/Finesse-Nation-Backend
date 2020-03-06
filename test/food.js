@@ -35,12 +35,15 @@ describe("events", () => {
             .set("api_token", process.env.API_TOKEN)
             .end((err, res) => {
                 expect(res).to.have.status(200);
+                expect(res).to.be.json;
                 done();
             });
     });
 });
 
 describe("events", () => {
+    let targetEventId = "";
+
     it("it should create an event", (done) => {
         let event = {
             "name": "Mocha Test Event",
@@ -58,12 +61,28 @@ describe("events", () => {
                 done();
             });
     });
-});
 
-describe("events", () => {
-    it("it should update an event", (done) => {
+    it("it should return _id of created event", (done) => {
+        chai.request(server)
+            .get("/api/food/getEvents")
+            .set("api_token", process.env.API_TOKEN)
+            .end((err, res) => {
+                for(let i = 0; i < res.body.length; i++) {
+                    if(res.body[i].name === "Mocha Test Event" && res.body[i].description === "Mocha test event description.") {
+                        targetEventId = res.body[i]._id;
+                        break;
+                    }
+                }
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
+                expect(targetEventId).to.be.length.greaterThan(0);
+                done();
+            });
+    });
+
+    it("it should update created event", (done) => {
         let eventUpdate = {
-            "currentName": "Mocha Test Event",
+            "eventId": targetEventId,
             "name": "Mocha Test Event 2",
             "description": "Mocha Crawfish broil",
             "location": "Mocha location",
@@ -80,12 +99,10 @@ describe("events", () => {
                 done();
             });
     });
-});
 
-describe("events", () => {
-    it("it should delete an event", (done) => {
+    it("it should delete created event", (done) => {
         let eventDelete = {
-            "name": "Mocha Test Event 2"
+            "eventId": targetEventId
         };
         chai.request(server)
             .post("/api/food/deleteEvent")
