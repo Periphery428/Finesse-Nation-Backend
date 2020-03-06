@@ -50,7 +50,8 @@ describe("events", () => {
             "description": "Mocha test event description.",
             "location": "Mocha location",
             "duration": "2 hrs",
-            "timePosted": "Wed Aug 21 2019 01:58:52 GMT+0200"
+            "timePosted": "Wed Aug 21 2019 01:58:52 GMT+0200",
+            "image": ""
         };
         chai.request(server)
             .post("/api/food/addEvent")
@@ -88,7 +89,6 @@ describe("events", () => {
             "location": "Mocha location",
             "duration": "3 hrs",
             "timePosted": "Thu Aug 22 2019 01:58:52 GMT+0200"
-
         };
         chai.request(server)
             .post("/api/food/updateEvent")
