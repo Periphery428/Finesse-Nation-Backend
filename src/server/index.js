@@ -40,9 +40,9 @@ app.get("/", (request, response) => {
 app.use("/api/user", userRoutes);
 
 //https://stackoverflow.com/questions/4075287/node-express-eaddrinuse-address-already-in-use-kill-server
-app.listen(PORT, (req, res) => {
+let server = app.listen(PORT, (req, res) => {
   console.log(`Server Started at PORT ${PORT}`);
 });
 
 // let server = app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));
-// module.exports = server;
+module.exports = server;
