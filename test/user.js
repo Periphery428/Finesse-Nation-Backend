@@ -55,6 +55,21 @@ describe("login", () => {
             });
     });
 
+    it("it should not login as no api_key is passed", (done) => {
+        let loginCreds = {
+            "emailId": "testmocha1@mochauniversity.edu",
+            "password": "testmocha2pass"
+        };
+        chai.request(server)
+            .post("/api/user/login")
+            .send(loginCreds)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                expect(res).to.be.json;
+                done();
+            });
+    });
+
     it("it should delete user for cleanup", (done) => {
         let emailId = {
             "emailId": "testmocha1@mochauniversity.edu"
