@@ -46,31 +46,6 @@ let password = process.env.MONGODB_PASSWORD;
 # Must use API Key to use API.
 Add to all headers: "api_token":"<api_token>"
 
-# Hello world
-GET http://localhost:8080/api/food/helloworld
-
-GET  https://finesse-nation.herokuapp.com/api/food/getEvents
-
-POST https://finesse-nation.herokuapp.com/api/food/addEvent
-{
-    "name": "Adobe Talking Points",
-    "description": "Seminar by Adobe about jobs. Will have salad.",
-    "location": "DCL",
-    "duration": "2.5 hrs"
-}
-
-POST https://finesse-nation.herokuapp.com/api/food/updateEvent
-{
-    "currentName": "Adobe Talking Points",
-    "name": "Facebook Talking Points",
-    "description": "Crawfish broil",
-    "location": "DCL",
-    "duration": "3 hrs"
-}
-
-POST https://finesse-nation.herokuapp.com/api/food/deleteEvent
-{
-    "name": "Josol Event Test 1"
-}
+# Refer to current postman collection for all http request to backend (Share current postman collection file to team)
 ```
 

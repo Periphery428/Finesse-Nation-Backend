@@ -100,6 +100,24 @@ describe("events", () => {
             });
     });
 
+    it("it should not update created event due to no api_key", (done) => {
+        let eventUpdate = {
+            "eventId": targetEventId,
+            "name": "Mocha Test Event 2",
+            "description": "Mocha Crawfish broil",
+            "location": "Mocha location",
+            "duration": "3 hrs",
+            "timePosted": "Thu Aug 22 2019 01:58:52 GMT+0200"
+        };
+        chai.request(server)
+            .post("/api/food/updateEvent")
+            .send(eventUpdate)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                done();
+            });
+    });
+
     it("it should delete created event", (done) => {
         let eventDelete = {
             "eventId": targetEventId
