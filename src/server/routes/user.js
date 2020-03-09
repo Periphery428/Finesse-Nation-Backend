@@ -1,11 +1,10 @@
 const express = require("express");
 
-//TODO: make use of API token
 let apiToken = process.env.API_TOKEN
 
 //express-validator: requires to express-validator/check are deprecated.You should just use require("express-validator") instead.
 // const { check, validationResult } = require("express-validator/check");
-const { check, validationResult } = require("express-validator");
+const {check, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const router = express.Router();
@@ -38,67 +37,74 @@ router.post(
         })
     ],
     async (req, res) => {
-        const errors = validationResult(req);
-        console.log(":-( "+errors);
-        if (!errors.isEmpty()) {
-            console.log("Error Happened");
-            return res.status(400).json({
-                errors: errors.array()
-            });
-        }
-
-        const { userName, emailId, password } = req.body;
-
-        console.log("Fixing Bugs");
-        console.log("Username: "+userName);
-        console.log("emailId: "+emailId);
-        console.log("password: "+password);
-        try {
-            let user = await User.findOne({
-                emailId
-            });
-            if (user) {
+        if(req.headers.api_token === apiToken) {
+            const errors = validationResult(req);
+            console.log(":-( " + errors);
+            if (!errors.isEmpty()) {
+                console.log("Error Happened");
                 return res.status(400).json({
-                    msg: "User Already Exists"
+                    errors: errors.array()
                 });
             }
 
-            user = new User({
-                userName,
-                emailId,
-                password
-                // username,
-                // email,
-                // password
-            });
+            const {userName, emailId, password} = req.body;
 
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(password, salt);
-
-            await user.save();
-
-            const payload = {
-                user: {
-                    id: user.id
-                }
-            };
-
-            jwt.sign(
-                payload,
-                "randomString",
-                {
-                    expiresIn: 10000
-                },
-                (err, token) => {
-                    if (err) throw err;
-                    res.status(200).json({
-                        token
+            console.log("Fixing Bugs");
+            console.log("Username: " + userName);
+            console.log("emailId: " + emailId);
+            console.log("password: " + password);
+            try {
+                let user = await User.findOne({
+                    emailId
+                });
+                if (user) {
+                    return res.status(400).json({
+                        msg: "User Already Exists"
                     });
                 }
-            );
-        } catch (err) {
-            console.log(err.message);
-            res.status(500).send("Error in Saving");
+
+                user = new User({
+                    userName,
+                    emailId,
+                    password
+                    // username,
+                    // email,
+                    // password
+                });
+
+                const salt = await bcrypt.genSalt(10);
+                user.password = await bcrypt.hash(password, salt);
+
+                await user.save();
+
+                const payload = {
+                    user: {
+                        id: user.id
+                    }
+                };
+
+                jwt.sign(
+                    payload,
+                    "randomString",
+                    {
+                        expiresIn: 10000
+                    },
+                    (err, token) => {
+                        if (err) throw err;
+                        res.status(200).json({
+                            token
+                        });
+                    }
+                );
+            } catch (err) {
+                console.log(err.message);
+                res.status(500).send("Error in Saving");
+            }
+        } else {
+            console.log("Request is not authorized.");
+            return res.status(401).json({
+                message: "Request is not authorized."
+            });
         }
     }
 );
@@ -112,53 +118,94 @@ router.post(
         })
     ],
     async (req, res) => {
-        const errors = validationResult(req);
+        if(req.headers.api_token === apiToken) {
+            const errors = validationResult(req);
 
-        if (!errors.isEmpty()) {
-            return res.status(400).json({
-                errors: errors.array()
-            });
-        }
-
-        const { emailId, password } = req.body;
-        try {
-            let user = await User.findOne({
-                emailId
-            });
-            if (!user)
+            if (!errors.isEmpty()) {
                 return res.status(400).json({
-                    message: "User Not Exist"
+                    errors: errors.array()
                 });
+            }
 
-            const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch)
-                return res.status(400).json({
-                    message: "Incorrect Password !"
-                });
-
-            const payload = {
-                user: {
-                    id: user.id
-                }
-            };
-
-            jwt.sign(
-                payload,
-                "randomString",
-                {
-                    expiresIn: 3600
-                },
-                (err, token) => {
-                    if (err) throw err;
-                    res.status(200).json({
-                        token
+            const {emailId, password} = req.body;
+            try {
+                let user = await User.findOne({emailId});
+                if (!user) {
+                    return res.status(400).json({
+                        message: "User Not Exist"
                     });
                 }
-            );
-        } catch (e) {
-            console.error(e);
-            res.status(500).json({
-                message: "Server Error"
+
+                const isMatch = await bcrypt.compare(password, user.password);
+                if (!isMatch) {
+                    return res.status(400).json({
+                        message: "Incorrect Password !"
+                    });
+                }
+
+                const payload = {
+                    user: {
+                        id: user.id
+                    }
+                };
+
+                jwt.sign(
+                    payload,
+                    "randomString",
+                    {
+                        expiresIn: 3600
+                    },
+                    (err, token) => {
+                        if (err) throw err;
+                        res.status(200).json({
+                            token
+                        });
+                    }
+                );
+            } catch (e) {
+                console.error(e);
+                res.status(500).json({
+                    message: "Server Error"
+                });
+            }
+        } else {
+            console.log("Request is not authorized.");
+            return res.status(401).json({
+                message: "Request is not authorized."
+            });
+        }
+    }
+);
+
+router.post(
+    "/deleteUser",
+    async (req, res) => {
+        if(req.headers.api_token === apiToken) {
+            const {emailId} = req.body;
+
+            try {
+                let user = await User.findOne({emailId});
+                if (!user) {
+                    return res.status(400).json({
+                        message: "User Not Exist"
+                    });
+                }
+
+                user.remove();
+
+                res.status(200).json({
+                    message: "User (" + emailId + ") deleted."
+                });
+            } catch(e) {
+                console.error(e);
+                res.status(500).json({
+                    message: "Server Error"
+                });
+            }
+        } else {
+            console.log("Request is not authorized.");
+            return res.status(401).json({
+                message: "Request is not authorized."
             });
         }
     }
