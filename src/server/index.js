@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
-const os = require('os');
+// const os = require('os');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const InitiateMongoServer = require("./config/db");
@@ -28,7 +28,7 @@ app.get("/", (request, response) => {
 });
 
 const PORT = process.env.PORT || 8080;
-let server = app.listen(PORT, (req, res) => {
+let server = app.listen(PORT, () => {
   console.log(`Server Started at PORT ${PORT}`);
 });
 

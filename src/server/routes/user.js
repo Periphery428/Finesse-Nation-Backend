@@ -12,10 +12,10 @@ const router = express.Router();
 
 const User = require("../model/user");
 
-const path = require('path');
+// const path = require('path');
 
 //TODO: the logic below to be shifted to the controller layer
-const userController = require('../controllers/user');
+// const userController = require('../controllers/user');
 
 // router.post('/signup', userController.signup);
 // module.exports = router;

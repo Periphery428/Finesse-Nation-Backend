@@ -4,7 +4,7 @@ let MongoObjectId = require("mongodb").ObjectID;
 let mongoUrl = "mongodb+srv://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongoclustercs428-pijzh.mongodb.net/free_food?retryWrites=true&w=majority";
 let apiToken = process.env.API_TOKEN
 
-MongoClient.connect(mongoUrl, function(err, client) {
+MongoClient.connect(mongoUrl, function(err) {
     if(!err) {
         console.log("We are connected to mongodb atlas...");
     }
@@ -14,11 +14,11 @@ const mongoOptions = {
     connectTimeoutMS: 5000
 };
 
-exports.helloWorld = (req, res, next) => {
+exports.helloWorld = (req, res) => {
     res.send("hello there, its working...");
 };
 
-exports.testMongoConnection = (req, res, next) => {
+exports.testMongoConnection = (req, res) => {
     MongoClient.connect(mongoUrl, function(err, client) {
         if(err) {
             console.log("Failed to connect to mongodb atlas...");
@@ -31,7 +31,7 @@ exports.testMongoConnection = (req, res, next) => {
     });
 };
 
-exports.getEvents = (req, res, next) => {
+exports.getEvents = (req, res) => {
     MongoClient.connect(mongoUrl, mongoOptions, function (err, client) {
         let db = client.db("free_food");
         db.collection("events").find().toArray(function(err, arr) {
@@ -51,7 +51,7 @@ exports.getEvents = (req, res, next) => {
     });
 };
 
-exports.addEvent = (req, res, next) => {
+exports.addEvent = (req, res) => {
     MongoClient.connect(mongoUrl, mongoOptions, function (err, client) {
         let db = client.db("free_food");
         let newEvent = {
@@ -80,7 +80,7 @@ exports.addEvent = (req, res, next) => {
     });
 };
 
-exports.updateEvent = (req, res, next) => {
+exports.updateEvent = (req, res) => {
     MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
         let db = client.db("free_food");
         let eventId = new MongoObjectId(req.body.eventId);
@@ -116,7 +116,7 @@ exports.updateEvent = (req, res, next) => {
     });
 };
 
-exports.deleteEvent = (req, res, next) => {
+exports.deleteEvent = (req, res) => {
     MongoClient.connect(mongoUrl, mongoOptions, function(err, client) {
         let db = client.db("free_food");
         let eventId = new MongoObjectId(req.body.eventId);
