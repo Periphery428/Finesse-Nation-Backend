@@ -68,8 +68,9 @@ exports.addEvent = (req, res) => {
                     res.send({"Error": "adding new event = " + req.body.name});
                     res.status(400).end();
                 } else {
-                    console.log("Success: added new event = " + req.body.name);
-                    res.send(result[0]);
+                    let logMessage = "Success: added new event = " + req.body.name;
+                    console.log(logMessage);
+                    res.send(logMessage);
                 }
             } else {
                 console.log("Request is not authorized.");
@@ -100,8 +101,9 @@ exports.updateEvent = (req, res) => {
                     res.status(400).end();
                 } else {
                     if(result.matchedCount >= 1) {
-                        console.log("Success: updated event _id = " + req.body.eventId);
-                        res.send(result[0]);
+                        let logMessage = "Success: updated event _id = " + req.body.eventId;
+                        console.log(logMessage);
+                        res.send(logMessage);
                     } else {
                         console.log("Error: unable to find event to update _id = " + req.body.eventId);
                         res.status(400).end();
@@ -127,8 +129,9 @@ exports.deleteEvent = (req, res) => {
                     res.send({"Error": "deleting event _id = " + req.body.eventId});
                     res.status(400).end();
                 } else {
-                    console.log("Success: deleted event _id = " + req.body.eventId);
-                    res.send(result[0]);
+                    let logMessage = "Success: deleted event _id = " + req.body.eventId;
+                    console.log(logMessage);
+                    res.send(logMessage);
                 }
             } else {
                 console.log("Request is not authorized.");

@@ -22,6 +22,7 @@ describe("connection", () => {
         chai.request(server)
             .get("/api/food/testMongoConnection")
             .end((err, res) => {
+                expect(res.text).to.equal("Connected to mongodb atlas.");
                 expect(res).to.have.status(200);
                 done();
             });
@@ -59,6 +60,7 @@ describe("events", () => {
             .send(event)
             .end((err, res) => {
                 expect(res).to.have.status(200);
+                expect(res.text).to.equal("Success: added new event = Mocha Test Event");
                 done();
             });
     });
@@ -96,6 +98,7 @@ describe("events", () => {
             .send(eventUpdate)
             .end((err, res) => {
                 expect(res).to.have.status(200);
+                expect(res.text).to.equal("Success: updated event _id = " + targetEventId);
                 done();
             });
     });
@@ -128,6 +131,7 @@ describe("events", () => {
             .send(eventDelete)
             .end((err, res) => {
                 expect(res).to.have.status(200);
+                expect(res.text).to.equal("Success: deleted event _id = " + targetEventId);
                 done();
             });
     });
