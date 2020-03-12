@@ -62,7 +62,7 @@ exports.addEvent = (req, res) => {
             "timePosted": req.body.timePosted,
             "image": req.body.image
         };
-        db.collection("events").insertOne(newEvent, function(err, result) {
+        db.collection("events").insertOne(newEvent, function(err) {
             if(req.headers.api_token === apiToken) {
                 if(err) {
                     res.send({"Error": "adding new event = " + req.body.name});
@@ -123,7 +123,7 @@ exports.deleteEvent = (req, res) => {
         let db = client.db("free_food");
         let eventId = new MongoObjectId(req.body.eventId);
         let query = {_id: eventId};
-        db.collection("events").deleteOne(query, function(err, result) {
+        db.collection("events").deleteOne(query, function(err) {
             if(req.headers.api_token === apiToken) {
                 if(err) {
                     res.send({"Error": "deleting event _id = " + req.body.eventId});
