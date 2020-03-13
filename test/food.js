@@ -5,30 +5,6 @@ let expect = chai.expect;
 
 chai.use(chaiHttp);
 
-describe("helloworld", () => {
-    it("it should return hello world", (done) => {
-        chai.request(server)
-            .get("/api/food/helloworld")
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res.text).to.equals("hello there, its working...");
-                done();
-            });
-    });
-});
-
-describe("connection", () => {
-    it("it should connect to mongodb atlas", (done) => {
-        chai.request(server)
-            .get("/api/food/testMongoConnection")
-            .end((err, res) => {
-                expect(res.text).to.equal("Connected to mongodb atlas.");
-                expect(res).to.have.status(200);
-                done();
-            });
-    });
-});
-
 describe("events", () => {
     it("it should return list of events", (done) => {
         chai.request(server)
@@ -85,12 +61,13 @@ describe("events", () => {
 
     it("it should update created event", (done) => {
         let eventUpdate = {
-            "eventId": targetEventId,
+            "eventId": targetEventId.toString(),
             "name": "Mocha Test Event 2",
             "description": "Mocha Crawfish broil",
             "location": "Mocha location",
             "duration": "3 hrs",
-            "timePosted": "Thu Aug 22 2019 01:58:52 GMT+0200"
+            "timePosted": "Thu Aug 22 2019 01:58:52 GMT+0200",
+            "image": ""
         };
         chai.request(server)
             .post("/api/food/updateEvent")

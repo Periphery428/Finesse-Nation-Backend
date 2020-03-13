@@ -11,7 +11,7 @@ const InitiateMongoServer = require("./config/db");
 InitiateMongoServer();
 
 const app = express();
-const foodRoutes = require('./routes/food');
+const eventRoutes = require('./routes/event');
 const userRoutes = require("./routes/user");
 
 app.use(bodyParser.json({ limit: "16mb", extended: true }));
@@ -20,7 +20,7 @@ app.use(cors());
 
 app.use(express.static(path.join(__dirname, 'build')));
 
-app.use('/api/food', foodRoutes);
+app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 
 app.get("/", (request, response) => {

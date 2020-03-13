@@ -1,4 +1,4 @@
-const {body, validationResult, sanitizeBody} = require("express-validator");
+const {body, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -11,9 +11,6 @@ exports.signup = [
     body("userName", "Please Enter a Valid UserName").isLength({min: 1}).trim(),
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
     body("password", "Please enter a valid password").isLength({min: 6}).trim(),
-
-    // Sanitize fields
-    sanitizeBody("*").escape(),
 
     async (req, res) => {
         if(req.headers.api_token === apiToken) {
@@ -86,9 +83,6 @@ exports.login = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
     body("password", "Please enter a valid password").isLength({min: 6}).trim(),
-
-    // Sanitize fields
-    sanitizeBody("*").escape(),
 
     async (req, res) => {
         if(req.headers.api_token === apiToken) {
