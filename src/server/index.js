@@ -17,14 +17,13 @@ const userRoutes = require("./routes/user");
 app.use(bodyParser.json({ limit: "16mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 app.use(cors());
-
 app.use(express.static(path.join(__dirname, 'build')));
 
 app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 
 app.get("/", (request, response) => {
-  response.sendFile(__dirname+"/index.html");
+  response.sendFile(__dirname + "/index.html");
 });
 
 const PORT = process.env.PORT || 8080;
