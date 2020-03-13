@@ -24,6 +24,4 @@ const UserSchema = mongoose.Schema({
 });
 
 // export model user with UserSchema
-//Fineese_Nation_Users
 module.exports = mongoose.model("Fineese_Nation_Users", UserSchema);
-// module.exports = mongoose.model("user", UserSchema);
