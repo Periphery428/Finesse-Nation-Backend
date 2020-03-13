@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const InitiateMongoServer = require("./config/db");
+const apiKeyValidation = require("./middleware/apikey")
 
 // Initiate Mongo Server
 InitiateMongoServer();
@@ -19,6 +20,10 @@ app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'build')));
 
+// Custom middleware
+app.use(apiKeyValidation);
+
+// Routes
 app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 
