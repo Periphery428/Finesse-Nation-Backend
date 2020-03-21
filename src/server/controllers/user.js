@@ -26,7 +26,7 @@ exports.signup = [
             let user = await User.findOne({emailId});
             if (user) {
                 return res.status(400).json({
-                    msg: "User Already Exists"
+                    msg: "User already exists"
                 });
             }
 
@@ -89,7 +89,7 @@ exports.login = [
             let user = await User.findOne({emailId});
             if (!user) {
                 return res.status(400).json({
-                    message: "User Not Exist"
+                    message: "User does not exist"
                 });
             }
 
@@ -136,7 +136,7 @@ exports.deleteUser = [
             let user = await User.findOne({emailId});
             if (!user) {
                 return res.status(400).json({
-                    message: "User Not Exist"
+                    message: "User does not exist"
                 });
             }
 
@@ -146,6 +146,40 @@ exports.deleteUser = [
                 message: "User (" + emailId + ") deleted."
             });
         } catch(e) {
+            console.error(e);
+            res.status(500).json({
+                message: "Server Error"
+            });
+        }
+    }
+];
+
+exports.checkEmailExists = [
+    // Validate fields
+    body("emailId", "Please enter a valid emailId").isEmail().trim(),
+
+    async (req, res) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                errors: errors.array()
+            });
+        }
+
+        const {emailId} = req.body;
+        try {
+            let user = await User.findOne({emailId});
+            if (!user) {
+                return res.status(400).json({
+                    message: "User does not exist"
+                });
+            }
+
+            res.status(200).json({
+               msg: "User found"
+            });
+        } catch (e) {
             console.error(e);
             res.status(500).json({
                 message: "Server Error"

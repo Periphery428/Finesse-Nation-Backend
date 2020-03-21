@@ -42,6 +42,36 @@ describe("login", () => {
             });
     });
 
+    it("it should find existing user", (done) => {
+        let email = {
+            "emailId": "testmocha1@mochauniversity.edu"
+        };
+        chai.request(server)
+            .post("/api/user/checkEmailExists")
+            .set("api_token", process.env.API_TOKEN)
+            .send(email)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body.msg).to.equal("User found");
+                done();
+            });
+    });
+
+    it("it should not find existing user", (done) => {
+        let email = {
+            "emailId": "testmocha2@mochauniversity.edu"
+        };
+        chai.request(server)
+            .post("/api/user/checkEmailExists")
+            .set("api_token", process.env.API_TOKEN)
+            .send(email)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal("User does not exist");
+                done();
+            });
+    });
+
     it("it should not login as user with incorrect password", (done) => {
         let loginCreds = {
             "emailId": "testmocha1@mochauniversity.edu",
@@ -70,7 +100,7 @@ describe("login", () => {
             .send(loginCreds)
             .end((err, res) => {
                 expect(res).to.have.status(400);
-                expect(res.body.message).to.equal("User Not Exist");
+                expect(res.body.message).to.equal("User does not exist");
                 expect(res).to.be.json;
                 done();
             });
