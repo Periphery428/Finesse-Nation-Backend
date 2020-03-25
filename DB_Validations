@@ -32,3 +32,29 @@ db.createCollection("Fineese_Nation_Users", {
 })
 
 db.Fineese_Nation_Users.insert( { emailId: "shilpar2@illinois.edu", password: "pass123", school: "UIUC" } )
+
+
+db.createCollection("fineese_nation_comments", {
+   validator: {
+      $jsonSchema: {
+         bsonType: "object",
+         required: [ "eventId", "userId", "comment" ],
+         properties: {
+            eventId: {
+               bsonType: "string",
+               description: "Event ID must be associated to a comment."
+            },
+            userId: {
+               bsonType: "string",
+               description: "Username must be associated to a comment."
+            },
+            comment: {
+               bsonType: "string",
+               description: "Comment cannot be empty."
+            }
+         }
+      }
+   }
+})
+
+db.fineese_nation_comments.insert( { eventId: "HackIllinois", userId: "Shilpa426", comment: "Amazing offers." } )
