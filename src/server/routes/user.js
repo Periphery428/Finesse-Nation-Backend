@@ -7,6 +7,8 @@ router.post('/signup', userController.signup);
 router.post('/login', userController.login);
 router.post('/deleteUser', userController.deleteUser);
 router.post('/checkEmailExists', userController.checkEmailExists);
+router.post('/generatePasswordResetLink', userController.generatePasswordResetLink)
+router.post('/checkEmailTokenExists', userController.checkEmailTokenExists);
 
 module.exports = router;
 
