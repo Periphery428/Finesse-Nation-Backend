@@ -157,7 +157,9 @@ exports.changePassword = [
                 } else {
                     let logMessage = "Success: updated password for user = " + emailId;
                     console.log(logMessage);
-                    res.send(logMessage);
+                    res.status(200).json({
+                        message: logMessage
+                    });
                 }
             });
         } else {
@@ -283,7 +285,8 @@ exports.generatePasswordResetLink = [
                     });
                 }
                 res.status(200).json({
-                    msg: "Password reset token sent to user email"
+                    msg: "Password reset token sent to user email",
+                    token: token
                 });
             });
         } catch (e) {
