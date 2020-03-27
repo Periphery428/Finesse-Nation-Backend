@@ -12,7 +12,3 @@ router.post('/generatePasswordResetLink', userController.generatePasswordResetLi
 router.post('/checkEmailTokenExists', userController.checkEmailTokenExists);
 
 module.exports = router;
-
-//TODO: FIXES
-//1. json web token
-//2. email caps and small are treated differently
