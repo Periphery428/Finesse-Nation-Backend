@@ -15,7 +15,6 @@ exports.signup = [
 
     async (req, res) => {
         const errors = validationResult(req);
-        console.log(":-( " + errors);
         if (!errors.isEmpty()) {
             console.log("Error Happened");
             return res.status(400).json({
@@ -23,7 +22,7 @@ exports.signup = [
             });
         }
 
-        const {userName, emailId, password} = req.body;
+        const {userName, emailId, password, school} = req.body;
 
         try {
             let user = await User.findOne({emailId});
@@ -36,10 +35,8 @@ exports.signup = [
             user = new User({
                 userName,
                 emailId,
-                password
-                // username,
-                // email,
-                // password
+                password,
+                school
             });
 
             const salt = await bcrypt.genSalt(10);
@@ -127,6 +124,45 @@ exports.login = [
             res.status(500).json({
                 message: "Server Error"
             });
+        }
+    }
+];
+
+exports.changePassword = [
+    // Validate fields
+    body("emailId", "Please enter a valid emailId").isEmail().trim(),
+    body("password", "Please enter a valid password").isLength({min: 6}).trim(),
+
+    async (req, res) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                errors: errors.array()
+            });
+        }
+
+        const {emailId, password} = req.body;
+
+        const salt = await bcrypt.genSalt(10);
+        const newPassword = await bcrypt.hash(password, salt);
+
+        let user = await User.findOne({"emailId": emailId});
+        if (user) {
+            user.password = newPassword;
+            await user.save(function(err) {
+                if(err) {
+                    res.send({"Error": "updating password for user = " + emailId});
+                    res.status(400).end();
+                } else {
+                    let logMessage = "Success: updated password for user = " + emailId;
+                    console.log(logMessage);
+                    res.send(logMessage);
+                }
+            });
+        } else {
+            console.log("Error: unable to find user " + emailId  + " to update password");
+            res.status(400).end();
         }
     }
 ];
@@ -284,6 +320,7 @@ exports.checkEmailTokenExists = [
 
             await user.remove();
 
+            console.log("Found valid email/token");
             return res.status(200).json({
                 msg: "Found valid email/token"
             });

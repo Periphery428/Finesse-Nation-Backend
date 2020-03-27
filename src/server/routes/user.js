@@ -5,6 +5,7 @@ const userController = require('../controllers/user');
 
 router.post('/signup', userController.signup);
 router.post('/login', userController.login);
+router.post('/changePassword', userController.changePassword);
 router.post('/deleteUser', userController.deleteUser);
 router.post('/checkEmailExists', userController.checkEmailExists);
 router.post('/generatePasswordResetLink', userController.generatePasswordResetLink)
