@@ -1,4 +1,4 @@
-db.createCollection("Fineese_Nation_Users", {
+db.createCollection("Finesse_Nation_Users", {
    validator: {
       $jsonSchema: {
          bsonType: "object",
@@ -31,10 +31,10 @@ db.createCollection("Fineese_Nation_Users", {
    }
 })
 
-db.Fineese_Nation_Users.insert( { emailId: "shilpar2@illinois.edu", password: "pass123", school: "UIUC" } )
+db.Finesse_Nation_Users.insert( { emailId: "shilpar2@illinois.edu", password: "pass123", school: "UIUC" } )
 
 
-db.createCollection("fineese_nation_comments", {
+db.createCollection("finesse_nation_comments", {
    validator: {
       $jsonSchema: {
          bsonType: "object",
@@ -57,4 +57,4 @@ db.createCollection("fineese_nation_comments", {
    }
 })
 
-db.fineese_nation_comments.insert( { eventId: "HackIllinois", userId: "Shilpa426", comment: "Amazing offers." } )
+db.finesse_nation_comments.insert( { eventId: "HackIllinois", userId: "Shilpa426", comment: "Amazing offers." } )
