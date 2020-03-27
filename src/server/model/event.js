@@ -30,7 +30,7 @@ const EventSchema = mongoose.Schema({
         required: false
     },
     active: {
-        type: String,
+        type: bool,
         required: false
     }
 });
