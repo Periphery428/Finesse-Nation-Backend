@@ -7,6 +7,7 @@ router.post('/signup', userController.signup);
 router.post('/login', userController.login);
 router.post('/deleteUser', userController.deleteUser);
 
+
 module.exports = router;
 
 //TODO: FIXES
