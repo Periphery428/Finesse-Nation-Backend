@@ -1,4 +1,4 @@
-db.createCollection("Finesse_Nation_Users", {
+db.createCollection("finesse_nation_users", {
    validator: {
       $jsonSchema: {
          bsonType: "object",
