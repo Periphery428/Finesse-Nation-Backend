@@ -24,6 +24,6 @@ const UserSchema = mongoose.Schema({
 });
 
 // export model user with UserSchema
-//Fineese_Nation_Users
-module.exports = mongoose.model("Fineese_Nation_Users", UserSchema);
+//Finesse_Nation_Users => Mongo is Case Sensitive
+module.exports = mongoose.model("finesse_nation_users", UserSchema);
 // module.exports = mongoose.model("user", UserSchema);

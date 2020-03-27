@@ -47,7 +47,7 @@ router.post(
             });
         }
 
-        const { userName, emailId, password } = req.body;
+        const { userName, emailId, password, school, points} = req.body;
 
         console.log("Fixing Bugs");
         console.log("Username: "+userName);
@@ -66,7 +66,9 @@ router.post(
             user = new User({
                 userName,
                 emailId,
-                password
+                password,
+                school,
+                points
                 // username,
                 // email,
                 // password
