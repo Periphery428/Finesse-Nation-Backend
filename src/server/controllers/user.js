@@ -20,7 +20,7 @@ exports.signup = [
             });
         }
 
-        const {userName, emailId, password} = req.body;
+        const { userName, emailId, password, school, points} = req.body;
 
         try {
             let user = await User.findOne({emailId});
@@ -33,10 +33,9 @@ exports.signup = [
             user = new User({
                 userName,
                 emailId,
-                password
-                // username,
-                // email,
-                // password
+                password,
+                school,
+                points
             });
 
             const salt = await bcrypt.genSalt(10);
