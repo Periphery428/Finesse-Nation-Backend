@@ -314,14 +314,23 @@ exports.checkEmailTokenExists = [
 
         const {emailId, token} = req.body;
         try {
-            let user = await PasswordReset.findOne({"emailId":emailId, "token":token});
-            if(!user) {
+            let passwordReset = await PasswordReset.findOne({"emailId":emailId, "token":token});
+            if(!passwordReset) {
+                console.log("Invalid email/token");
                 return res.status(401).json({
-                    msg: "Invalid email/token or token has expired"
+                    msg: "Invalid email/token"
                 });
             }
 
-            await user.remove();
+            let tokenTTLMins = 20;
+            if ((Date.now() - passwordReset.creationTime) > tokenTTLMins * 60 * 1000) {
+                console.log("Token has expired");
+                return res.status(401).json({
+                    msg: "Token has expired"
+                });
+            }
+
+            await passwordReset.remove();
 
             console.log("Found valid email/token");
             return res.status(200).json({
