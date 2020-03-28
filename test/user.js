@@ -12,7 +12,8 @@ describe("login", () => {
         let newUser = {
             "userName": "testmocha1",
             "emailId": "testmocha1@mochauniversity.edu",
-            "password": "testmocha1pass"
+            "password": "testmocha1pass",
+            "school": "mochauniversity"
         };
         chai.request(server)
             .post("/api/user/signup")
