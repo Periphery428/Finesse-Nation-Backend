@@ -58,3 +58,61 @@ db.createCollection("finesse_nation_comments", {
 })
 
 db.finesse_nation_comments.insert( { eventId: "HackIllinois", userId: "Shilpa426", comment: "Amazing offers." } )
+
+
+db.createCollection ( "finesse_nation_events",
+{
+    validator:
+    {
+        $jsonSchema:
+      {
+        bsonType: "object",
+        required: [ "emailId", "eventTitle", "school" ],
+        properties:
+        {
+            _id: {},
+            emailId: {
+               bsonType: "string",
+               description: "The creator of the event."
+            },
+            eventTitle: {
+               bsonType: "string",
+               description: "The title of the event(need not be unique)."
+            },
+            school: {
+               bsonType: "string",
+               description: "Event should be associated to a school."
+            },
+            description: {
+               bsonType: "string",
+               description: "Further details about the event."
+            },
+            location: {
+               bsonType: "string",
+               description: "Further details about the event."
+            },
+            isActive: {
+               bsonType: "bool",
+               description: "Whether the event is active."
+            },
+            image: {
+               bsonType: "string", // binary Blob, or a base64-encoded string
+               description: "Storing the image as a blob."
+            },
+            postedTime: {
+               bsonType: "timestamp",
+               description: "The event was created at this time."
+            },
+            duration: {
+               bsonType: "long", // to be stored in milliseconds
+               description: "How long will the event be active."
+            },
+            category: {
+                enum: ["General", "Vegan"],
+                description: "It's defaulted to General"
+            }
+        }
+      }
+    },
+    validationAction: "warn"
+})
