@@ -45,8 +45,6 @@ MAILTRAP_PASSWORD=<mailtrap_password>
 
 # Use in nodejs:
 let password = process.env.MONGODB_PASSWORD;
-
-# Password reset:
 ```
 
 ```bash
