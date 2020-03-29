@@ -95,7 +95,7 @@
 //             .end((err, res) => {
 //                 expect(res).to.have.status(401);
 //                 done();
-//             });
+//             });g
 //     });
 //
 //     it("it should delete created event", (done) => {

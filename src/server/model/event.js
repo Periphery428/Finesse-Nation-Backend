@@ -1,39 +1,48 @@
-const mongoose = require("mongoose");
+const mongoose = require("mongoose"),
 
-const EventSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    description: {
-        type: String,
-        required: false
-    },
-    location: {
-        type: String,
-        required: true
-    },
-    duration: {
-        type: String,
-        required: false
-    },
-    timePosted: {
-        type: String,
-        required: true
-    },
-    image: {
-        type: String,
-        required: false
-    },
-    type: {
-        type: String,
-        required: false
-    },
-    active: {
-        type: Boolean,
-        required: false
-    }
-});
+    EventSchema = mongoose.Schema({
 
-// export model user with UserSchema
-module.exports = mongoose.model("events", EventSchema);
+        "eventTitle": {
+            "type": String,
+            "required": true
+        },
+        "emailId": {
+            "type": String,
+            "required": true
+        },
+        "school": {
+            "type": String,
+            "required": true
+        },
+        "description": {
+            "type": String,
+            "required": false
+        },
+        "location": {
+            "type": String,
+            "required": true
+        },
+        "isActive": {
+            "type": Boolean,
+            "required": false
+        },
+        "image": {
+            "type": String,
+            "required": false
+        },
+        "postedTime": {
+            "type": Date,
+            "required": true
+        },
+        "duration": {
+            "type": Number,
+            "required": true
+        },
+        "category": {
+            "type": String,
+            "required": false
+        }
+    });
+
+// Export model event with EventSchema
+module.exports = mongoose.model("finesse_nation_events", EventSchema);

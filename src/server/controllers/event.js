@@ -15,11 +15,11 @@ exports.getEvents = function(req, res) {
 
 exports.addEvent = [
     // Validate fields
-    body("name", "Please enter a valid name").isLength({min: 1}).trim(),
+    body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
     // body("description", "Please enter a valid description").isLength({min: 1}).trim(),
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
     // body("duration", "Please enter a valid duration").isLength({min: 1}).trim(),
-    body("timePosted", "Please enter a valid time posted").isLength({min: 1}).trim(),
+    body("postedTime", "Please enter a valid time posted").isLength({min: 1}).trim(),
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
     async (req, res) => {
@@ -31,25 +31,28 @@ exports.addEvent = [
             });
         }
 
-        const {name, description, location, duration, timePosted, image, type, active} = req.body;
+        const {eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
 
         let newEvent = new Event({
-            "name": name,
+            "eventTitle": eventTitle,
+            "emailId": emailId,
+            "school": school,
             "description": description,
             "location": location,
-            "duration": duration,
-            "timePosted": timePosted,
+            "isActive" : isActive,
             "image": image,
-            "type" : type,
-            "active" : active,
+            "postedTime": postedTime,
+            "duration": duration,
+            "category" : category
         });
 
         await newEvent.save(function(err) {
             if(err) {
-                res.send({"Error": "adding new event = " + name});
+                res.send({"Error": "adding new event = " + eventTitle});
+                console.log(err);
                 res.status(400).end();
             } else {
-                let logMessage = "Success: added new event = " + name;
+                let logMessage = "Success: added new event = " + eventTitle;
                 console.log(logMessage);
                 res.send(logMessage);
             }
@@ -59,11 +62,11 @@ exports.addEvent = [
 
 exports.updateEvent = [
     // Validate fields
-    body("name", "Please enter a valid name").isLength({min: 1}).trim(),
+    body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
     // body("description", "Please enter a valid description").isLength({min: 1}).trim(),
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
     // body("duration", "Please enter a valid duration").isLength({min: 1}).trim(),
-    body("timePosted", "Please enter a valid time posted").isLength({min: 1}).trim(),
+    body("postedTime", "Please enter a valid time posted").isLength({min: 1}).trim(),
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
     async (req, res) => {
@@ -75,37 +78,41 @@ exports.updateEvent = [
             });
         }
 
-        const {eventId, name, description, location, duration, timePosted, image, active, type} = req.body;
+        //TODO: decide on what all fields are modifiable!!!
+        const {eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
 
-        let currEvent = await Event.findOne({"_id": eventId});
+        //Treating eventTitle as the unique ID
+        let currEvent = await Event.findOne({"eventTitle": eventTitle});
         if(currEvent) {
-            currEvent.name = name;
+            currEvent.eventTitle = eventTitle;
+            currEvent.emailId = emailId;
+            currEvent.school = school;
             currEvent.description = description;
             currEvent.location = location;
-            currEvent.duration = duration;
-            currEvent.timePosted = timePosted;
+            currEvent.isActive = isActive;
             currEvent.image = image;
-            currEvent.active = active;
-            currEvent.type = type;
+            currEvent.postedTime = postedTime;
+            currEvent.duration = duration;
+            currEvent.category = category;
             await currEvent.save(function(err) {
                 if(err) {
-                    res.send({"Error": "updating event _id = " + eventId});
+                    res.send({"Error": "updating event _id = " + eventTitle});
                     res.status(400).end();
                 } else {
-                    let logMessage = "Success: updated event _id = " + eventId;
+                    let logMessage = "Success: updated event _id = " + eventTitle;
                     console.log(logMessage);
                     res.send(logMessage);
                 }
             });
         } else {
-            console.log("Error: unable to find event to update _id = " + eventId);
+            console.log("Error: unable to find event to update _id = " + eventTitle);
             res.status(400).end();
         }
     }
 ];
 
 exports.deleteEvent = function(req, res) {
-    let rawEventId = req.body.eventId;
+    let rawEventId = req.body._id;
     Event.findByIdAndDelete(rawEventId, function(err) {
         if(err) {
             res.send({"Error": "deleting event _id = " + rawEventId});
