@@ -31,7 +31,7 @@ exports.addEvent = [
             });
         }
 
-        const {name, description, location, duration, timePosted, image} = req.body;
+        const {name, description, location, duration, timePosted, image, type, active} = req.body;
 
         let newEvent = new Event({
             "name": name,
@@ -39,7 +39,9 @@ exports.addEvent = [
             "location": location,
             "duration": duration,
             "timePosted": timePosted,
-            "image": image
+            "image": image,
+            "type" : type,
+            "active" : active,
         });
 
         await newEvent.save(function(err) {
@@ -73,7 +75,7 @@ exports.updateEvent = [
             });
         }
 
-        const {eventId, name, description, location, duration, timePosted, image} = req.body;
+        const {eventId, name, description, location, duration, timePosted, image, active, type} = req.body;
 
         let currEvent = await Event.findOne({"_id": eventId});
         if(currEvent) {
@@ -83,6 +85,8 @@ exports.updateEvent = [
             currEvent.duration = duration;
             currEvent.timePosted = timePosted;
             currEvent.image = image;
+            currEvent.active = active;
+            currEvent.type = type;
             await currEvent.save(function(err) {
                 if(err) {
                     res.send({"Error": "updating event _id = " + eventId});

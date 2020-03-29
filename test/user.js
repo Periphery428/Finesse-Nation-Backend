@@ -13,7 +13,8 @@ describe("login", () => {
             "userName": "testmocha1",
             "emailId": "testmocha1@mochauniversity.edu",
             "password": "testmocha1pass",
-            "school": "mochauniversity"
+            "school": "UIUC",
+            "points": 0
         };
         chai.request(server)
             .post("/api/user/signup")

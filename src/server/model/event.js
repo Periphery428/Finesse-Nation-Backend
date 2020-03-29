@@ -24,6 +24,14 @@ const EventSchema = mongoose.Schema({
     image: {
         type: String,
         required: false
+    },
+    type: {
+        type: String,
+        required: false
+    },
+    active: {
+        type: Boolean,
+        required: false
     }
 });
 

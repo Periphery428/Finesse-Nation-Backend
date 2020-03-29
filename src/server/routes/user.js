@@ -11,4 +11,5 @@ router.post('/checkEmailExists', userController.checkEmailExists);
 router.post('/generatePasswordResetLink', userController.generatePasswordResetLink)
 router.post('/checkEmailTokenExists', userController.checkEmailTokenExists);
 
+
 module.exports = router;
