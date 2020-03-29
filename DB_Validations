@@ -116,3 +116,32 @@ db.createCollection ( "finesse_nation_events",
     },
     validationAction: "warn"
 })
+
+ONE PROPERTY:
+
+comments: {
+                bsonType: ["array"],
+                minItems: 1, // each box of food color must have at least one color
+                uniqueItems: true,
+                additionalProperties: false,
+                items: {
+                    bsonType: ["object"],
+                    required: ["eventId", "userId", "content"],
+                    additionalProperties: false,
+                    description: "'items' must contain the stated fields.",
+                    properties: {
+                        eventId: {
+                          enum: ["small", "medium", "large"],
+                          description: "'size' is required and can only be one of the given enum values"
+                                },
+                        userId: {
+                          bsonType: "string",
+                          description: "'userId' is a required field of type string"
+                                },
+                        content: {
+                          bsonType: "string",
+                          description: "'content' is a required field of type string"
+                                }
+                    }
+                }
+            }
