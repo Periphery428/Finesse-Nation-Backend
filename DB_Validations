@@ -57,7 +57,7 @@ db.createCollection("finesse_nation_comments", {
    }
 })
 
-db.finesse_nation_comments.insert( { eventId: "HackIllinois", emailId : "Darko12@gmail.com",, comment: "Amazing offers." } )
+db.finesse_nation_comments.insert( { eventId: "HackIllinois", emailId : "Darko12@gmail.com", comment: "Amazing offers." } )
 
 
 db.createCollection ( "finesse_nation_events",
