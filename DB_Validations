@@ -38,7 +38,7 @@ db.createCollection("finesse_nation_comments", {
    validator: {
       $jsonSchema: {
          bsonType: "object",
-         required: [ "eventId", "userId", "comment" ],
+         required: [ "eventId", "emailId", "comment" ],
          properties: {
             eventId: {
                bsonType: "string",
