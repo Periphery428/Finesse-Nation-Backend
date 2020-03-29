@@ -28,4 +28,3 @@ const mongoose = require("mongoose"),
 module.exports = mongoose.model("finesse_nation_users", UserSchema);
 
 // Module.exports = mongoose.model("user", UserSchema);
-

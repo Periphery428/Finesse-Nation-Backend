@@ -27,8 +27,12 @@ app.use(apiKeyValidation);
 app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 
-app.get("/", (request, response) => {
-  response.sendFile(__dirname + "/index.html");
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '../../public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
 });
 
 const PORT = process.env.PORT || 8080;

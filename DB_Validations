@@ -38,15 +38,15 @@ db.createCollection("finesse_nation_comments", {
    validator: {
       $jsonSchema: {
          bsonType: "object",
-         required: [ "eventId", "userId", "comment" ],
+         required: [ "eventId", "emailId", "comment" ],
          properties: {
             eventId: {
                bsonType: "string",
                description: "Event ID must be associated to a comment."
             },
-            userId: {
+            emailId: {
                bsonType: "string",
-               description: "Username must be associated to a comment."
+               description: "The creator of the event."
             },
             comment: {
                bsonType: "string",
@@ -57,4 +57,95 @@ db.createCollection("finesse_nation_comments", {
    }
 })
 
-db.finesse_nation_comments.insert( { eventId: "HackIllinois", userId: "Shilpa426", comment: "Amazing offers." } )
+db.finesse_nation_comments.insert( { eventId: "HackIllinois", emailId : "Darko12@gmail.com", comment: "Amazing offers." } )
+
+
+db.createCollection ( "finesse_nation_events",
+{
+    validator:
+    {
+        $jsonSchema:
+      {
+        bsonType: "object",
+        required: [ "emailId", "eventTitle", "school" ],
+        properties:
+        {
+            _id: {},
+            emailId: {
+               bsonType: "string",
+               description: "The creator of the event."
+            },
+            eventTitle: {
+               bsonType: "string",
+               description: "The title of the event(need not be unique)."
+            },
+            school: {
+               bsonType: "string",
+               description: "Event should be associated to a school."
+            },
+            description: {
+               bsonType: "string",
+               description: "Further details about the event."
+            },
+            location: {
+               bsonType: "string",
+               description: "Further details about the event."
+            },
+            isActive: {
+               bsonType: "bool", //need a scheduler to clean it up
+               description: "Whether the event is active."
+            },
+            image: {
+               bsonType: "string", // binary Blob, or a base64-encoded string
+               description: "Storing the image as a blob."
+            },
+            postedTime: {
+               bsonType: "timestamp",
+               description: "The event was created at this time."
+            },
+            duration: {
+               bsonType: "long", // to be stored in milliseconds
+               description: "How long will the event be active."
+            },
+            category: {
+                enum: ["General", "Vegan"],
+                description: "It's defaulted to General"
+            }
+        }
+      }
+    },
+    validationAction: "warn"
+})
+
+db.finesse_nation_events.insert( { emailId: "Darko12@gmail.com", eventTitle: "HackIllinois", 
+school: "UIUC", description: "Hackathon across the nation.", location: "Siebel Center", 
+isActive: true, image: "", postedTime: new Date(), duration: 3600000 , category: "General" } )
+
+ONE PROPERTY:
+
+comments: {
+                bsonType: ["array"],
+                minItems: 1, // each box of food color must have at least one color
+                uniqueItems: true,
+                additionalProperties: false,
+                items: {
+                    bsonType: ["object"],
+                    required: ["eventId", "userId", "content"],
+                    additionalProperties: false,
+                    description: "'items' must contain the stated fields.",
+                    properties: {
+                        eventId: {
+                          enum: ["small", "medium", "large"],
+                          description: "'size' is required and can only be one of the given enum values"
+                                },
+                        userId: {
+                          bsonType: "string",
+                          description: "'userId' is a required field of type string"
+                                },
+                        content: {
+                          bsonType: "string",
+                          description: "'content' is a required field of type string"
+                                }
+                    }
+                }
+            }

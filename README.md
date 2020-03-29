@@ -10,10 +10,14 @@ Backend for the free food service.
 # Install dependencies
 npm install
 
-# Run mocha tests
+# Run mocha (nodejs) and jest (reactjs) tests
 npm test
 
-# Start production server
+# Start client and server seperately
+npm run client
+npm run server
+
+# Start both client and server
 npm start
 ```
 
@@ -36,6 +40,9 @@ mongo "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/test"  --username <user
 MONGODB_USERNAME=<username>
 MONGODB_PASSWORD=<password>
 API_TOKEN=<api_token>
+MAILTRAP_USERNAME=<mailtrap_username>
+MAILTRAP_PASSWORD=<mailtrap_password>
+
 # Use in nodejs:
 let password = process.env.MONGODB_PASSWORD;
 ```
