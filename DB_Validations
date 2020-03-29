@@ -44,9 +44,9 @@ db.createCollection("finesse_nation_comments", {
                bsonType: "string",
                description: "Event ID must be associated to a comment."
             },
-            userId: {
+            emailId: {
                bsonType: "string",
-               description: "Username must be associated to a comment."
+               description: "The creator of the event."
             },
             comment: {
                bsonType: "string",
@@ -92,7 +92,7 @@ db.createCollection ( "finesse_nation_events",
                description: "Further details about the event."
             },
             isActive: {
-               bsonType: "bool",
+               bsonType: "bool", //need a scheduler to clean it up
                description: "Whether the event is active."
             },
             image: {
