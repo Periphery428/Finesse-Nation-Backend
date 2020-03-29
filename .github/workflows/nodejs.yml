@@ -26,3 +26,5 @@ jobs:
         MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
         MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
         API_TOKEN: ${{ secrets.API_TOKEN }}
+        MAILTRAP_USERNAME: ${{ secrets.MAILTRAP_USERNAME }}
+        MAILTRAP_PASSWORD: ${{ secrets.MAILTRAP_PASSWORD }}
