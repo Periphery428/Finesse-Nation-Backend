@@ -117,6 +117,10 @@ db.createCollection ( "finesse_nation_events",
     validationAction: "warn"
 })
 
+db.finesse_nation_events.insert( { emailId: "Darko12@gmail.com", eventTitle: "HackIllinois", 
+school: "UIUC", description: "Hackathon across the nation.", location: "Siebel Center", 
+isActive: true, image: "", postedTime: new Date(), duration: 3600000 , category: "General" } )
+
 ONE PROPERTY:
 
 comments: {
