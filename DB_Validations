@@ -108,7 +108,7 @@ db.createCollection ( "finesse_nation_events",
                description: "How long will the event be active."
             },
             category: {
-                enum: ["General", "Vegan"],
+                enum: ["Food", "Other"],
                 description: "It's defaulted to General"
             }
         }
