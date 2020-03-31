@@ -31,11 +31,11 @@ const mongoose = require("mongoose"),
             "required": false
         },
         "postedTime": {
-            "type": Date,
+            "type": String,
             "required": true
         },
         "duration": {
-            "type": Number,
+            "type": String,
             "required": true
         },
         "category": {

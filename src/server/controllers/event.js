@@ -61,12 +61,14 @@ exports.addEvent = [
 ];
 
 exports.updateEvent = [
+    body("_id", "Please enter a valid event ID").isLength({min: 1}).trim(),
     // Validate fields
     body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
     // body("description", "Please enter a valid description").isLength({min: 1}).trim(),
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
     // body("duration", "Please enter a valid duration").isLength({min: 1}).trim(),
     body("postedTime", "Please enter a valid time posted").isLength({min: 1}).trim(),
+    body("location", "Please enter a valid location").isLength({min: 1}).trim(),
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
     async (req, res) => {
@@ -82,7 +84,7 @@ exports.updateEvent = [
         const {eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
 
         //Treating eventTitle as the unique ID
-        let currEvent = await Event.findOne({"eventTitle": eventTitle});
+        let currEvent = await Event.findOne({"_id": req.body._id});
         if(currEvent) {
             currEvent.eventTitle = eventTitle;
             currEvent.emailId = emailId;
