@@ -30,7 +30,7 @@ describe("events", () => {
             "location": "Mocha location",
             "isActive" : true,
             "duration": "2 hrs",
-            "postedTime": "Wed Aug 21 2019 01:58:52 GMT+0200",
+            "postedTime": "2020-04-01 03:29:03.693069",
             "image": "",
             "category" : "Food"
         };
@@ -73,7 +73,7 @@ describe("events", () => {
             "location": "Mocha location",
             "isActive" : true,
             "duration": "2 hrs",
-            "postedTime": "Wed Aug 21 2019 01:58:52 GMT+0200",
+            "postedTime": "2020-04-01 03:29:03.693069",
             "image": "",
             "category" : "Food"
         };
@@ -95,7 +95,7 @@ describe("events", () => {
             "description": "Mocha Crawfish broil",
             "location": "Mocha location",
             "duration": "3 hrs",
-            "timePosted": "Thu Aug 22 2019 01:58:52 GMT+0200"
+            "timePosted": "2020-04-01 03:29:03.6930690"
         };
         chai.request(server)
             .post("/api/food/updateEvent")
