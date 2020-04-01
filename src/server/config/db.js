@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const MONGOURI = "mongodb+srv://" + "cs428User"/*process.env.MONGODB_USERNAME*/ + ":" + "cs428Pass"/*process.env.MONGODB_PASSWORD*/ + "@mongoclustercs428-pijzh.mongodb.net/free_food?retryWrites=true&w=majority";
+const MONGOURI = "mongodb+srv://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongoclustercs428-pijzh.mongodb.net/free_food?retryWrites=true&w=majority";
 
 const InitiateMongoServer = async () => {
     try {
