@@ -50,17 +50,12 @@ describe("events", () => {
             .get("/api/food/getEvents")
             .set("api_token", process.env.API_TOKEN)
             .end((err, res) => {
-
-                // console.log("Length of body "+res.body.length);
-                // console.log(res.body[0]);
-
                 for(let i = 0; i < res.body.length; i++) {
-                    if (res.body[i].eventTitle === "Mocha Test Event" && res.body[i].description === "Mocha test event description.") {
+                    if(res.body[i].eventTitle === "Mocha Test Event" && res.body[i].description === "Mocha test event description.") {
                         targetEventId = res.body[i]._id;
                         break;
                     }
                 }
-                //console.log("*****"+targetEventId);
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(targetEventId).to.be.length.greaterThan(0);
@@ -71,7 +66,6 @@ describe("events", () => {
     it("it should update created event", (done) => {
         let eventUpdate = {
             "eventId": targetEventId.toString(),
-            //"_id": "5e83fc6360e608486d74c60a",
             "eventTitle": "Mocha Test Event",
             "emailId": "darko123@gmail.com",
             "school": "UIUC",
@@ -93,7 +87,6 @@ describe("events", () => {
                 done();
             });
     });
-
 
     it("it should not update created event due to no api_key", (done) => {
         let eventUpdate = {
