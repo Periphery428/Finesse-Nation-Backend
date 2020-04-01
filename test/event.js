@@ -50,24 +50,28 @@ describe("events", () => {
             .get("/api/food/getEvents")
             .set("api_token", process.env.API_TOKEN)
             .end((err, res) => {
+
+                // console.log("Length of body "+res.body.length);
+                // console.log(res.body[0]);
+
                 for(let i = 0; i < res.body.length; i++) {
-                    if (res.body[i].name === "Mocha Test Event" && res.body[i].description === "Mocha test event description.") {
+                    if (res.body[i].eventTitle === "Mocha Test Event" && res.body[i].description === "Mocha test event description.") {
                         targetEventId = res.body[i]._id;
                         break;
                     }
                 }
-                console.log("*****"+targetEventId);
+                //console.log("*****"+targetEventId);
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
-                //expect(targetEventId).to.be.length.greaterThan(0);
+                expect(targetEventId).to.be.length.greaterThan(0);
                 done();
             });
     });
 
     it("it should update created event", (done) => {
         let eventUpdate = {
-            // "eventId": targetEventId.toString(),
-            "_id": "5e83fc6360e608486d74c60a",
+            "_id": targetEventId.toString(),
+            //"_id": "5e83fc6360e608486d74c60a",
             "eventTitle": "Mocha Test Event",
             "emailId": "darko123@gmail.com",
             "school": "UIUC",
@@ -108,9 +112,9 @@ describe("events", () => {
             });
     });
 
-    /*it("it should delete created event", (done) => {
+    it("it should delete created event", (done) => {
         let eventDelete = {
-            "eventId": targetEventId
+            "_id": targetEventId
         };
         chai.request(server)
             .delete("/api/food/deleteEvent")
@@ -121,5 +125,5 @@ describe("events", () => {
                 expect(res.text).to.equal("Success: deleted event _id = " + targetEventId);
                 done();
             });
-    });*/
+    });
 });
