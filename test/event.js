@@ -70,7 +70,7 @@ describe("events", () => {
 
     it("it should update created event", (done) => {
         let eventUpdate = {
-            "_id": targetEventId.toString(),
+            "eventId": targetEventId.toString(),
             //"_id": "5e83fc6360e608486d74c60a",
             "eventTitle": "Mocha Test Event",
             "emailId": "darko123@gmail.com",
@@ -89,7 +89,7 @@ describe("events", () => {
             .send(eventUpdate)
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                // expect(res.text).to.equal("Success: updated event _id = " + targetEventId);
+                expect(res.text).to.equal("Success: updated event _id = " + targetEventId);
                 done();
             });
     });

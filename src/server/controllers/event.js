@@ -81,10 +81,10 @@ exports.updateEvent = [
         }
 
         //TODO: decide on what all fields are modifiable!!!
-        const {eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
+        const {eventId, eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
 
         //Treating eventTitle as the unique ID
-        let currEvent = await Event.findOne({"_id": req.body._id});
+        let currEvent = await Event.findOne({"_id": eventId});
         if(currEvent) {
             currEvent.eventTitle = eventTitle;
             currEvent.emailId = emailId;
@@ -98,16 +98,16 @@ exports.updateEvent = [
             currEvent.category = category;
             await currEvent.save(function(err) {
                 if(err) {
-                    res.send({"Error": "updating event _id = " + eventTitle});
+                    res.send({"Error": "updating event _id = " + eventId});
                     res.status(400).end();
                 } else {
-                    let logMessage = "Success: updated event _id = " + eventTitle;
+                    let logMessage = "Success: updated event _id = " + eventId;
                     console.log(logMessage);
                     res.send(logMessage);
                 }
             });
         } else {
-            console.log("Error: unable to find event to update _id = " + eventTitle);
+            console.log("Error: unable to find event to update _id = " + eventId);
             res.status(400).end();
         }
     }
