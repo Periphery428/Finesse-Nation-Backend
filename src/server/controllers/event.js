@@ -114,7 +114,7 @@ exports.updateEvent = [
 ];
 
 exports.deleteEvent = function(req, res) {
-    let rawEventId = req.body._id;
+    let rawEventId = req.body.eventId;
     Event.findByIdAndDelete(rawEventId, function(err) {
         if(err) {
             res.send({"Error": "deleting event _id = " + rawEventId});
@@ -126,4 +126,3 @@ exports.deleteEvent = function(req, res) {
         }
     });
 };
-

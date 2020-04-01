@@ -115,10 +115,10 @@ describe("events", () => {
 
     it("it should delete created event", (done) => {
         let eventDelete = {
-            "_id": targetEventId
+            "eventId": targetEventId
         };
         chai.request(server)
-            .delete("/api/food/deleteEvent")
+            .post("/api/food/deleteEvent")
             .set("api_token", process.env.API_TOKEN)
             .send(eventDelete)
             .end((err, res) => {
