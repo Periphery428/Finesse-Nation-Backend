@@ -84,7 +84,7 @@ describe("events", () => {
             "category" : "Food"
         };
         chai.request(server)
-            .put("/api/food/updateEvent")
+            .post("/api/food/updateEvent")
             .set("api_token", process.env.API_TOKEN)
             .send(eventUpdate)
             .end((err, res) => {
@@ -93,6 +93,7 @@ describe("events", () => {
                 done();
             });
     });
+
 
     it("it should not update created event due to no api_key", (done) => {
         let eventUpdate = {

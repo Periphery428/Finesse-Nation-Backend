@@ -61,7 +61,7 @@ exports.addEvent = [
 ];
 
 exports.updateEvent = [
-    body("_id", "Please enter a valid event ID").isLength({min: 1}).trim(),
+    // body("_id", "Please enter a valid event ID").isLength({min: 1}).trim(),
     // Validate fields
     body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
     // body("description", "Please enter a valid description").isLength({min: 1}).trim(),
