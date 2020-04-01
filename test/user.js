@@ -61,7 +61,7 @@ describe("login", () => {
             });
     });
 
-    /*it("it should not login as user with non-existent username", (done) => {
+    it("it should not login as user with non-existent username", (done) => {
         let loginCreds = {
             "emailId": "testmochafake@mochauniversity.edu",
             "password": "testmochafakepass"
@@ -72,11 +72,11 @@ describe("login", () => {
             .send(loginCreds)
             .end((err, res) => {
                 expect(res).to.have.status(400);
-                expect(res.body.message).to.equal("User Not Exist");
+                expect(res.body.message).to.equal("User does not exist");
                 expect(res).to.be.json;
                 done();
             });
-    });*/
+    });
 
     it("it should not login as no api_key is passed", (done) => {
         let loginCreds = {
