@@ -18,7 +18,7 @@ npm run client
 npm run server
 
 # Start both client and server
-npm start
+npm run dev
 ```
 
 ```bash
