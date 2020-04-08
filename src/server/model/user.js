@@ -20,6 +20,10 @@ const mongoose = require("mongoose"),
         "points": {
             "type": Number,
             "default": 0
+        },
+        "notifications": {
+            "type": Boolean,
+            "default" : true
         }
     });
 

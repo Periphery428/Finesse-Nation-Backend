@@ -140,6 +140,7 @@ describe("login", () => {
                 done();
             });
     });
+    
 
     it("it should check token is valid for password reset request", (done) => {
         let emailToken = {
@@ -153,6 +154,23 @@ describe("login", () => {
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body.msg).to.equal("Found valid email/token");
+                done();
+            });
+    });
+
+    it("it should send successful request for notification change", (done) => {
+        let emailId = "testmocha1@mochauniversity.edu";
+        let notificationUpdate = {
+            "emailId": emailId,
+            "notifications": false
+        };
+        chai.request(server)
+            .post("/api/user/changeNotifications")
+            .set("api_token", process.env.API_TOKEN)
+            .send(notificationUpdate)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.equal("Success: updated notifications for user = " + emailId);
                 done();
             });
     });
@@ -173,6 +191,7 @@ describe("login", () => {
                 done();
             });
     });
+
 
     it("it should assert users password was changed", (done) => {
         let loginCreds = {
