@@ -170,6 +170,43 @@ exports.changePassword = [
     }
 ];
 
+exports.changeNotifications = [
+    // Validate fields
+    body("emailId", "Please enter a valid emailId").isEmail().trim(),
+
+    async (req, res) => {
+        const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.status(400).json({
+                errors: errors.array()
+            });
+        }
+
+        const {emailId, notifications} = req.body;
+
+        let user = await User.findOne({"emailId": emailId});
+        if (user) {
+            user.notifications = notifications;
+            await user.save(function(err) {
+                if(err) {
+                    res.send({"Error": "updating notifications for user = " + emailId});
+                    res.status(400).end();
+                } else {
+                    let logMessage = "Success: updated notifications for user = " + emailId;
+                    console.log(logMessage);
+                    res.status(200).json({
+                        message: logMessage
+                    });
+                }
+            });
+        } else {
+            console.log("Error: unable to find user " + emailId  + " to update notifications");
+            res.status(400).end();
+        }
+    }
+];
+
 exports.deleteUser = [
     async (req, res) => {
         const {emailId} = req.body;
