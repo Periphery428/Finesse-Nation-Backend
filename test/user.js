@@ -162,7 +162,7 @@ describe("login", () => {
         let emailId = "testmocha1@mochauniversity.edu";
         let notificationUpdate = {
             "emailId": emailId,
-            "notifications": False
+            "notifications": false
         };
         chai.request(server)
             .post("/api/user/changeNotifications")
