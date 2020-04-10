@@ -14,7 +14,8 @@ describe("login", () => {
             "emailId": "testmocha1@mochauniversity.edu",
             "password": "testmocha1pass",
             "school": "UIUC",
-            "points": 0
+            "points": 0,
+            "notifications": True
         };
         chai.request(server)
             .post("/api/user/signup")
@@ -45,12 +46,30 @@ describe("login", () => {
             });
     });
 
-    it("it should find existing user", (done) => {
+    it("it should get current user information", (done) => {
         let email = {
             "emailId": "testmocha1@mochauniversity.edu"
         };
         chai.request(server)
             .post("/api/user/checkEmailExists")
+            .set("api_token", process.env.API_TOKEN)
+            .send(email)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
+                expect(res.body.emailId === "testmocha1@mochauniversity.edu");
+                expect(res.body.notifications ===  True);              
+                
+                done();
+    });
+
+    
+    it("it should find existing user", (done) => {
+        let email = {
+            "emailId": "testmocha1@mochauniversity.edu"
+        };
+        chai.request(server)
+            .post("/api/user/getCurrentUser")
             .set("api_token", process.env.API_TOKEN)
             .send(email)
             .end((err, res) => {

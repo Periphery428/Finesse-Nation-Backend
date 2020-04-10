@@ -129,6 +129,34 @@ exports.login = [
     }
 ];
 
+exports.getCurrentUser = [
+        // Validate fields
+        body("emailId", "Please enter a valid emailId").isEmail().trim(),
+
+        async (req, res) => {
+            const errors = validationResult(req);
+            if (!errors.isEmpty()) {
+                console.log("Error Happened");
+                return res.status(400).json({
+                    errors: errors.array()
+                });
+            }
+    
+            //TODO: decide on what all fields are modifiable!!!
+            const {emailId} = req.body;
+    
+            //Treating eventTitle as the unique ID
+            User.findOne({emailId}).exec(function(err, userStuff) {
+                if(err) {
+                    console.log("Error: unable to get user");
+                    res.status(400).end();
+                } else {
+                    res.json(userStuff);
+                }
+            });
+        }
+]
+
 exports.changePassword = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
