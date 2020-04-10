@@ -15,7 +15,7 @@ describe("login", () => {
             "password": "testmocha1pass",
             "school": "UIUC",
             "points": 0,
-            "notifications": True
+            "notifications": true
         };
         chai.request(server)
             .post("/api/user/signup")
@@ -58,7 +58,7 @@ describe("login", () => {
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body.emailId === "testmocha1@mochauniversity.edu");
-                expect(res.body.notifications ===  True);              
+                expect(res.body.notifications ===  true);              
                 
                 done();
     });
