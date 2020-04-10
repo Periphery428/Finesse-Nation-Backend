@@ -51,16 +51,17 @@ describe("login", () => {
             "emailId": "testmocha1@mochauniversity.edu"
         };
         chai.request(server)
-            .post("/api/user/checkEmailExists")
+            .post("/api/user/getCurrentUser")
             .set("api_token", process.env.API_TOKEN)
             .send(email)
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res).to.be.json;
                 expect(res.body.emailId === "testmocha1@mochauniversity.edu");
-                expect(res.body.notifications ===  true);              
+                expect(res.body.notifications ===  true );              
                 
                 done();
+            });
     });
 
     
@@ -69,7 +70,7 @@ describe("login", () => {
             "emailId": "testmocha1@mochauniversity.edu"
         };
         chai.request(server)
-            .post("/api/user/getCurrentUser")
+            .post("/api/user/checkEmailExists")
             .set("api_token", process.env.API_TOKEN)
             .send(email)
             .end((err, res) => {
