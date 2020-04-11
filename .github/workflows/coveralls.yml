@@ -16,12 +16,12 @@ jobs:
         with:
           node-version: 10.x
 
-      - name: npm install, nyc
+      - name: npm install, make test-coverage
         run: |
           npm install
-          nyc npm test && nyc report --reporter=text-lcov | coveralls
+          make test-coverage
 
       - name: Coveralls
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.COVERALLS_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
