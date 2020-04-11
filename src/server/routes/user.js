@@ -8,6 +8,7 @@ router.post('/login', userController.login);
 router.post('/changePassword', userController.changePassword);
 router.post('/changeNotifications', userController.changeNotifications);
 router.post('/deleteUser', userController.deleteUser);
+router.post('/getCurrentUser', userController.getCurrentUser);
 router.post('/checkEmailExists', userController.checkEmailExists);
 router.post('/generatePasswordResetLink', userController.generatePasswordResetLink)
 router.post('/checkEmailTokenExists', userController.checkEmailTokenExists);

@@ -42,6 +42,40 @@ describe("login", () => {
             });
     });
 
+    it("it should get current user information", (done) => {
+        let email = {
+            "emailId": "testmocha1@mochauniversity.edu"
+        };
+        chai.request(server)
+            .post("/api/user/getCurrentUser")
+            .set("api_token", process.env.API_TOKEN)
+            .send(email)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
+                expect(res.body.emailId === "testmocha1@mochauniversity.edu");
+                expect(res.body.notifications ===  true );              
+                
+                done();
+            });
+    });
+
+    it("it should not find existing user", (done) => {
+        let email = {
+            "emailId": "testmocha2@mochauniversity.edu"
+        };
+        chai.request(server)
+            .post("/api/user/getCurrentUser")
+            .set("api_token", process.env.API_TOKEN)
+            .send(email)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body.message).to.equal("User does not exist");
+                done();
+            });
+    });
+
+    
     it("it should find existing user", (done) => {
         let email = {
             "emailId": "testmocha1@mochauniversity.edu"

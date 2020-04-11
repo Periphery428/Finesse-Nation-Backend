@@ -135,6 +135,38 @@ exports.login = [
     }
 ];
 
+exports.getCurrentUser = [
+        // Validate fields
+        body("emailId", "Please enter a valid emailId").isEmail().trim(),
+
+        async (req, res) => {
+            const errors = validationResult(req);
+    
+            if (!errors.isEmpty()) {
+                return res.status(400).json({
+                    errors: errors.array()
+                });
+            }
+    
+            const {emailId} = req.body;
+            try {
+                let user = await User.findOne({emailId});
+                if (!user) {
+                    return res.status(400).json({
+                        message: "User does not exist"
+                    });
+                }
+    
+                res.status(200).json(user);
+            } catch (e) {
+                console.error(e);
+                res.status(500).json({
+                    message: "Server Error"
+                });
+            }
+        }
+]
+
 exports.changePassword = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
