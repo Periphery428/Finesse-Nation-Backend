@@ -21,6 +21,11 @@ jobs:
       - run: npm install
       - run: npm run test-cov
 
+      - name: Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
         env:
           CI: true
           MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
