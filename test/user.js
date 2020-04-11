@@ -64,6 +64,24 @@ describe("login", () => {
             });
     });
 
+    it("it should get fail to get current user information", (done) => {
+        let email = {
+            "emailId": "testmocha4@mochauniversity.edu"
+        };
+        chai.request(server)
+            .post("/api/user/getCurrentUser")
+            .set("api_token", process.env.API_TOKEN)
+            .send(email)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                
+                expect(res.body.message).to.equal("Error: unable to get user");
+                done();           
+                
+                done();
+            });
+    });
+
     
     it("it should find existing user", (done) => {
         let email = {
@@ -80,7 +98,7 @@ describe("login", () => {
             });
     });
 
-    it("it should not find existing user", (done) => {
+    it("it error finding existing user", (done) => {
         let email = {
             "emailId": "testmocha2@mochauniversity.edu"
         };

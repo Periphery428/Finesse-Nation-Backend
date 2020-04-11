@@ -148,10 +148,11 @@ exports.getCurrentUser = [
             //Treating eventTitle as the unique ID
             User.findOne({emailId}).exec(function(err, userStuff) {
                 if(err) {
-                    console.log("Error: unable to get user");
-                    res.status(400).end();
+                    return res.status(400).json({
+                        message: "User does not exist"
+                    });
                 } else {
-                    res.json(userStuff);
+                    return res.json(userStuff);
                 }
             });
         }
