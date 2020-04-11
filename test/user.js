@@ -10,11 +10,8 @@ describe("login", () => {
 
     it("it should signup a new user", (done) => {
         let newUser = {
-            "userName": "testmocha1",
             "emailId": "testmocha1@mochauniversity.edu",
-            "password": "testmocha1pass",
-            "school": "UIUC",
-            "points": 0
+            "password": "testmocha1pass"
         };
         chai.request(server)
             .post("/api/user/signup")
@@ -140,7 +137,7 @@ describe("login", () => {
                 done();
             });
     });
-    
+
 
     it("it should check token is valid for password reset request", (done) => {
         let emailToken = {
