@@ -135,26 +135,29 @@ exports.getCurrentUser = [
 
         async (req, res) => {
             const errors = validationResult(req);
+    
             if (!errors.isEmpty()) {
-                console.log("Error Happened");
                 return res.status(400).json({
                     errors: errors.array()
                 });
             }
     
-            //TODO: decide on what all fields are modifiable!!!
             const {emailId} = req.body;
-    
-            //Treating eventTitle as the unique ID
-            User.findOne({emailId}).exec(function(err, userStuff) {
-                if(err) {
+            try {
+                let user = await User.findOne({emailId});
+                if (!user) {
                     return res.status(400).json({
                         message: "User does not exist"
                     });
-                } else {
-                    return res.json(userStuff);
                 }
-            });
+    
+                res.status(200).json(user);
+            } catch (e) {
+                console.error(e);
+                res.status(500).json({
+                    message: "Server Error"
+                });
+            }
         }
 ]
 
