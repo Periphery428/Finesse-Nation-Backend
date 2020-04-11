@@ -27,6 +27,7 @@ exports.signup = [
         const dotSplit = atSplit[1].split(".");
         const school = dotSplit[0];
         const points = 0;
+        const notifications = true;
 
         try {
             let user = await User.findOne({emailId});
@@ -41,7 +42,8 @@ exports.signup = [
                 emailId,
                 password,
                 school,
-                points
+                points,
+                notifications
             });
 
             const salt = await bcrypt.genSalt(10);
