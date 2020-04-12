@@ -4,9 +4,10 @@
   "description": "Backend server for free food app.",
   "main": "src/server/index.js",
   "scripts": {
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false",
+    "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "node src/server/index.js",
+    "start": "npm run build && node src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "eslint src/server && mocha --exit && jest -u",
     "test-cov": "nyc --reporter=lcov --reporter=text-summary npm run test"
