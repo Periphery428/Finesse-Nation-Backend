@@ -9,7 +9,6 @@ const PasswordReset = require("../model/passwordReset");
 
 exports.signup = [
     // Validate fields
-    body("userName", "Please Enter a Valid UserName").isLength({min: 1}).trim(),
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
     body("password", "Please enter a valid password").isLength({min: 6}).trim(),
 
@@ -22,7 +21,13 @@ exports.signup = [
             });
         }
 
-        const { userName, emailId, password, school, points} = req.body;
+        const { emailId, password } = req.body;
+        const atSplit = emailId.split("@");
+        const userName = atSplit[0];
+        const dotSplit = atSplit[1].split(".");
+        const school = dotSplit[0];
+        const points = 0;
+        const notifications = true;
 
         try {
             let user = await User.findOne({emailId});
@@ -37,7 +42,8 @@ exports.signup = [
                 emailId,
                 password,
                 school,
-                points
+                points,
+                notifications
             });
 
             const salt = await bcrypt.genSalt(10);
