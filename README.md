@@ -57,6 +57,7 @@ let password = process.env.MONGODB_PASSWORD;
 # Must use API Key to use API.
 Add to all headers: "api_token":"<api_token>"
 
-# Refer to current postman collection for all http request to backend (Share current postman collection file to team)
+# Refer to current postman collection for all http request to backend (Share current postman collection file to team
+). File also in project root.
 ```
 
