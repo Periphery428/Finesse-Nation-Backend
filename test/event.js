@@ -28,11 +28,11 @@ describe("events", () => {
             "school": "UIUC",
             "description": "Mocha test event description.",
             "location": "Mocha location",
-            "isActive" : true,
+            "isActive": [],
             "duration": "2 hrs",
             "postedTime": "2020-04-01 03:29:03.693069",
             "image": "",
-            "category" : "Food"
+            "category": "Food"
         };
         chai.request(server)
             .post("/api/food/addEvent")
@@ -50,8 +50,8 @@ describe("events", () => {
             .get("/api/food/getEvents")
             .set("api_token", process.env.API_TOKEN)
             .end((err, res) => {
-                for(let i = 0; i < res.body.length; i++) {
-                    if(res.body[i].eventTitle === "Mocha Test Event" && res.body[i].description === "Mocha test event description.") {
+                for (let i = 0; i < res.body.length; i++) {
+                    if (res.body[i].eventTitle === "Mocha Test Event" && res.body[i].description === "Mocha test event description.") {
                         targetEventId = res.body[i]._id;
                         break;
                     }
@@ -71,11 +71,11 @@ describe("events", () => {
             "school": "UIUC",
             "description": "Mocha test event description.",
             "location": "Mocha location",
-            "isActive" : true,
+            "isActive": [],
             "duration": "2 hrs",
             "postedTime": "2020-04-01 03:29:03.693069",
             "image": "",
-            "category" : "Food"
+            "category": "Food"
         };
         chai.request(server)
             .post("/api/food/updateEvent")
