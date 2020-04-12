@@ -23,7 +23,7 @@ const mongoose = require("mongoose"),
             "required": true
         },
         "isActive": {
-            "type": Boolean,
+            "type": [String],
             "required": false
         },
         "image": {
