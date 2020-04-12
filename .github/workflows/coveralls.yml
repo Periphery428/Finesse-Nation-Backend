@@ -7,8 +7,6 @@ env:
   API_TOKEN: ${{ secrets.API_TOKEN }}
   MAILTRAP_USERNAME: ${{ secrets.MAILTRAP_USERNAME }}
   MAILTRAP_PASSWORD: ${{ secrets.MAILTRAP_PASSWORD }}
-  COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-  COVERALLS_GIT_BRANCH: ${{ github.ref }}
 
 jobs:
   run:
