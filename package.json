@@ -4,6 +4,8 @@
   "description": "Backend server for free food app.",
   "main": "src/server/index.js",
   "scripts": {
+    "heroku-prebuild": "npm install --dev",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false",
     "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
     "server": "node src/server/index.js",
