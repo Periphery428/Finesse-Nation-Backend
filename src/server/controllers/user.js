@@ -84,7 +84,6 @@ exports.login = [
 
     async (req, res) => {
         const errors = validationResult(req);
-
         if (!errors.isEmpty()) {
             return res.status(400).json({
                 errors: errors.array()
@@ -141,13 +140,12 @@ exports.getCurrentUser = [
 
         async (req, res) => {
             const errors = validationResult(req);
-    
             if (!errors.isEmpty()) {
                 return res.status(400).json({
                     errors: errors.array()
                 });
             }
-    
+
             const {emailId} = req.body;
             try {
                 let user = await User.findOne({emailId});
@@ -156,7 +154,7 @@ exports.getCurrentUser = [
                         message: "User does not exist"
                     });
                 }
-    
+
                 res.status(200).json(user);
             } catch (e) {
                 console.error(e);
@@ -174,7 +172,6 @@ exports.changePassword = [
 
     async (req, res) => {
         const errors = validationResult(req);
-
         if (!errors.isEmpty()) {
             return res.status(400).json({
                 errors: errors.array()
@@ -214,7 +211,6 @@ exports.changeNotifications = [
 
     async (req, res) => {
         const errors = validationResult(req);
-
         if (!errors.isEmpty()) {
             return res.status(400).json({
                 errors: errors.array()
@@ -277,7 +273,6 @@ exports.checkEmailExists = [
 
     async (req, res) => {
         const errors = validationResult(req);
-
         if (!errors.isEmpty()) {
             return res.status(400).json({
                 errors: errors.array()
@@ -311,7 +306,6 @@ exports.generatePasswordResetLink = [
 
     async (req, res) => {
         const errors = validationResult(req);
-
         if (!errors.isEmpty()) {
             return res.status(400).json({
                 errors: errors.array()
@@ -381,7 +375,6 @@ exports.checkEmailTokenExists = [
 
     async (req, res) => {
         const errors = validationResult(req);
-
         if (!errors.isEmpty()) {
             return res.status(400).json({
                 errors: errors.array()

@@ -45,6 +45,29 @@ describe("events", () => {
             });
     });
 
+    it("it should throw error on event add for empty eventTitle", (done) => {
+        let event = {
+            "eventTitle": "",
+            "emailId": "darko123@gmail.com",
+            "school": "UIUC",
+            "description": "Mocha test event description.",
+            "location": "Mocha location",
+            "isActive": [],
+            "duration": "2 hrs",
+            "postedTime": "2020-04-01 03:29:03.693069",
+            "image": "",
+            "category": "Food"
+        };
+        chai.request(server)
+            .post("/api/food/addEvent")
+            .set("api_token", process.env.API_TOKEN)
+            .send(event)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                done();
+            });
+    });
+
     it("it should return _id of created event", (done) => {
         chai.request(server)
             .get("/api/food/getEvents")
@@ -84,6 +107,30 @@ describe("events", () => {
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.text).to.equal("Success: updated event _id = " + targetEventId);
+                done();
+            });
+    });
+
+    it("it should throw error on event add for empty eventTitle", (done) => {
+        let eventUpdate = {
+            "eventId": targetEventId.toString(),
+            "eventTitle": "",
+            "emailId": "darko123@gmail.com",
+            "school": "UIUC",
+            "description": "Mocha test event description.",
+            "location": "Mocha location",
+            "isActive": [],
+            "duration": "2 hrs",
+            "postedTime": "2020-04-01 03:29:03.693069",
+            "image": "",
+            "category": "Food"
+        };
+        chai.request(server)
+            .post("/api/food/updateEvent")
+            .set("api_token", process.env.API_TOKEN)
+            .send(eventUpdate)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
                 done();
             });
     });
