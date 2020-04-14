@@ -29,13 +29,25 @@ app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/comment", commentRoutes);
 
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '../../public/index.html'), function(err) {
-    if (err) {
-      res.status(500).send(err)
-    }
-  })
-});
+// app.get('/*', function(req, res) {
+//   res.sendFile(path.join(__dirname, '../../public/index.html'), function(err) {
+//     if (err) {
+//       res.status(500).send(err)
+//     }
+//   })
+// });
+
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "src/client/build")));
+
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname, "src/client/build"), function(err) {
+      if (err) {
+        res.status(500).send(err)
+      }
+    })
+  });
+}
 
 const PORT = process.env.PORT || 8080;
 let server = app.listen(PORT, () => {
