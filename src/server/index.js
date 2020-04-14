@@ -38,10 +38,10 @@ app.use("/api/user", userRoutes);
 // });
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "src/client/build")));
+  app.use(express.static(path.join(__dirname, "build")));
 
   app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, "src/client/build"), function(err) {
+    res.sendFile(path.join(__dirname, "build", "index.html"), function(err) {
       if (err) {
         res.status(500).send(err)
       }
