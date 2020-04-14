@@ -19,7 +19,7 @@ const userRoutes = require("./routes/user");
 app.use(bodyParser.json({ limit: "16mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 
 // Custom middleware
 app.use(apiKeyValidation);
@@ -40,7 +40,7 @@ app.use("/api/user", userRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "src/client/build")));
 
-  app.get('*', function(req, res) {
+  app.get('/*', function(req, res) {
     res.sendFile(path.join(__dirname, "src/client/build"), function(err) {
       if (err) {
         res.status(500).send(err)
