@@ -4,7 +4,7 @@
 
 ![Lint](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Lint/badge.svg)
 
-[![Coverage Status](https://coveralls.io/repos/github/Periphery428/Finesse-Nation-Backend/badge.svg?branch=master)](https://coveralls.io/github/Periphery428/Finesse-Nation-Backend?branch=master)
+[![Coverage Status](https://coveralls.io/repos/github/Periphery428/Finesse-Nation-Backend/badge.svg?branch=master)](https://coveralls.io/github/Periphery428/Finesse-Nation-Backend?branch=master&service=github)
 
 Backend for the free food service.
 
