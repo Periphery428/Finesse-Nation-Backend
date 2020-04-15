@@ -2,7 +2,6 @@ require('dotenv').config();
 
 const path = require('path');
 const express = require('express');
-// const os = require('os');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const InitiateMongoServer = require("./config/db");
@@ -21,7 +20,7 @@ app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 app.use(cors());
 
 // Custom middleware
-app.use(apiKeyValidation).unless({ path: ['/', '/users']});
+app.use(apiKeyValidation);
 
 // Routes
 app.use('/api/food', eventRoutes);
