@@ -1,22 +1,13 @@
 {
-  "name": "Finesse-Nation-Backend",
-  "version": "1.0.0",
-  "description": "Backend server for free food app.",
-  "main": "src/server/index.js",
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
-    "server": "node src/server/index.js",
-    "start": "node src/server/index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "eslint src/server && mocha --exit && cd src/client && jest -u",
-    "test-cov": "nyc --reporter=lcov --reporter=text-summary npm run test",
-    "heroku-postbuild": "cd src/client && npm install && npm run build"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
-  "engines": {
-    "node": "12.x"
-  },
-  "author": "",
-  "license": "N/A",
   "dependencies": {
     "@date-io/date-fns": "^1.3.11",
     "@material-ui/core": "^4.5.2",
@@ -84,10 +75,17 @@
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.7.1"
   },
-  "proxy": {
-    "/api/*": {
-      "target": "http://localhost:8080",
-      "secure": false
-    }
+  "proxy": "http://localhost:8080",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

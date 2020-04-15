@@ -16,7 +16,7 @@ class Users extends Component {
     }
 
     componentDidMount() {
-        const params = queryString.parse(location.search);
+        const params = queryString.parse(window.location.search);
         const email = params["email"];
         const token = params["token"];
 
@@ -26,7 +26,7 @@ class Users extends Component {
                 token: token
             },{
                 headers: {
-                    "api_token": process.env.API_TOKEN
+                    "api_token": process.env.REACT_APP_API_TOKEN
                 }
             }).then((res) => {
                 if (res.status === 200) {
@@ -50,7 +50,7 @@ class Users extends Component {
                 password: this.state.confirmPassword
             },{
                 headers: {
-                    "api_token": process.env.API_TOKEN
+                    "api_token": process.env.REACT_APP_API_TOKEN
                 }
             }).then((res) => {
                 if (res.status === 200) {

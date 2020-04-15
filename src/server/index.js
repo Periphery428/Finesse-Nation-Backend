@@ -19,9 +19,9 @@ const userRoutes = require("./routes/user");
 app.use(bodyParser.json({ limit: "16mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 app.use(cors());
-// app.use(express.static(path.join(__dirname, 'build')));
 
 // Custom middleware
+// app.use(apiKeyValidation).unless({ path: ['/api/user/checkEmailTokenExists']});
 app.use(apiKeyValidation);
 
 // Routes
@@ -29,19 +29,12 @@ app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 // app.use("/api/comment", commentRoutes);
 
-// app.get('/*', function(req, res) {
-//   res.sendFile(path.join(__dirname, '../../public/index.html'), function(err) {
-//     if (err) {
-//       res.status(500).send(err)
-//     }
-//   })
-// });
 
 if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "build")));
+  app.use(express.static(path.join(__dirname, "src/client/build")));
 
-  app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, "build", "index.html"), function(err) {
+  app.get('*', function(req, res) {
+    res.sendFile(path.join(__dirname + "/src/client/build/index.html"), function(err) {
       if (err) {
         res.status(500).send(err)
       }
