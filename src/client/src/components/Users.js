@@ -30,11 +30,8 @@ class Users extends Component {
                 }
             }).then((res) => {
                 if (res.status === 200) {
-                    console.log("Rendering password reset form");
                     this.setState({email: email});
                     this.setState({validRequest: true});
-                } else {
-                    console.log("Rendering invalid password reset request page");
                 }
             }).catch(err => console.log(err));
         }
