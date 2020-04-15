@@ -7,8 +7,8 @@ const Navigation = () => {
         <div>
             <AppBar position="static" style={{backgroundColor: "darkblue"}}>
                 <Tabs>
-                    <NavLink style={{textDecoration: 'none', color: '#fff'}} to="/"><Tab label="Home"/></NavLink>
-                    <NavLink style={{textDecoration: 'none', color: '#fff'}} to="/users"><Tab
+                    <NavLink style={{textDecoration: 'none', color: '#fff'}} to="/admin/"><Tab label="Home"/></NavLink>
+                    <NavLink style={{textDecoration: 'none', color: '#fff'}} to="/admin/users"><Tab
                         label="Users"/></NavLink>
                 </Tabs>
             </AppBar>
