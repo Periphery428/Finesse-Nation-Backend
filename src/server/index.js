@@ -30,10 +30,9 @@ app.use("/api/user", userRoutes);
 // app.use("/api/comment", commentRoutes);
 
 
-app.use(express.static(path.join(__dirname, "src/client/build")));
-
+app.use(express.static(path.join("/app/src/client/build")));
 app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname + "/src/client/build/index.html"), function(err) {
+  res.sendFile(path.join("/app/src/client/build/index.html"), function(err) {
     if (err) {
       res.status(500).send(err)
     }
