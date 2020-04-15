@@ -236,7 +236,7 @@ describe("login", () => {
             "token": passwordResetToken
         };
         chai.request(server)
-            .post("/api/user/checkEmailTokenExists")
+            .post("/admin/api/user/checkEmailTokenExists")
             .set("api_token", process.env.API_TOKEN)
             .send(emailToken)
             .end((err, res) => {
@@ -267,7 +267,7 @@ describe("login", () => {
             "token": passwordResetToken
         };
         chai.request(server)
-            .post("/api/user/checkEmailTokenExists")
+            .post("/admin/api/user/checkEmailTokenExists")
             .set("api_token", process.env.API_TOKEN)
             .send(emailToken)
             .end((err, res) => {
@@ -315,7 +315,7 @@ describe("login", () => {
             "password": "testmocha2pass"
         };
         chai.request(server)
-            .post("/api/user/changePassword")
+            .post("/admin/api/user/changePassword")
             .set("api_token", process.env.API_TOKEN)
             .send(loginCreds)
             .end((err, res) => {
@@ -331,7 +331,7 @@ describe("login", () => {
             "password": "testmocha2pass"
         };
         chai.request(server)
-            .post("/api/user/changePassword")
+            .post("/admin/api/user/changePassword")
             .set("api_token", process.env.API_TOKEN)
             .send(loginCreds)
             .end((err, res) => {
