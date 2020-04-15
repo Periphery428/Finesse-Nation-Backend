@@ -345,7 +345,7 @@ exports.generatePasswordResetLink = [
                 from: "admin@finessenation.com",
                 to: emailId,
                 subject: "Finesse Nation - Password Reset",
-                text: '<p>Click <a href="https://finesse-nation.herokuapp.com:3000/users?email=' + emailId + '&token=' + token + '">here</a> to reset your password</p>'
+                text: '<p>Click <a href="https://finesse-nation.herokuapp.com/admin/users?email=' + emailId + '&token=' + token + '">here</a> to reset your password</p>'
             };
 
             transport.sendMail(message, function(err) {
