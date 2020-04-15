@@ -21,8 +21,7 @@ app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
 app.use(cors());
 
 // Custom middleware
-// app.use(apiKeyValidation).unless({ path: ['/api/user/checkEmailTokenExists']});
-app.use(apiKeyValidation);
+app.use(apiKeyValidation).unless({ path: ['/', '/users']});
 
 // Routes
 app.use('/api/food', eventRoutes);
