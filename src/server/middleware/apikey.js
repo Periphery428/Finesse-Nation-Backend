@@ -1,7 +1,8 @@
 const apiToken = process.env.API_TOKEN
 
 module.exports = function(req, res, next) {
-    if(req.originalUrl.startsWith('/admin')) {
+    if(req.originalUrl.startsWith('/admin') || req.originalUrl.startsWith('/static') ||
+        req.originalUrl.startsWith('/favicon.ico')) {
         next();
     } else {
         if(req.headers.api_token !== apiToken) {
