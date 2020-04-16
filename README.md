@@ -1,10 +1,6 @@
 # Finesse-Nation-Backend
 
-[![Node.js CI](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Node.js%20CI/badge.svg?branch=master)](https://github.com/Periphery428/Finesse-Nation-Backend/actions)
-
-![Lint](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Lint/badge.svg)
-
-[![Coverage Status](https://coveralls.io/repos/github/Periphery428/Finesse-Nation-Backend/badge.png?branch=master)](https://coveralls.io/github/Periphery428/Finesse-Nation-Backend?branch=master&service=github)
+[![Node.js CI](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Node.js%20CI/badge.svg?branch=master)](https://github.com/Periphery428/Finesse-Nation-Backend/actions) ![Lint](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Lint/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/Periphery428/Finesse-Nation-Backend/badge.png?branch=master)](https://coveralls.io/github/Periphery428/Finesse-Nation-Backend?branch=master&service=github)
 
 Backend for the free food service.
 
