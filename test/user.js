@@ -7,6 +7,7 @@ chai.use(chaiHttp);
 
 describe("login", () => {
     let passwordResetToken = "";
+    let userId = "";
 
     it("it should signup a new user", (done) => {
         let newUser = {
@@ -237,11 +238,12 @@ describe("login", () => {
         };
         chai.request(server)
             .post("/admin/api/user/checkEmailTokenExists")
-            .set("api_token", process.env.API_TOKEN)
             .send(emailToken)
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.body.msg).to.equal("Found valid email/token");
+                expect(res.body.userId).length.gte(24);
+                userId = res.body.userId;
                 done();
             });
     });
@@ -268,7 +270,6 @@ describe("login", () => {
         };
         chai.request(server)
             .post("/admin/api/user/checkEmailTokenExists")
-            .set("api_token", process.env.API_TOKEN)
             .send(emailToken)
             .end((err, res) => {
                 expect(res).to.have.status(400);
@@ -311,28 +312,26 @@ describe("login", () => {
     it("it should send successful request for password change", (done) => {
         let emailId = "testmocha1@mochauniversity.edu";
         let loginCreds = {
-            "emailId": emailId,
+            "userId": userId,
             "password": "testmocha2pass"
         };
         chai.request(server)
             .post("/admin/api/user/changePassword")
-            .set("api_token", process.env.API_TOKEN)
             .send(loginCreds)
             .end((err, res) => {
                 expect(res).to.have.status(200);
-                expect(res.body.message).to.equal("Success: updated password for user = " + emailId);
+                expect(res.body.message).to.equal("Success: updated password for userId = " + userId);
                 done();
             });
     });
 
-    it("it should throw error on password change for invalid email", (done) => {
+    it("it should throw error on password change for invalid userid", (done) => {
         let loginCreds = {
-            "emailId": "testmocha1_mochauniversity.edu",
+            "userId": "12345",
             "password": "testmocha2pass"
         };
         chai.request(server)
             .post("/admin/api/user/changePassword")
-            .set("api_token", process.env.API_TOKEN)
             .send(loginCreds)
             .end((err, res) => {
                 expect(res).to.have.status(400);

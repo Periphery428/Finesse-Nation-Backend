@@ -7,6 +7,7 @@ class Users extends Component {
         super();
         this.state = {
             email: "",
+            userId: "",
             password: "",
             confirmPassword: "",
             validRequest: false,
@@ -24,13 +25,10 @@ class Users extends Component {
             axios.post('api/user/checkEmailTokenExists', {
                 emailId: email,
                 token: token
-            },{
-                headers: {
-                    "api_token": process.env.REACT_APP_API_TOKEN
-                }
             }).then((res) => {
                 if (res.status === 200) {
                     this.setState({email: email});
+                    this.setState({userId: res.data.userId});
                     this.setState({validRequest: true});
                 }
             }).catch(err => console.log(err));
@@ -43,12 +41,8 @@ class Users extends Component {
             alert("Passwords do not match!");
         } else {
             axios.post('api/user/changePassword', {
-                emailId: this.state.email,
+                userId: this.state.userId,
                 password: this.state.confirmPassword
-            },{
-                headers: {
-                    "api_token": process.env.REACT_APP_API_TOKEN
-                }
             }).then((res) => {
                 if (res.status === 200) {
                     this.setState({validRequest: false});

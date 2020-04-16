@@ -6,7 +6,7 @@ const PasswordReset = require("../model/passwordReset");
 
 exports.changePassword = [
     // Validate fields
-    body("emailId", "Please enter a valid emailId").isEmail().trim(),
+    body("userId", "Please enter a valid userId").isLength({min: 24}).trim(),
     body("password", "Please enter a valid password").isLength({min: 6}).trim(),
 
     async (req, res) => {
@@ -17,20 +17,22 @@ exports.changePassword = [
             });
         }
 
-        const {emailId, password} = req.body;
+        const {userId, password} = req.body;
 
-        const salt = await bcrypt.genSalt(10);
-        const newPassword = await bcrypt.hash(password, salt);
-
-        let user = await User.findOne({"emailId": emailId});
+        let user = await User.findOne({"_id": userId});
         if (user) {
+            const salt = await bcrypt.genSalt(10);
+            const newPassword = await bcrypt.hash(password, salt);
             user.password = newPassword;
             await user.save(function(err) {
                 if(err) {
-                    res.send({"Error": "updating password for user = " + emailId});
-                    res.status(400).end();
+                    let logMessage = "Error: updating password for userId = " + userId
+                    console.log(logMessage);
+                    res.status(400).json({
+                        message: logMessage
+                    });
                 } else {
-                    let logMessage = "Success: updated password for user = " + emailId;
+                    let logMessage = "Success: updated password for userId = " + userId;
                     console.log(logMessage);
                     res.status(200).json({
                         message: logMessage
@@ -38,8 +40,11 @@ exports.changePassword = [
                 }
             });
         } else {
-            console.log("Error: unable to find user " + emailId  + " to update password");
-            res.status(400).end();
+            let logMessage = "Error: unable to find userId " + userId  + " to update password";
+            console.log(logMessage);
+            res.status(400).json({
+                message: logMessage
+            });
         }
     }
 ];
@@ -77,9 +82,13 @@ exports.checkEmailTokenExists = [
 
             await passwordReset.remove();
 
+            // Get user id if valid email/token
+            let user = await User.findOne({emailId});
+
             console.log("Found valid email/token");
             return res.status(200).json({
-                msg: "Found valid email/token"
+                msg: "Found valid email/token",
+                userId: user._id
             });
         } catch (e) {
             console.error(e);
