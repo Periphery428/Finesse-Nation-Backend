@@ -11,14 +11,15 @@ Backend for the free food service.
 npm install
 
 # Run mocha (nodejs) and jest (reactjs) tests
-npm test
+npm run test
+# Run tests with coverage
+npm run test-cov
 
-# Start client and server seperately
-npm run client
-npm run server
+# Run server from root
+npm run start
 
-# Start both client and server
-npm run dev
+# Run server from src/client
+npm run start
 ```
 
 ```bash
