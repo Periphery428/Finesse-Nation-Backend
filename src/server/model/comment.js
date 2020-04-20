@@ -20,6 +20,10 @@ const mongoose = require("mongoose"),
         "comment": {
             "type": String,
             "required": true
+        },
+        "postedTime": {
+            "type": String,
+            "required": true
         }
     });
 

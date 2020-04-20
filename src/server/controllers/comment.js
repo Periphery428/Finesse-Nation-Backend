@@ -39,12 +39,13 @@ exports.addComment = [
             });
         }
 
-        const {eventId, emailId, comment} = req.body;
+        const {eventId, emailId, comment, postedTime} = req.body;
 
         let newComment = new Comment({
             "eventId": eventId,
             "emailId": emailId,
-            "comment": comment
+            "comment": comment,
+            "postedTime":postedTime
         });
         await newComment.save(function(err) {
             if(err) {

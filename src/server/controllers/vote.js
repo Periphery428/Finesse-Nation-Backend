@@ -67,7 +67,7 @@ exports.getVoteByEventAndUser = function(req, res) {
             //there will always be a single vote
             var response = "";
             if(singleVote.length == 0)
-                response = "Not_Voted";
+                response = "NOT_VOTED";
             else if(singleVote[0].vote == 1)
                 response = "UPVOTE";
             else
@@ -94,7 +94,6 @@ exports.addVote = [
                 errors: errors.array()
             });
         }
-
         const {eventId, emailId, vote} = req.body;
 
         //vote value must be +1 or -1.
@@ -107,38 +106,35 @@ exports.addVote = [
             "vote": vote
         });
 
-        //Non Success Scenario
-        //Unlike find, findOne only returns one element
+        //For simplicity, I am deleting and inserting a vote object
+        //To avoid the frontend to make two calls.
+        //CONS: Two DB Calls are made now.
+        //PROS: Avoids a number of additional checks here, Followed this quick fix approach to fix a BUG! => IMPROVISE.
+        // let voteElement = await Vote.findOne({"_id": voteId});
         let voteElement = await Vote.findOne({"eventId": eventId, "emailId":emailId});
-        console.log("MONGO: "+voteElement);
-
-        if (voteElement && voteElement.vote == newVote.vote) {
-            console.log("HAY BODY "+ newVote);
-            console.log(voteElement.vote +" * "+ newVote.vote);
-
-            if(voteElement.vote == 1 && newVote.vote == 1 )
-                return res.status(400).json({
-                msg: "UPVOTED_ALREADY"
+        console.log("Fetched from Mongo "+voteElement);
+        if(voteElement) {
+            Vote.findByIdAndDelete(voteElement._id, function (err) {
+                if (err) {
+                    res.send({"Error": "deleting event _id = " + voteElement._id});
+                    res.status(400).end();
+                } else {
+                    let logMessage = "Success: deleted event _id = " + voteElement._id;
+                    console.log(logMessage);
+                    // res.send(logMessage);
+                }
             });
-            else if(voteElement.vote == -1 && newVote.vote == -1 )
-                return res.status(400).json({
-                    msg: "DOWNVOTED_ALREADY"
-                });
         }
-        else {
-            //vote element is 0(likely would not happen) or no vote element found
-            await newVote.save(function (err) {
+        //vote element is 0(likely would not happen) or no vote element found
+        await newVote.save(function (err) {
                 if (err) {
                     res.send({"Error": "adding new vote = " + vote});
                     console.log(err);
                     //Bad Request
                     res.status(400).end();
                 } else {
-                    // let logMessage = "Successfully Upvoted/ Downvoted";
-                    // res.send(logMessage);
                     res.json({"status": "Successfully Upvoted-Downvoted"});
                 }
             });
-        }
     }
 ];
