@@ -112,14 +112,14 @@ exports.addVote = [
         //PROS: Avoids a number of additional checks here, Followed this quick fix approach to fix a BUG! => IMPROVISE.
         // let voteElement = await Vote.findOne({"_id": voteId});
         let voteElement = await Vote.findOne({"eventId": eventId, "emailId":emailId});
-        console.log("Fetched from Mongo "+voteElement);
+        // console.log("Fetched from Mongo "+voteElement);
         if(voteElement) {
             Vote.findByIdAndDelete(voteElement._id, function (err) {
                 if (err) {
-                    res.send({"Error": "deleting event _id = " + voteElement._id});
+                    res.send({"Error": "deleting vote _id = " + voteElement._id});
                     res.status(400).end();
                 } else {
-                    let logMessage = "Success: deleted event _id = " + voteElement._id;
+                    let logMessage = "Success: deleted vote _id = " + voteElement._id;
                     console.log(logMessage);
                     // res.send(logMessage);
                 }
