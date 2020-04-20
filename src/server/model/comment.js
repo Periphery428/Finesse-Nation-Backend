@@ -17,7 +17,7 @@ const mongoose = require("mongoose"),
             // lowercase:true,
             // validate: [{ validator: value => isEmail(value), msg: 'Invalid email.' }]
         },
-        "comment`": {
+        "comment": {
             "type": String,
             "required": true
         }

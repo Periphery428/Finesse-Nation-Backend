@@ -14,7 +14,7 @@ const app = express();
 const eventRoutes = require('./routes/event');
 const userRoutes = require("./routes/user");
 const adminRoutes = require("./routes/admin");
-// const commentRoutes = require("./routes/comment");
+const commentRoutes = require("./routes/comment");
 
 app.use(bodyParser.json({ limit: "16mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
@@ -27,7 +27,7 @@ app.use(apiKeyValidation);
 app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 app.use("/admin/api/user", adminRoutes);
-// app.use("/api/comment", commentRoutes);
+app.use("/api/comment", commentRoutes);
 
 
 app.use(express.static(path.join("/app/src/client/build")));
