@@ -292,6 +292,8 @@ exports.generatePasswordResetLink = [
             await passwordReset.save();
 
             // Send password reset link to users email
+            console.log('email = ' + process.env.EMAIL_USERNAME);
+            console.log('password = ' + process.env.EMAIL_PASSWORD);
             let transport = nodemailer.createTransport({
                 service: "gmail",
                 auth: {
