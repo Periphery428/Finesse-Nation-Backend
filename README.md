@@ -43,6 +43,8 @@ MONGODB_PASSWORD=<password>
 API_TOKEN=<api_token>
 MAILTRAP_USERNAME=<mailtrap_username>
 MAILTRAP_PASSWORD=<mailtrap_password>
+EMAIL_USERNAME=<email_username>
+EMAIL_PASSWORD=<email_password>
 
 # Use in nodejs:
 let password = process.env.MONGODB_PASSWORD;
