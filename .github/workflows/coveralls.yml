@@ -7,6 +7,8 @@ env:
   API_TOKEN: ${{ secrets.API_TOKEN }}
   MAILTRAP_USERNAME: ${{ secrets.MAILTRAP_USERNAME }}
   MAILTRAP_PASSWORD: ${{ secrets.MAILTRAP_PASSWORD }}
+  EMAIL_USERNAME: ${{ secrets.EMAIL_USERNAME}}
+  EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD}}
 
 jobs:
   run:

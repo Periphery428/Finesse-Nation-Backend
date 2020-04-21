@@ -293,19 +293,18 @@ exports.generatePasswordResetLink = [
 
             // Send password reset link to users email
             let transport = nodemailer.createTransport({
-                host: "smtp.mailtrap.io",
-                port: 2525,
+                service: "gmail",
                 auth: {
-                    user: process.env.MAILTRAP_USERNAME,
-                    pass: process.env.MAILTRAP_PASSWORD
+                    user: process.env.EMAIL_USERNAME,
+                    pass: process.env.EMAIL_PASSWORD
                 }
             });
 
             const message = {
-                from: "admin@finessenation.com",
+                from: "xXFinesseNationXx@gmail.com",
                 to: emailId,
                 subject: "Finesse Nation - Password Reset",
-                text: '<p>Click <a href="https://finesse-nation.herokuapp.com/admin/users?email=' + emailId + '&token=' + token + '">here</a> to reset your password</p>'
+                html: '<p>Click <a href="https://finesse-nation.herokuapp.com/admin/users?email=' + emailId + '&token=' + token + '">here</a> to reset your password</p>'
             };
 
             transport.sendMail(message, function(err) {
