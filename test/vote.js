@@ -43,7 +43,7 @@ describe("votes", () => {
         //get points for user
         it("it should return points earned by a user", (done) => {
             chai.request(server)
-                .get("/api/vote/userPoints?emailId=robertb4@illinois.edu")
+                .get("/api/vote/userPoints?emailId=cs428Node@gmail.com")
                 .set("api_token", process.env.API_TOKEN)
                 .end((err, res) => {
                     expect(res).to.have.status(200);
