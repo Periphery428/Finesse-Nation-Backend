@@ -29,8 +29,8 @@
     "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
     "clsx": "^1.0.4",
-    "cors": "^2.8.5",
     "concurrently": "^4.1.2",
+    "cors": "^2.8.5",
     "date-fns": "^2.0.0-beta.5",
     "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
@@ -42,6 +42,7 @@
     "mongodb": "^3.3.5",
     "mongoose": "^5.7.12",
     "mysql": "^2.17.1",
+    "node-cron": "^2.0.3",
     "nodemailer": "^6.4.6",
     "prop-types": "latest",
     "query-string": "^6.11.1",
@@ -89,5 +90,10 @@
       "target": "http://localhost:8080",
       "secure": false
     }
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/server/controllers.ScheduleCleanUp.js"
+    ]
   }
 }

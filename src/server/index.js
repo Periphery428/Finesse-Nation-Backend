@@ -7,6 +7,7 @@ const cors = require('cors');
 const InitiateMongoServer = require("./config/db");
 const apiKeyValidation = require("./middleware/apikey")
 
+
 // Initiate Mongo Server
 InitiateMongoServer();
 
@@ -16,6 +17,7 @@ const userRoutes = require("./routes/user");
 const adminRoutes = require("./routes/admin");
 const commentRoutes = require("./routes/comment");
 const voteRoutes = require("./routes/vote");
+const schedulerInAction = require("./controllers/ScheduleCleanUp");
 
 app.use(bodyParser.json({ limit: "16mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
@@ -24,13 +26,14 @@ app.use(cors());
 // Custom middleware
 app.use(apiKeyValidation);
 
+schedulerInAction();
+
 // Routes
 app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 app.use("/admin/api/user", adminRoutes);
 app.use("/api/comment", commentRoutes);
 app.use("/api/vote", voteRoutes);
-
 
 app.use(express.static(path.join("/app/src/client/build")));
 app.get('*', function(req, res) {
