@@ -1,6 +1,6 @@
 const mongoose = require("mongoose"),
 
-    CommentSchema = mongoose.Schema({
+    VoteSchema = mongoose.Schema({
         "eventId": {
             "type": String,
             // "required": true
@@ -17,17 +17,13 @@ const mongoose = require("mongoose"),
             // lowercase:true,
             // validate: [{ validator: value => isEmail(value), msg: 'Invalid email.' }]
         },
-        "comment": {
-            "type": String,
-            "required": true
-        },
-        "postedTime": {
-            "type": String,
+        "vote": {
+            "type": Number,
             "required": true
         }
     });
 
 // Export model comment with CommentSchema
-module.exports = mongoose.model("finesse_nation_comments", CommentSchema);
+module.exports = mongoose.model("finesse_nation_votes", VoteSchema);
 
 
