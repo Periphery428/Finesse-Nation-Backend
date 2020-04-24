@@ -29,6 +29,7 @@ exports.addComment = [
     // body("duration", "Please enter a valid duration").isLength({min: 1}).trim(),
     body("comment", "The comment cannot be empty").isLength({min: 1}).trim(),
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
+    body("postedTime", "The time cannot be empty").isLength({min: 1}).trim(),
 
     async (req, res) => {
         const errors = validationResult(req);
