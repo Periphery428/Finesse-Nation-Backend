@@ -31,40 +31,15 @@ module.exports = function() {
                     // Calculate the difference in milliseconds
                     // Convert dates to milliseconds
                     var difference_ms = currTime.getTime() - eventTime.getTime();
-                    //timeDifference = Math.abs(secondDate.getTime() - firstDate.getTime());
-                    //let differentDays = Math.ceil(timeDifference / (1000 * 3600 * 24));
-                    // console.log("Ye ye " + difference_ms);
-                    // console.log("Ye ye "+currTime.getMonth());
 
                     //it's true or 'true' - both in the DB :(
+                    //Now -> a list of strings :( - FIX IT!
                     //using (1000 * 3600 * 24) for 1 day, elements older than a day should be deleted
                     //TODO: mark isActive as false, rather than deleting
                     if (listEvents[i].isActive == true && difference_ms >= (1000 * 3600 * 24)) {
 
-                        console.log("HIHIHIHIHIHIHI......................");
                         var rawEventId = listEvents[i]._id;
-
-                        let updatedEvent = new Event({
-                            "eventTitle": listEvents[i].eventTitle,
-                            "emailId": listEvents[i].emailId,
-                            "school": listEvents[i].school,
-                            "description": listEvents[i].description,
-                            "location": listEvents[i].location,
-                            "isActive" : false,  //updating it to false
-                            "image": listEvents[i].image,
-                            "postedTime": listEvents[i].postedTime,
-                            "duration": listEvents[i].duration,
-                            "category" : listEvents[i].category
-                        });
-
-                        console.log("HUHUHIHUHIHIHI......................" + updatedEvent.isActive);
-                        //Marking the event as inactive
-                        updatedEvent.isActive = 'false';
-                        //Contact.update({_id: contact.id}, upsertData, {upsert: true}, function(err{...});
-                        //Event.update({'_id':rawEventId},updatedEvent, {upsert: true});
-                        //Event.update({_id : rawEventId},{$set: { isActive: 'false' }}, {upsert: true});
                         const res =  Event.updateOne({ _id : rawEventId }, { isActive: 'false' },
-                                            // {upsert: true},
                         function(err){
                              if(err){
                              throw err;
@@ -72,8 +47,7 @@ module.exports = function() {
                               console.log("DONE!");
                               });
                             // res.n; // Number of documents matched
-                            console.log( res.nModified ); // Number of documents modified
-                        console.log("Yippeee Modified");
+                            console.log( "Yippeee Modified" + res.nModified ); // Number of documents modified
 
                         /*
                         //This is the code if we want to delete a code after a certain time
@@ -96,7 +70,6 @@ module.exports = function() {
     }); //end of cron.schedule.
 
 }; //end of module
-
 
 //TODO: fix isActive is saved as string, change to boolean
 // It should store boolean value, currently it's storing a list and that too as a string
