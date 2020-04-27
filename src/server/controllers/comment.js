@@ -3,9 +3,8 @@ const {body, validationResult} = require("express-validator");
 const Comment = require("../model/comment");
 
 exports.getComments = function(req, res) {
-
     //event id is accepted as a path param
-    var eventId = req.params.eventId;
+    let eventId = req.params.eventId;
 
     // Comment.find({"eventId": req.body.eventId}).exec(function(err, listComments) {
     Comment.find({"eventId": eventId}).exec(function(err, listComments) {

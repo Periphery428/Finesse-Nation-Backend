@@ -19,8 +19,8 @@ exports.changePassword = [
 
         const {userId, password} = req.body;
 
-        let user = await User.findOne({"_id": userId});
-        if (user) {
+        try {
+            let user = await User.findOne({"_id": userId});
             const salt = await bcrypt.genSalt(10);
             const newPassword = await bcrypt.hash(password, salt);
             user.password = newPassword;
@@ -39,7 +39,7 @@ exports.changePassword = [
                     });
                 }
             });
-        } else {
+        } catch(err) {
             let logMessage = "Error: unable to find userId " + userId  + " to update password";
             console.log(logMessage);
             res.status(400).json({
@@ -90,8 +90,8 @@ exports.checkEmailTokenExists = [
                 msg: "Found valid email/token",
                 userId: user._id
             });
-        } catch (e) {
-            console.error(e);
+        } catch(err) {
+            console.error(err);
             res.status(500).json({
                 msg: "Server Error"
             });

@@ -70,7 +70,7 @@ exports.signup = [
                     });
                 }
             );
-        } catch (err) {
+        } catch(err) {
             console.log(err.message);
             res.status(500).send("Error in Saving");
         }
@@ -125,8 +125,8 @@ exports.login = [
                     });
                 }
             );
-        } catch (e) {
-            console.error(e);
+        } catch (err) {
+            console.error(err);
             res.status(500).json({
                 message: "Server Error"
             });
@@ -156,8 +156,8 @@ exports.getCurrentUser = [
                 }
 
                 res.status(200).json(user);
-            } catch (e) {
-                console.error(e);
+            } catch(err) {
+                console.error(err);
                 res.status(500).json({
                     message: "Server Error"
                 });
@@ -179,8 +179,8 @@ exports.changeNotifications = [
 
         const {emailId, notifications} = req.body;
 
-        let user = await User.findOne({"emailId": emailId});
-        if (user) {
+        try {
+            let user = await User.findOne({"emailId": emailId});
             user.notifications = notifications;
             await user.save(function(err) {
                 if(err) {
@@ -194,7 +194,7 @@ exports.changeNotifications = [
                     });
                 }
             });
-        } else {
+        } catch(err) {
             console.log("Error: unable to find user " + emailId  + " to update notifications");
             res.status(400).end();
         }
@@ -314,13 +314,11 @@ exports.generatePasswordResetLink = [
                         msg: "Error - unable to send password reset token to user email"
                     });
                 }
-                else {
-                    console.log(info);
-                    res.status(200).json({
-                        msg: "Password reset token sent to user email",
-                        token: token
-                    });
-                }
+                console.log(info);
+                res.status(200).json({
+                    msg: "Password reset token sent to user email",
+                    token: token
+                });
             });
         } catch (e) {
             console.error(e);

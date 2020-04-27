@@ -63,6 +63,7 @@ exports.addEvent = [
 exports.updateEvent = [
     // body("_id", "Please enter a valid event ID").isLength({min: 1}).trim(),
     // Validate fields
+    body("eventId", "Please enter a valid event id").isLength({min: 24}).trim(),
     body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
     // body("description", "Please enter a valid description").isLength({min: 1}).trim(),
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
@@ -83,9 +84,9 @@ exports.updateEvent = [
         //TODO: decide on what all fields are modifiable!!!
         const {eventId, eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
 
-        //Treating eventTitle as the unique ID
-        let currEvent = await Event.findOne({"_id": eventId});
-        if(currEvent) {
+        try {
+            //Treating eventTitle as the unique ID
+            let currEvent = await Event.findOne({"_id": eventId});
             currEvent.eventTitle = eventTitle;
             currEvent.emailId = emailId;
             currEvent.school = school;
@@ -100,13 +101,12 @@ exports.updateEvent = [
                 if(err) {
                     res.send({"Error": "updating event _id = " + eventId});
                     res.status(400).end();
-                } else {
-                    let logMessage = "Success: updated event _id = " + eventId;
-                    console.log(logMessage);
-                    res.send(logMessage);
                 }
+                let logMessage = "Success: updated event _id = " + eventId;
+                console.log(logMessage);
+                res.send(logMessage);
             });
-        } else {
+        } catch(err) {
             console.log("Error: unable to find event to update _id = " + eventId);
             res.status(400).end();
         }
