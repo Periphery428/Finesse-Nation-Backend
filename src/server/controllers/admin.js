@@ -9,7 +9,7 @@ exports.changePassword = [
     body("userId", "Please enter a valid userId").isLength({min: 24}).trim(),
     body("password", "Please enter a valid password").isLength({min: 6}).trim(),
 
-    async (req, res) => {
+    async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({
@@ -25,19 +25,12 @@ exports.changePassword = [
             const newPassword = await bcrypt.hash(password, salt);
             user.password = newPassword;
             await user.save(function(err) {
-                if(err) {
-                    let logMessage = "Error: updating password for userId = " + userId
-                    console.log(logMessage);
-                    res.status(400).json({
-                        message: logMessage
-                    });
-                } else {
-                    let logMessage = "Success: updated password for userId = " + userId;
-                    console.log(logMessage);
-                    res.status(200).json({
-                        message: logMessage
-                    });
-                }
+                if(err) { return next(err); }
+                let logMessage = "Success: updated password for userId = " + userId;
+                console.log(logMessage);
+                res.status(200).json({
+                    message: logMessage
+                });
             });
         } catch(err) {
             let logMessage = "Error: unable to find userId " + userId  + " to update password";
@@ -65,13 +58,6 @@ exports.checkEmailTokenExists = [
         const {emailId, token} = req.body;
         try {
             let passwordReset = await PasswordReset.findOne({"emailId":emailId, "token":token});
-            if(!passwordReset) {
-                console.log("Invalid email/token");
-                return res.status(401).json({
-                    msg: "Invalid email/token"
-                });
-            }
-
             let tokenTTLMins = 20;
             if ((Date.now() - passwordReset.creationTime) > tokenTTLMins * 60 * 1000) {
                 console.log("Token has expired");
@@ -91,9 +77,9 @@ exports.checkEmailTokenExists = [
                 userId: user._id
             });
         } catch(err) {
-            console.error(err);
-            res.status(500).json({
-                msg: "Server Error"
+            console.log("Invalid email/token");
+            return res.status(401).json({
+                msg: "Invalid email/token"
             });
         }
     }

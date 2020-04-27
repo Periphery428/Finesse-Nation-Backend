@@ -277,6 +277,20 @@ describe("login", () => {
             });
     });
 
+    it("it should throw error on check email token exists for incorrect token", (done) => {
+        let emailToken = {
+            "emailId": "testmochaz@mochauniversity.edu",
+            "token": "acc0f1fe898cdf038777a1a3056b73d021d9196229b6287e8c79cb8ae3451dde"
+        };
+        chai.request(server)
+            .post("/admin/api/user/checkEmailTokenExists")
+            .send(emailToken)
+            .end((err, res) => {
+                expect(res).to.have.status(401);
+                done();
+            });
+    });
+
     it("it should send successful request for notification change", (done) => {
         let emailId = "testmocha1@mochauniversity.edu";
         let notificationUpdate = {
@@ -339,6 +353,19 @@ describe("login", () => {
             });
     });
 
+    it("it should throw error on password change for invalid userid with correct length", (done) => {
+        let loginCreds = {
+            "userId": "5e90ddf926775a6df5c90a1z",
+            "password": "testmocha2pass"
+        };
+        chai.request(server)
+            .post("/admin/api/user/changePassword")
+            .send(loginCreds)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                done();
+            });
+    });
 
     it("it should assert users password was changed", (done) => {
         let loginCreds = {
