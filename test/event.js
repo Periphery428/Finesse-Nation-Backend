@@ -153,6 +153,30 @@ describe("events", () => {
             });
     });
 
+    it("it should not update created event due to no non-existing eventId", (done) => {
+        let eventUpdate = {
+            "eventId": "5e9537316f5e40002ecc9a3z",
+            "eventTitle": "Josol Test Event",
+            "emailId": "mocha@mochatest.com",
+            "school": "UIUC",
+            "description": "Mocha test event description.",
+            "location": "Mocha location",
+            "isActive": [],
+            "duration": "2 hrs",
+            "postedTime": "2020-04-01 03:29:03.693069",
+            "image": "",
+            "category": "Food"
+        };
+        chai.request(server)
+            .post("/api/food/updateEvent")
+            .set("api_token", process.env.API_TOKEN)
+            .send(eventUpdate)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                done();
+            });
+    });
+
     it("it should delete created event", (done) => {
         let eventDelete = {
             "eventId": targetEventId
