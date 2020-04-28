@@ -59,7 +59,7 @@ exports.addVote = [
     body("emailId", "Please enter a valid email address").isLength({min: 1}).trim(),
     body("vote", "The user must upvote or downvote").isLength({min: 1}).trim(),
 
-    async (req, res) => {
+    async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             console.log("Error Happened");
@@ -89,13 +89,9 @@ exports.addVote = [
         let voteElement = await Vote.findOne({"eventId": eventId, "emailId":emailId});
         if (voteElement) {
             Vote.findByIdAndDelete(voteElement._id, function (err) {
-                if (err) {
-                    res.send({"Error": "deleting vote _id = " + voteElement._id});
-                    res.status(400).end();
-                } else {
-                    let logMessage = "Success: deleted vote _id = " + voteElement._id;
-                    console.log(logMessage);
-                }
+                if(err) { return next(err); }
+                let logMessage = "Success: deleted vote _id = " + voteElement._id;
+                console.log(logMessage);
             });
         }
 
