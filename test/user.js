@@ -26,7 +26,22 @@ describe("login", () => {
             });
     });
 
-    it("it should fail user signup from incorrect email", (done) => {
+    it("it should fail signup for already registered user", (done) => {
+        let newUser = {
+            "emailId": "testmocha1@mochauniversity.edu",
+            "password": "testmocha1pass"
+        };
+        chai.request(server)
+            .post("/api/user/signup")
+            .set("api_token", process.env.API_TOKEN)
+            .send(newUser)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                done();
+            });
+    });
+
+    it("it should fail user signup for incorrect email", (done) => {
         let newUser = {
             "emailId": "testmocha1_mochauniversity.edu",
             "password": "testmocha1pass"
@@ -248,6 +263,22 @@ describe("login", () => {
             });
     });
 
+    it("it should generate email link for password reset for existing user", (done) => {
+        let loginCreds = {
+            "emailId": "testmocha1@mochauniversity.edu"
+        };
+        chai.request(server)
+            .post("/api/user/generatePasswordResetLink")
+            .set("api_token", process.env.API_TOKEN)
+            .send(loginCreds)
+            .end((err, res) => {
+                passwordResetToken = res.body.token;
+                expect(res).to.have.status(200);
+                expect(res.body.msg).to.equal("Password reset token sent to user email");
+                done();
+            });
+    });
+
     it("it should throw error on generate email link password reset for invalid email", (done) => {
         let loginCreds = {
             "emailId": "testmocha0_mochauniversity.edu"
@@ -311,6 +342,21 @@ describe("login", () => {
     it("it should throw error on notification change for invalid email", (done) => {
         let notificationUpdate = {
             "emailId": "testmocha1_mochauniversity.edu",
+            "notifications": false
+        };
+        chai.request(server)
+            .post("/api/user/changeNotifications")
+            .set("api_token", process.env.API_TOKEN)
+            .send(notificationUpdate)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                done();
+            });
+    });
+
+    it("it should throw error on notification change for non-existing email", (done) => {
+        let notificationUpdate = {
+            "emailId": "testmochax@mochauniversity.edu",
             "notifications": false
         };
         chai.request(server)

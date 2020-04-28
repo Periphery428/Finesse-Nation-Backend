@@ -29,51 +29,46 @@ exports.signup = [
         const points = 0;
         const notifications = true;
 
-        try {
-            let user = await User.findOne({emailId});
-            if (user) {
-                return res.status(400).json({
-                    msg: "User already exists"
+        let user = await User.findOne({emailId});
+        if (user) {
+            return res.status(400).json({
+                msg: "User already exists"
+            });
+        }
+
+        user = new User({
+            userName,
+            emailId,
+            password,
+            school,
+            points,
+            notifications
+        });
+
+        const salt = await bcrypt.genSalt(10);
+        user.password = await bcrypt.hash(password, salt);
+
+        await user.save();
+
+        const payload = {
+            user: {
+                id: user.id
+            }
+        };
+
+        jwt.sign(
+            payload,
+            "randomString",
+            {
+                expiresIn: 10000
+            },
+            (err, token) => {
+                if (err) throw err;
+                res.status(200).json({
+                    token
                 });
             }
-
-            user = new User({
-                userName,
-                emailId,
-                password,
-                school,
-                points,
-                notifications
-            });
-
-            const salt = await bcrypt.genSalt(10);
-            user.password = await bcrypt.hash(password, salt);
-
-            await user.save();
-
-            const payload = {
-                user: {
-                    id: user.id
-                }
-            };
-
-            jwt.sign(
-                payload,
-                "randomString",
-                {
-                    expiresIn: 10000
-                },
-                (err, token) => {
-                    if (err) throw err;
-                    res.status(200).json({
-                        token
-                    });
-                }
-            );
-        } catch(err) {
-            console.log(err.message);
-            res.status(500).send("Error in Saving");
-        }
+        );
     }
 ];
 
@@ -91,46 +86,40 @@ exports.login = [
         }
 
         const {emailId, password} = req.body;
-        try {
-            let user = await User.findOne({emailId});
-            if (!user) {
-                return res.status(400).json({
-                    message: "User does not exist"
-                });
-            }
 
-            const isMatch = await bcrypt.compare(password, user.password);
-            if (!isMatch) {
-                return res.status(400).json({
-                    message: "Incorrect Password !"
-                });
-            }
-
-            const payload = {
-                user: {
-                    id: user.id
-                }
-            };
-
-            jwt.sign(
-                payload,
-                "randomString",
-                {
-                    expiresIn: 3600
-                },
-                (err, token) => {
-                    if (err) throw err;
-                    res.status(200).json({
-                        token
-                    });
-                }
-            );
-        } catch (err) {
-            console.error(err);
-            res.status(500).json({
-                message: "Server Error"
+        let user = await User.findOne({emailId});
+        if (!user) {
+            return res.status(400).json({
+                message: "User does not exist"
             });
         }
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) {
+            return res.status(400).json({
+                message: "Incorrect Password !"
+            });
+        }
+
+        const payload = {
+            user: {
+                id: user.id
+            }
+        };
+
+        jwt.sign(
+            payload,
+            "randomString",
+            {
+                expiresIn: 3600
+            },
+            (err, token) => {
+                if (err) throw err;
+                res.status(200).json({
+                    token
+                });
+            }
+        );
     }
 ];
 
@@ -147,21 +136,15 @@ exports.getCurrentUser = [
             }
 
             const {emailId} = req.body;
-            try {
-                let user = await User.findOne({emailId});
-                if (!user) {
-                    return res.status(400).json({
-                        message: "User does not exist"
-                    });
-                }
 
-                res.status(200).json(user);
-            } catch(err) {
-                console.error(err);
-                res.status(500).json({
-                    message: "Server Error"
+            let user = await User.findOne({emailId});
+            if (!user) {
+                return res.status(400).json({
+                    message: "User does not exist"
                 });
             }
+
+            res.status(200).json(user);
         }
 ]
 
@@ -169,7 +152,7 @@ exports.changeNotifications = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
 
-    async (req, res) => {
+    async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({
@@ -183,16 +166,12 @@ exports.changeNotifications = [
             let user = await User.findOne({"emailId": emailId});
             user.notifications = notifications;
             await user.save(function(err) {
-                if(err) {
-                    res.send({"Error": "updating notifications for user = " + emailId});
-                    res.status(400).end();
-                } else {
-                    let logMessage = "Success: updated notifications for user = " + emailId;
-                    console.log(logMessage);
-                    res.status(200).json({
-                        message: logMessage
-                    });
-                }
+                if(err) { return next(err); }
+                let logMessage = "Success: updated notifications for user = " + emailId;
+                console.log(logMessage);
+                res.status(200).json({
+                    message: logMessage
+                });
             });
         } catch(err) {
             console.log("Error: unable to find user " + emailId  + " to update notifications");
@@ -205,25 +184,18 @@ exports.deleteUser = [
     async (req, res) => {
         const {emailId} = req.body;
 
-        try {
-            let user = await User.findOne({emailId});
-            if (!user) {
-                return res.status(400).json({
-                    message: "User does not exist"
-                });
-            }
-
-            await user.remove();
-
-            res.status(200).json({
-                message: "User (" + emailId + ") deleted."
-            });
-        } catch(e) {
-            console.error(e);
-            res.status(500).json({
-                message: "Server Error"
+        let user = await User.findOne({emailId});
+        if (!user) {
+            return res.status(400).json({
+                message: "User does not exist"
             });
         }
+
+        await user.remove();
+
+        res.status(200).json({
+            message: "User (" + emailId + ") deleted."
+        });
     }
 ];
 
@@ -240,23 +212,17 @@ exports.checkEmailExists = [
         }
 
         const {emailId} = req.body;
-        try {
-            let user = await User.findOne({emailId});
-            if (!user) {
-                return res.status(400).json({
-                    message: "User does not exist"
-                });
-            }
 
-            res.status(200).json({
-               msg: "User found"
-            });
-        } catch (e) {
-            console.error(e);
-            res.status(500).json({
-                message: "Server Error"
+        let user = await User.findOne({emailId});
+        if (!user) {
+            return res.status(400).json({
+                message: "User does not exist"
             });
         }
+
+        res.status(200).json({
+           msg: "User found"
+        });
     }
 ];
 
@@ -264,7 +230,7 @@ exports.generatePasswordResetLink = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
 
-    async (req, res) => {
+    async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({
@@ -273,58 +239,47 @@ exports.generatePasswordResetLink = [
         }
 
         const {emailId} = req.body;
-        try {
-            // Check if user already sent password reset request and refresh new token if exists
-            let user = await PasswordReset.findOne({emailId});
-            if (user) {
-                await user.remove();
-            }
 
-            // Add password reset token to db
-            let token = crypto.randomBytes(32).toString("hex");
-            let creationTime = Date.now();
-            let passwordReset = new PasswordReset({
-                emailId,
-                token,
-                creationTime
-            });
-
-            await passwordReset.save();
-
-            // Send password reset link to users email
-            let transport = nodemailer.createTransport({
-                service: "gmail",
-                auth: {
-                    user: process.env.EMAIL_USERNAME,
-                    pass: process.env.EMAIL_PASSWORD
-                }
-            });
-
-            const message = {
-                from: "xXFinesseNationXx@gmail.com",
-                to: emailId,
-                subject: "Finesse Nation - Password Reset",
-                html: '<p>Click <a href="https://finesse-nation.herokuapp.com/admin/users?email=' + emailId + '&token=' + token + '">here</a> to reset your password</p>'
-            };
-
-            transport.sendMail(message, function(err, info) {
-                if(err) {
-                    console.log(err);
-                    res.status(400).json({
-                        msg: "Error - unable to send password reset token to user email"
-                    });
-                }
-                console.log(info);
-                res.status(200).json({
-                    msg: "Password reset token sent to user email",
-                    token: token
-                });
-            });
-        } catch (e) {
-            console.error(e);
-            res.status(500).json({
-                message: "Server Error"
-            });
+        // Check if user already sent password reset request and refresh new token if exists
+        let user = await PasswordReset.findOne({emailId});
+        if (user) {
+            await user.remove();
         }
+
+        // Add password reset token to db
+        let token = crypto.randomBytes(32).toString("hex");
+        let creationTime = Date.now();
+        let passwordReset = new PasswordReset({
+            emailId,
+            token,
+            creationTime
+        });
+
+        await passwordReset.save();
+
+        // Send password reset link to users email
+        let transport = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL_USERNAME,
+                pass: process.env.EMAIL_PASSWORD
+            }
+        });
+
+        const message = {
+            from: "xXFinesseNationXx@gmail.com",
+            to: emailId,
+            subject: "Finesse Nation - Password Reset",
+            html: '<p>Click <a href="https://finesse-nation.herokuapp.com/admin/users?email=' + emailId + '&token=' + token + '">here</a> to reset your password</p>'
+        };
+
+        transport.sendMail(message, function(err, info) {
+            if(err) { return next(err); }
+            console.log(info);
+            res.status(200).json({
+                msg: "Password reset token sent to user email",
+                token: token
+            });
+        });
     }
 ];
