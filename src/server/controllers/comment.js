@@ -6,14 +6,9 @@ exports.getComments = function(req, res) {
     //event id is accepted as a path param
     let eventId = req.params.eventId;
 
-    // Comment.find({"eventId": req.body.eventId}).exec(function(err, listComments) {
     Comment.find({"eventId": eventId}).exec(function(err, listComments) {
-        if(err) {
-            console.log("Error: unable to get events");
-            res.status(400).end();
-        } else {
-            res.json(listComments);
-        }
+        if(err) {  res.status(400).end(); }
+        res.json(listComments);
     });
 };
 
@@ -30,7 +25,7 @@ exports.addComment = [
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
     body("postedTime", "The time cannot be empty").isLength({min: 1}).trim(),
 
-    async (req, res) => {
+    async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             console.log("Error Happened");
@@ -48,15 +43,10 @@ exports.addComment = [
             "postedTime":postedTime
         });
         await newComment.save(function(err) {
-            if(err) {
-                res.send({"Error": "adding new comment = " + comment});
-                console.log(err);
-                res.status(400).end();
-            } else {
-                let logMessage = "Success: added new comment = " + comment;
-                console.log(logMessage);
-                res.send(logMessage);
-            }
+            if(err) { return next(err); }
+            let logMessage = "Success: added new comment = " + comment;
+            console.log(logMessage);
+            res.send(logMessage);
         });
     }
 ];

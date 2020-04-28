@@ -45,6 +45,7 @@ describe("comments", () => {
     });
 
 
+
     describe("comments", () => {
         it("it should return list of comment associated with an event", (done) => {
             chai.request(server)
