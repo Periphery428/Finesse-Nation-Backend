@@ -7,7 +7,7 @@ Backend for the free food service.
 ## Quick Start
 
 ```bash
-# Install dependencies
+# Install dependencies in both server(/) and client(src/client) locations
 npm install
 
 # Run mocha (nodejs) and jest (reactjs) tests
@@ -15,23 +15,15 @@ npm run test
 # Run tests with coverage
 npm run test-cov
 
-# Run server from root
+# Run nodejs server from (/)
 npm run start
 
-# Run server from src/client
+# Run reactjs client from (src/client)
 npm run start
 ```
 
 ```bash
 # Developer Notes Only
-
-# Import test data on mongo database
-mongoimport --db=free_food --collection:places --file=dbutil/foodPlaces.json --jsonArray
-
-# Import data into mongodb atlas
-mongoimport --uri "mongodb+srv://<username>:<password>@mongoclustercs428-pijzh.mongodb.net/free_food" --collection
- places
- --drop --file dbutil/foodPlaces.json --jsonArray
 
 # Connect to mongodb atlas
 mongo "mongodb+srv://mongoclustercs428-pijzh.mongodb.net/test"  --username <username> --password <password>

@@ -6,19 +6,8 @@ let expect = chai.expect;
 chai.use(chaiHttp);
 
 describe("events", () => {
-    it("it should return list of events", (done) => {
-        chai.request(server)
-            .get("/api/food/getEvents")
-            .set("api_token", process.env.API_TOKEN)
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res).to.be.json;
-                done();
-            });
-    });
-});
+    // -------------------- Before tests --------------------
 
-describe("events", () => {
     let targetEventId = "";
 
     it("it should create an event", (done) => {
@@ -41,6 +30,19 @@ describe("events", () => {
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.text).to.equal("Success: added new event = Mocha Test Event");
+                done();
+            });
+    });
+
+    // -------------------- Test cases --------------------
+
+    it("it should return list of events", (done) => {
+        chai.request(server)
+            .get("/api/food/getEvents")
+            .set("api_token", process.env.API_TOKEN)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
                 done();
             });
     });
@@ -152,6 +154,32 @@ describe("events", () => {
                 done();
             });
     });
+
+    it("it should not update created event due to no non-existing eventId", (done) => {
+        let eventUpdate = {
+            "eventId": "5e9537316f5e40002ecc9a3z",
+            "eventTitle": "Josol Test Event",
+            "emailId": "mocha@mochatest.com",
+            "school": "UIUC",
+            "description": "Mocha test event description.",
+            "location": "Mocha location",
+            "isActive": [],
+            "duration": "2 hrs",
+            "postedTime": "2020-04-01 03:29:03.693069",
+            "image": "",
+            "category": "Food"
+        };
+        chai.request(server)
+            .post("/api/food/updateEvent")
+            .set("api_token", process.env.API_TOKEN)
+            .send(eventUpdate)
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                done();
+            });
+    });
+
+    // -------------------- After tests --------------------
 
     it("it should delete created event", (done) => {
         let eventDelete = {

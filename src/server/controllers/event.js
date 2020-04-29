@@ -4,12 +4,8 @@ const Event = require("../model/event");
 
 exports.getEvents = function(req, res) {
     Event.find({}).exec(function(err, listEvents) {
-        if(err) {
-            console.log("Error: unable to get events");
-            res.status(400).end();
-        } else {
-            res.json(listEvents);
-        }
+        if(err) {  res.status(400).end(); }
+        res.json(listEvents);
     });
 };
 
@@ -22,7 +18,7 @@ exports.addEvent = [
     body("postedTime", "Please enter a valid time posted").isLength({min: 1}).trim(),
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
-    async (req, res) => {
+    async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             console.log("Error Happened");
@@ -47,15 +43,10 @@ exports.addEvent = [
         });
 
         await newEvent.save(function(err) {
-            if(err) {
-                res.send({"Error": "adding new event = " + eventTitle});
-                console.log(err);
-                res.status(400).end();
-            } else {
-                let logMessage = "Success: added new event = " + eventTitle;
-                console.log(logMessage);
-                res.send(logMessage);
-            }
+            if(err) { return next(err); }
+            let logMessage = "Success: added new event = " + eventTitle;
+            console.log(logMessage);
+            res.send(logMessage);
         });
     }
 ];
@@ -63,6 +54,7 @@ exports.addEvent = [
 exports.updateEvent = [
     // body("_id", "Please enter a valid event ID").isLength({min: 1}).trim(),
     // Validate fields
+    body("eventId", "Please enter a valid event id").isLength({min: 24}).trim(),
     body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
     // body("description", "Please enter a valid description").isLength({min: 1}).trim(),
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
@@ -71,7 +63,7 @@ exports.updateEvent = [
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
-    async (req, res) => {
+    async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             console.log("Error Happened");
@@ -83,9 +75,9 @@ exports.updateEvent = [
         //TODO: decide on what all fields are modifiable!!!
         const {eventId, eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
 
-        //Treating eventTitle as the unique ID
-        let currEvent = await Event.findOne({"_id": eventId});
-        if(currEvent) {
+        try {
+            //Treating eventTitle as the unique ID
+            let currEvent = await Event.findOne({"_id": eventId});
             currEvent.eventTitle = eventTitle;
             currEvent.emailId = emailId;
             currEvent.school = school;
@@ -97,16 +89,12 @@ exports.updateEvent = [
             currEvent.duration = duration;
             currEvent.category = category;
             await currEvent.save(function(err) {
-                if(err) {
-                    res.send({"Error": "updating event _id = " + eventId});
-                    res.status(400).end();
-                } else {
-                    let logMessage = "Success: updated event _id = " + eventId;
-                    console.log(logMessage);
-                    res.send(logMessage);
-                }
+                if(err) { return next(err); }
+                let logMessage = "Success: updated event _id = " + eventId;
+                console.log(logMessage);
+                res.send(logMessage);
             });
-        } else {
+        } catch(err) {
             console.log("Error: unable to find event to update _id = " + eventId);
             res.status(400).end();
         }
@@ -116,10 +104,8 @@ exports.updateEvent = [
 exports.deleteEvent = function(req, res) {
     let rawEventId = req.body.eventId;
     Event.findByIdAndDelete(rawEventId, function(err) {
-        if(err) {
-            res.send({"Error": "deleting event _id = " + rawEventId});
-            res.status(400).end();
-        } else {
+        if(err) {  res.status(400).end(); }
+        else {
             let logMessage = "Success: deleted event _id = " + rawEventId;
             console.log(logMessage);
             res.send(logMessage);
