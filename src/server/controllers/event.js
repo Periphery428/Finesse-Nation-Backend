@@ -105,8 +105,10 @@ exports.deleteEvent = function(req, res) {
     let rawEventId = req.body.eventId;
     Event.findByIdAndDelete(rawEventId, function(err) {
         if(err) {  res.status(400).end(); }
-        let logMessage = "Success: deleted event _id = " + rawEventId;
-        console.log(logMessage);
-        res.send(logMessage);
+        else {
+            let logMessage = "Success: deleted event _id = " + rawEventId;
+            console.log(logMessage);
+            res.send(logMessage);
+        }
     });
 };
