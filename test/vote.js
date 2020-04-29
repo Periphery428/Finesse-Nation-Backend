@@ -9,6 +9,7 @@ chai.use(chaiHttp);
 
 describe("votes", () => {
     // -------------------- Before tests --------------------
+
     let emailId = "testmocha1@mochauniversity.edu";
     let targetEventId;
 
@@ -72,6 +73,7 @@ describe("votes", () => {
     });
 
     // -------------------- Test cases --------------------
+
     it("it should fail upvote/downvote an event for empty eventId", (done) => {
         let voteInfo = {
             "eventId": "",

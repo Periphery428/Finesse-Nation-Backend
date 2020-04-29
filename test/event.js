@@ -6,19 +6,8 @@ let expect = chai.expect;
 chai.use(chaiHttp);
 
 describe("events", () => {
-    it("it should return list of events", (done) => {
-        chai.request(server)
-            .get("/api/food/getEvents")
-            .set("api_token", process.env.API_TOKEN)
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res).to.be.json;
-                done();
-            });
-    });
-});
+    // -------------------- Before tests --------------------
 
-describe("events", () => {
     let targetEventId = "";
 
     it("it should create an event", (done) => {
@@ -41,6 +30,19 @@ describe("events", () => {
             .end((err, res) => {
                 expect(res).to.have.status(200);
                 expect(res.text).to.equal("Success: added new event = Mocha Test Event");
+                done();
+            });
+    });
+
+    // -------------------- Test cases --------------------
+
+    it("it should return list of events", (done) => {
+        chai.request(server)
+            .get("/api/food/getEvents")
+            .set("api_token", process.env.API_TOKEN)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res).to.be.json;
                 done();
             });
     });
@@ -176,6 +178,8 @@ describe("events", () => {
                 done();
             });
     });
+
+    // -------------------- After tests --------------------
 
     it("it should delete created event", (done) => {
         let eventDelete = {

@@ -6,6 +6,8 @@ let expect = chai.expect;
 chai.use(chaiHttp);
 
 describe("login", () => {
+    // -------------------- Test cases --------------------
+
     let passwordResetToken = "";
     let userId = "";
 
@@ -430,22 +432,6 @@ describe("login", () => {
             });
     });
 
-    it("it should delete user for cleanup", (done) => {
-        let emailId = {
-            "emailId": "testmocha1@mochauniversity.edu"
-        };
-        chai.request(server)
-            .post("/api/user/deleteUser")
-            .set("api_token", process.env.API_TOKEN)
-            .send(emailId)
-            .end((err, res) => {
-                expect(res).to.have.status(200);
-                expect(res.body.message).to.equal("User (testmocha1@mochauniversity.edu) deleted.");
-                expect(res).to.be.json;
-                done();
-            });
-    });
-
     it("it should not delete for user that does not exist", (done) => {
         let emailId = {
             "emailId": "testmocha0@mochauniversity.edu"
@@ -457,6 +443,24 @@ describe("login", () => {
             .end((err, res) => {
                 expect(res).to.have.status(400);
                 expect(res.body.message).to.equal("User does not exist");
+                expect(res).to.be.json;
+                done();
+            });
+    });
+
+    // -------------------- After tests --------------------
+
+    it("it should delete user for cleanup", (done) => {
+        let emailId = {
+            "emailId": "testmocha1@mochauniversity.edu"
+        };
+        chai.request(server)
+            .post("/api/user/deleteUser")
+            .set("api_token", process.env.API_TOKEN)
+            .send(emailId)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body.message).to.equal("User (testmocha1@mochauniversity.edu) deleted.");
                 expect(res).to.be.json;
                 done();
             });
