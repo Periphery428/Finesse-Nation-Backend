@@ -9,13 +9,8 @@ const mongoose = require("mongoose"),
         },
         "emailId": {
             "type": String,
-            // "required": true
-            // unique:true,
             required: 'Please enter the email id',
-            trim: true,
-            // index: true
-            // lowercase:true,
-            // validate: [{ validator: value => isEmail(value), msg: 'Invalid email.' }]
+            trim: true
         },
         "vote": {
             "type": Number,

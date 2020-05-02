@@ -31,7 +31,6 @@ app.use("/admin/api/user", adminRoutes);
 app.use("/api/comment", commentRoutes);
 app.use("/api/vote", voteRoutes);
 
-
 app.use(express.static(path.join("/app/src/client/build")));
 app.get('*', function(req, res) {
   res.sendFile(path.join("/app/src/client/build/index.html"), function(err) {

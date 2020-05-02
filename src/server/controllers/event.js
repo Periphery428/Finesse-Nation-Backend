@@ -21,19 +21,9 @@ exports.getEvents = function(req, res) {
 exports.addEvent = [
     // Validate fields
     body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
-    // body("description", "Please enter a valid description").isLength({min: 1}).trim(),
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
-    // body("duration", "Please enter a valid duration").isLength({min: 1}).trim(),
     body("postedTime", "Please enter a valid time posted").isLength({min: 1}).trim(),
-    // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
-    /**
-     *
-     * @param req
-     * @param res
-     * @param next
-     * @returns {Promise<*>}
-     */
     async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -72,24 +62,13 @@ exports.addEvent = [
  * @type {ValidationChain[]}
  */
 exports.updateEvent = [
-    // body("_id", "Please enter a valid event ID").isLength({min: 1}).trim(),
     // Validate fields
     body("eventId", "Please enter a valid event id").isLength({min: 24}).trim(),
     body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
-    // body("description", "Please enter a valid description").isLength({min: 1}).trim(),
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
-    // body("duration", "Please enter a valid duration").isLength({min: 1}).trim(),
     body("postedTime", "Please enter a valid time posted").isLength({min: 1}).trim(),
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
-    // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
-    /**
-     *
-     * @param req
-     * @param res
-     * @param next
-     * @returns {Promise<*>}
-     */
     async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -99,7 +78,6 @@ exports.updateEvent = [
             });
         }
 
-        //TODO: decide on what all fields are modifiable!!!
         const {eventId, eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
 
         try {

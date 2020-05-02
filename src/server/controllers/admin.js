@@ -26,8 +26,7 @@ exports.changePassword = [
         try {
             let user = await User.findOne({"_id": userId});
             const salt = await bcrypt.genSalt(10);
-            const newPassword = await bcrypt.hash(password, salt);
-            user.password = newPassword;
+            user.password = await bcrypt.hash(password, salt);
             await user.save(function(err) {
                 if(err) { return next(err); }
                 let logMessage = "Success: updated password for userId = " + userId;
