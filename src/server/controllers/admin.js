@@ -4,6 +4,10 @@ const bcrypt = require("bcryptjs");
 const User = require("../model/user");
 const PasswordReset = require("../model/passwordReset");
 
+/**
+ *
+ * @type {(ValidationChain | (function(...[any]=)))[]}
+ */
 exports.changePassword = [
     // Validate fields
     body("userId", "Please enter a valid userId").isLength({min: 24}).trim(),
@@ -42,6 +46,10 @@ exports.changePassword = [
     }
 ];
 
+/**
+ *
+ * @type {(ValidationChain | (function(...[any]=)))[]}
+ */
 exports.checkEmailTokenExists = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),

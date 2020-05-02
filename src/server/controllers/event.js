@@ -2,6 +2,11 @@ const {body, validationResult} = require("express-validator");
 
 const Event = require("../model/event");
 
+/**
+ *
+ * @param req
+ * @param res
+ */
 exports.getEvents = function(req, res) {
     Event.find({}).exec(function(err, listEvents) {
         if(err) {  res.status(400).end(); }
@@ -9,6 +14,10 @@ exports.getEvents = function(req, res) {
     });
 };
 
+/**
+ *
+ * @type {(ValidationChain|(function(...[*]=)))[]}
+ */
 exports.addEvent = [
     // Validate fields
     body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
@@ -18,6 +27,13 @@ exports.addEvent = [
     body("postedTime", "Please enter a valid time posted").isLength({min: 1}).trim(),
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
+    /**
+     *
+     * @param req
+     * @param res
+     * @param next
+     * @returns {Promise<*>}
+     */
     async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -51,6 +67,10 @@ exports.addEvent = [
     }
 ];
 
+/**
+ *
+ * @type {ValidationChain[]}
+ */
 exports.updateEvent = [
     // body("_id", "Please enter a valid event ID").isLength({min: 1}).trim(),
     // Validate fields
@@ -63,6 +83,13 @@ exports.updateEvent = [
     body("location", "Please enter a valid location").isLength({min: 1}).trim(),
     // body("image", "Please enter a valid image string binary").isLength({min: 1}).trim(),
 
+    /**
+     *
+     * @param req
+     * @param res
+     * @param next
+     * @returns {Promise<*>}
+     */
     async (req, res, next) => {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -101,6 +128,11 @@ exports.updateEvent = [
     }
 ];
 
+/**
+ *
+ * @param req
+ * @param res
+ */
 exports.deleteEvent = function(req, res) {
     let rawEventId = req.body.eventId;
     Event.findByIdAndDelete(rawEventId, function(err) {

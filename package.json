@@ -8,7 +8,7 @@
     "server": "node src/server/index.js",
     "start": "node src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "eslint src/server && mocha --exit && cd src/client && jest -u",
+    "test": "eslint src/server && mocha --timeout 2500 --exit && cd src/client && jest -u",
     "test-cov": "nyc --reporter=lcov --reporter=text-summary npm run test",
     "heroku-postbuild": "cd src/client && npm install && npm run build"
   },
