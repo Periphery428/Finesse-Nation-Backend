@@ -2,11 +2,6 @@ const {body, validationResult} = require("express-validator");
 
 const Comment = require("../model/comment");
 
-/**
- *
- * @param req
- * @param res
- */
 exports.getComments = function(req, res) {
     let eventId = req.params.eventId;
 
@@ -16,10 +11,6 @@ exports.getComments = function(req, res) {
     });
 };
 
-/**
- *
- * @type {(ValidationChain | (function(...[any]=)))[]}
- */
 exports.addComment = [
     // Validate fields
     body("eventId", "Please enter a valid event id").isLength({min: 1}).trim(),

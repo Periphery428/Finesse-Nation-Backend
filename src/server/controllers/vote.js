@@ -2,11 +2,6 @@ const {body, validationResult} = require("express-validator");
 
 const Vote = require("../model/vote");
 
-/**
- * It returnS the number of user who have voted this post.
- * @param req
- * @param res
- */
 exports.getVotesByEventId = function(req, res) {
     //event id is accepted as a query param
     let eventId = req.query.eventId;
@@ -26,11 +21,6 @@ exports.getVotesByEventId = function(req, res) {
     });
 };
 
-/**
- * Points of a user = No. of times he has upvoted or downvoted a post.
- * @param req
- * @param res
- */
 exports.getPointsForAUser = function(req, res) {
     //event id is accepted as a path param
     let emailId = req.query.emailId;
@@ -41,12 +31,6 @@ exports.getPointsForAUser = function(req, res) {
     });
 };
 
-/**
- * Get whether it's an upvote or downvote or No vote.
- * Points of a user = No. of times he has upvoted or downvoted a post.
- * @param req
- * @param res
- */
 exports.getVoteByEventAndUser = function(req, res) {
     let eventId = req.query.eventId;
     let emailId = req.query.emailId;
@@ -65,10 +49,6 @@ exports.getVoteByEventAndUser = function(req, res) {
     });
 };
 
-/**
- *
- * @type {(ValidationChain|(function(...[*]=)))[]}
- */
 exports.addVote = [
     // Validate fields
     body("eventId", "Please enter a valid event id").isLength({min: 1}).trim(),
@@ -124,10 +104,6 @@ exports.addVote = [
     }
 ];
 
-/**
- *
- * @type {(function(...[*]=))[]}
- */
 exports.deleteVote = [
     async (req, res) => {
         const {eventId, emailId} = req.body;

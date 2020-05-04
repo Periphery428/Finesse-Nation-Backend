@@ -7,10 +7,6 @@ const nodemailer = require("nodemailer");
 const User = require("../model/user");
 const PasswordReset = require("../model/passwordReset");
 
-/**
- *
- * @type {(ValidationChain | (function(...[any]=)))[]}
- */
 exports.signup = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
@@ -76,10 +72,6 @@ exports.signup = [
     }
 ];
 
-/**
- *
- * @type {(ValidationChain | (function(...[any]=)))[]}
- */
 exports.login = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
@@ -131,10 +123,6 @@ exports.login = [
     }
 ];
 
-/**
- *
- * @type {(ValidationChain | (function(...[any]=)))[]}
- */
 exports.getCurrentUser = [
         // Validate fields
         body("emailId", "Please enter a valid emailId").isEmail().trim(),
@@ -160,10 +148,6 @@ exports.getCurrentUser = [
         }
 ]
 
-/**
- *
- * @type {(ValidationChain | (function(...[any]=)))[]}
- */
 exports.changeNotifications = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
@@ -196,10 +180,6 @@ exports.changeNotifications = [
     }
 ];
 
-/**
- *
- * @type {(function(...[any]=))[]}
- */
 exports.deleteUser = [
     async (req, res) => {
         const {emailId} = req.body;
@@ -219,10 +199,6 @@ exports.deleteUser = [
     }
 ];
 
-/**
- *
- * @type {(ValidationChain | (function(...[any]=)))[]}
- */
 exports.checkEmailExists = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),
@@ -250,10 +226,6 @@ exports.checkEmailExists = [
     }
 ];
 
-/**
- *
- * @type {(ValidationChain | (function(...[any]=)))[]}
- */
 exports.generatePasswordResetLink = [
     // Validate fields
     body("emailId", "Please enter a valid emailId").isEmail().trim(),

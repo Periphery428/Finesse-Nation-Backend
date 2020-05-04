@@ -2,11 +2,6 @@ const {body, validationResult} = require("express-validator");
 
 const Event = require("../model/event");
 
-/**
- *
- * @param req
- * @param res
- */
 exports.getEvents = function(req, res) {
     Event.find({}).exec(function(err, listEvents) {
         if(err) {  res.status(400).end(); }
@@ -14,10 +9,6 @@ exports.getEvents = function(req, res) {
     });
 };
 
-/**
- *
- * @type {(ValidationChain|(function(...[*]=)))[]}
- */
 exports.addEvent = [
     // Validate fields
     body("eventTitle", "Please enter a valid event title").isLength({min: 1}).trim(),
@@ -57,10 +48,6 @@ exports.addEvent = [
     }
 ];
 
-/**
- *
- * @type {ValidationChain[]}
- */
 exports.updateEvent = [
     // Validate fields
     body("eventId", "Please enter a valid event id").isLength({min: 24}).trim(),
@@ -106,11 +93,6 @@ exports.updateEvent = [
     }
 ];
 
-/**
- *
- * @param req
- * @param res
- */
 exports.deleteEvent = function(req, res) {
     let rawEventId = req.body.eventId;
     Event.findByIdAndDelete(rawEventId, function(err) {
