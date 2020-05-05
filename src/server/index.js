@@ -16,6 +16,7 @@ const userRoutes = require("./routes/user");
 const adminRoutes = require("./routes/admin");
 const commentRoutes = require("./routes/comment");
 const voteRoutes = require("./routes/vote");
+const schedulerInAction = require("./controllers/ScheduleCleanUp");
 
 app.use(bodyParser.json({ limit: "16mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "16mb", extended: true }));
@@ -23,6 +24,9 @@ app.use(cors());
 
 // Custom middleware
 app.use(apiKeyValidation);
+
+// Calling the scheduler
+schedulerInAction();
 
 // Routes
 app.use('/api/food', eventRoutes);

@@ -1,6 +1,5 @@
 const {body, validationResult} = require("express-validator");
 const bcrypt = require("bcryptjs");
-
 const User = require("../model/user");
 const PasswordReset = require("../model/passwordReset");
 
@@ -16,7 +15,6 @@ exports.changePassword = [
                 errors: errors.array()
             });
         }
-
         const {userId, password} = req.body;
 
         try {
@@ -54,7 +52,6 @@ exports.checkEmailTokenExists = [
                 errors: errors.array()
             });
         }
-
         const {emailId, token} = req.body;
         try {
             let passwordReset = await PasswordReset.findOne({"emailId":emailId, "token":token});
@@ -65,7 +62,6 @@ exports.checkEmailTokenExists = [
                     msg: "Token has expired"
                 });
             }
-
             await passwordReset.remove();
 
             // Get user id if valid email/token
