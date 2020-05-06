@@ -6,7 +6,7 @@ There are free meals and giveaways on campus all the time. Finesse Nation is an 
 
 Developed using Node.js (server) and React (client).
 
-[Read the docs](project_documentation.pdf)
+[Read the docs](https://github.com/Periphery428/Finesse-Nation-Frontend/blob/master/project_documentation.pdf)
 ```bash
 # Contributors
 # Jeffrey Josol, Shilpa Rani, Robert Beckwith, Aditya Pandey, Krastan Dimitrov
