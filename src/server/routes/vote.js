@@ -23,6 +23,16 @@ const voteController = require('../controllers/vote');
  *      responses:
  *        200:
  *          description: Successfully return number of upvotes and downvotes.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              upVote:
+ *                type: integer
+ *              downVote:
+ *                type: integer
+ *            example:
+ *              upVote: 80
+ *              downVote: 13
  *        400:
  *          description: Fails to return number of upvotes and downvotes.
  */
@@ -48,6 +58,13 @@ router.get('/eventPoints', voteController.getVotesByEventId);
  *      responses:
  *        200:
  *          description: Successfully return number of points.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              points:
+ *                type: integer
+ *            example:
+ *              points: 112
  *        400:
  *          description: Fails to return number of points.
  */
@@ -75,6 +92,13 @@ router.get('/userPoints', voteController.getPointsForAUser);
  *      responses:
  *        200:
  *          description: Successfully return the vote status.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              status:
+ *                type: string
+ *            example:
+ *              status: "NOT_VOTED"
  *        400:
  *          description: Fails to return the vote status.
  */
@@ -82,7 +106,7 @@ router.get('/info', voteController.getVoteByEventAndUser);
 
 /**
  * @swagger
- * /api/food:
+ * /api/vote:
  *    post:
  *      tags:
  *          - Votes
@@ -104,6 +128,13 @@ router.get('/info', voteController.getVoteByEventAndUser);
  *      responses:
  *        200:
  *          description: Successfully added vote from user on an event.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              status:
+ *                type: string
+ *            example:
+ *              status: "Successfully Upvoted-Downvoted"
  *        400:
  *          description: Invalid vote number or input validation failed.
  */
@@ -111,7 +142,7 @@ router.post('/', voteController.addVote);
 
 /**
  * @swagger
- * /api/deleteVote:
+ * /api/vote/deleteVote:
  *    post:
  *      tags:
  *          - Votes
@@ -131,6 +162,9 @@ router.post('/', voteController.addVote);
  *      responses:
  *        200:
  *          description: Successfully delete a vote from user on an event.
+ *          schema:
+ *            type: string
+ *            example: "Vote (eventId=1ca98cdcd0738a925ca2ed6e, emailId=darko123@gmail.com) deleted."
  *        400:
  *          description: Vote from user on event doesn't exist.
  */

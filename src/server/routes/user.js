@@ -24,7 +24,14 @@ const userController = require('../controllers/user');
  *                type: string
  *      responses:
  *        200:
- *          description: Successfully updated event.
+ *          description: Successfully signed up user and returns valid token.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              token:
+ *                type: string
+ *            example:
+ *               token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWViMWQxOGJkMTc2MWYyMzZkNTJjNDQ0In0sImlhdCI6MTU4ODcxMTgxOSwiZXhwIjoxNTg4NzIxODE5fQ.UjDjX8AnSTOAPuQbZlsbEVsdtqliYTHQeEr0OitEAd8"
  *        400:
  *          description: Error on adding new user, user already exists, or input validation failed.
  */
@@ -51,7 +58,14 @@ router.post('/signup', userController.signup);
  *                type: string
  *      responses:
  *        200:
- *          description: Successfully authorize user.
+ *          description: Successfully authorize user and returns valid token.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              token:
+ *                type: string
+ *            example:
+ *               token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWViMWQxOGJkMTc2MWYyMzZkNTJjNDQ0In0sImlhdCI6MTU4ODcxMTgxOSwiZXhwIjoxNTg4NzIxODE5fQ.UjDjX8AnSTOAPuQbZlsbEVsdtqliYTHQeEr0OitEAd8"
  *        400:
  *          description: Error if user doesn't exist, incorrect password, or input validation failed.
  */
@@ -79,6 +93,13 @@ router.post('/login', userController.login);
  *      responses:
  *        200:
  *          description: Successfully updated notification option for user.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              message:
+ *                type: string
+ *            example:
+ *              message: "Success: updated notifications for user = testjosol1@school1.com"
  *        400:
  *          description: Error if user doesn't exist or input validation failed.
  */
@@ -104,6 +125,13 @@ router.post('/changeNotifications', userController.changeNotifications);
  *      responses:
  *        200:
  *          description: Successfully deleted user.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              message:
+ *                type: string
+ *            example:
+ *              message: "User (testjosol1@school2.com) deleted."
  *        400:
  *          description: User doesn't exist.
  */
@@ -129,6 +157,34 @@ router.post('/deleteUser', userController.deleteUser);
  *      responses:
  *        200:
  *          description: Successfully found user to return.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              points:
+ *                type: string
+ *              notifications:
+ *                type: boolean
+ *              _id:
+ *                type: string
+ *              userName:
+ *                type: string
+ *              emailId:
+ *                type: string
+ *              password:
+ *                type: string
+ *              school:
+ *                type: string
+ *              __v:
+ *                type: integer
+ *            example:
+ *              points: 0
+ *              notifications: false
+ *              _id: "5eb89ca3e0738a295ca2ed7x"
+ *              userName: "testjosol1"
+ *              emailId: "testjosol1@school1.com"
+ *              password: "$2a$11$ukNqi4v40zcGvi7gFkf1ru4qLFXzf946fSoaEfI4D8/.xrGPk2W/e"
+ *              school: "school1"
+ *              "__v": 0
  *        400:
  *          description: User doesn't exist.
  */
@@ -154,6 +210,13 @@ router.post('/getCurrentUser', userController.getCurrentUser);
  *      responses:
  *        200:
  *          description: Successfully found user from email.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              msg:
+ *                type: string
+ *            example:
+ *              msg: "User found"
  *        400:
  *          description: User doesn't exist.
  */
@@ -179,6 +242,16 @@ router.post('/checkEmailExists', userController.checkEmailExists);
  *      responses:
  *        200:
  *          description: Successfully sent email to user with password reset link.
+ *          schema:
+ *            type: object
+ *            properties:
+ *              msg:
+ *                type: string
+ *              token:
+ *                type: string
+ *            example:
+ *              msg: "Password reset token sent to user email"
+ *              token: "9960fec787576ccc58fd536f10d52c86d3xc9d61a4f40e88d8db2d9de947c7e0"
  *        400:
  *          description: Failed to send email or failed validation check.
  */
