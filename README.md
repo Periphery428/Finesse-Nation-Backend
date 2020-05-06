@@ -2,7 +2,14 @@
 
 [![Node.js CI](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Node.js%20CI/badge.svg?branch=master)](https://github.com/Periphery428/Finesse-Nation-Backend/actions) ![Lint](https://github.com/Periphery428/Finesse-Nation-Backend/workflows/Lint/badge.svg) [![Coverage Status](https://coveralls.io/repos/github/Periphery428/Finesse-Nation-Backend/badge.png?branch=master)](https://coveralls.io/github/Periphery428/Finesse-Nation-Backend?branch=master&service=github)
 
-Backend for the free food service.
+There are free meals and giveaways on campus all the time. Finesse Nation is an app that would allow users to share where the free items are located on campus.
+
+Developed using Node.js (server) and React (client).
+
+```bash
+# Contributors
+# Jeffrey Josol, Shilpa Rani, Robert Beckwith, Aditya Pandey, Krastan Dimitrov
+```
 
 ## Quick Start
 
@@ -52,10 +59,5 @@ Add to all headers: "api_token":"<api_token>"
 ```bash
 HTTP api swagger documentation:
 https://finesse-nation.herokuapp.com/api-docs
-```
-
-```bash
-# Contributors
-# Jeffrey Josol, Shilpa Rani, Robert Beckwith, Aditya Pandey, Krastan Dimitrov
 ```
 
