@@ -2,7 +2,6 @@ const {body, validationResult} = require("express-validator");
 
 const Vote = require("../model/vote");
 
-//it return the number of user who have voted this post.
 exports.getVotesByEventId = function(req, res) {
     //event id is accepted as a query param
     let eventId = req.query.eventId;
@@ -22,7 +21,6 @@ exports.getVotesByEventId = function(req, res) {
     });
 };
 
-//Points of a user = No. of times he has upvoted or downvoted a post.
 exports.getPointsForAUser = function(req, res) {
     //event id is accepted as a path param
     let emailId = req.query.emailId;
@@ -33,8 +31,6 @@ exports.getPointsForAUser = function(req, res) {
     });
 };
 
-//Get whether it's an upvote or downvote or No vote.
-//Points of a user = No. of times he has upvoted or downvoted a post.
 exports.getVoteByEventAndUser = function(req, res) {
     let eventId = req.query.eventId;
     let emailId = req.query.emailId;

@@ -4,6 +4,8 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const swaggerUi = require('swagger-ui-express');
+const specs = require('./swagger');
 const InitiateMongoServer = require("./config/db");
 const apiKeyValidation = require("./middleware/apikey")
 
@@ -29,12 +31,14 @@ app.use(apiKeyValidation);
 schedulerInAction();
 
 // Routes
+// Swagger api docs
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
+// App api routes
 app.use('/api/food', eventRoutes);
 app.use("/api/user", userRoutes);
 app.use("/admin/api/user", adminRoutes);
 app.use("/api/comment", commentRoutes);
 app.use("/api/vote", voteRoutes);
-
 
 app.use(express.static(path.join("/app/src/client/build")));
 app.get('*', function(req, res) {

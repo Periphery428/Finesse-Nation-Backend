@@ -6,8 +6,6 @@ let expect = chai.expect;
 chai.use(chaiHttp);
 
 describe("comments", () => {
-    let targetEventId = "5e83d7b01ed1c835cffc0f15";
-
     it("it should create a comment for an event", (done) => {
         let comment = {
             "eventId": "5e83d7b01ed1c835cffc0f15",
@@ -31,8 +29,6 @@ describe("comments", () => {
     });
 
     function test_server_response(serverUrl, statusCode, comment) {
-        // console.log("HIHI " + serverUrl + " " + statusCode+" ");
-
         chai.request(server)
             .post(serverUrl)
             .set("api_token", process.env.API_TOKEN)

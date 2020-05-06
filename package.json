@@ -8,7 +8,7 @@
     "server": "node src/server/index.js",
     "start": "node src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "eslint src/server && mocha --exit && cd src/client && jest -u",
+    "test": "eslint src/server && mocha --timeout 5000 --exit && cd src/client && jest -u",
     "test-cov": "nyc --reporter=lcov --reporter=text-summary npm run test",
     "heroku-postbuild": "cd src/client && npm install && npm run build"
   },
@@ -29,8 +29,8 @@
     "body-parser": "^1.19.0",
     "chai-http": "^4.3.0",
     "clsx": "^1.0.4",
-    "cors": "^2.8.5",
     "concurrently": "^4.1.2",
+    "cors": "^2.8.5",
     "date-fns": "^2.0.0-beta.5",
     "dotenv": "^8.2.0",
     "enzyme": "^3.11.0",
@@ -49,7 +49,9 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "^3.3.1"
+    "react-scripts": "^3.3.1",
+    "swagger-jsdoc": "^4.0.0",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",

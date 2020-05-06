@@ -35,6 +35,10 @@ class Users extends Component {
         }
     }
 
+    /**
+     * Change password given form data of new password.
+     * @param {string} event
+     */
     changePassword(event) {
         event.preventDefault();
         if (this.state.password !== this.state.confirmPassword) {

@@ -9,7 +9,7 @@ const mongoose = require("mongoose"),
         "emailId": {
             "type": String,
             required: 'Please enter the email id',
-            trim: true
+            trim: true,
         },
         "comment": {
             "type": String,

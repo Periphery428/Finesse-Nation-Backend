@@ -47,8 +47,15 @@ let password = process.env.MONGODB_PASSWORD;
 
 # Must use API Key to use API.
 Add to all headers: "api_token":"<api_token>"
+```
 
-# Refer to current postman collection for all http request to backend (Share current postman collection file to 
-# team). File also in project root.
+```bash
+HTTP api swagger documentation:
+https://finesse-nation.herokuapp.com/api-docs
+```
+
+```bash
+# Contributors
+# Jeffrey Josol, Shilpa Rani, Robert Beckwith, Aditya Pandey, Krastan Dimitrov
 ```
 

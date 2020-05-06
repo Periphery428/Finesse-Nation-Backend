@@ -2,6 +2,11 @@ const mongoose = require("mongoose");
 
 const MONGOURI = "mongodb+srv://" + process.env.MONGODB_USERNAME + ":" + process.env.MONGODB_PASSWORD + "@mongoclustercs428-pijzh.mongodb.net/free_food?retryWrites=true&w=majority";
 
+/**
+ * Establish mongodb connection and make it available to app.
+ * @returns {Promise<void>}
+ * @constructor
+ */
 const InitiateMongoServer = async () => {
     try {
         await mongoose.connect(MONGOURI, {
