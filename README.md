@@ -52,3 +52,13 @@ Add to all headers: "api_token":"<api_token>"
 # team). File also in project root.
 ```
 
+```bash
+HTTP api documentation:
+https://finesse-nation.herokuapp.com/api-docs
+```
+
+```bash
+# Contributors
+# Jeffrey Josol, Shilpa Rani, Robert Beckwith, Aditya Pandey, Krastan Dimitrov
+```
+
