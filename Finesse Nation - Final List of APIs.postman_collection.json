@@ -1,0 +1,1035 @@
+{
+	"info": {
+		"_postman_id": "5bbc1048-dfd1-48ee-820c-af24b9c7e64e",
+		"name": "Finesse Nation - Final List of APIs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "1.1 Signup - Step 1",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emailId\":\"darko@gmail.com\",\n\t\"password\":\"cs428Pass123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/user/signup",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.2 Login",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emailId\":\"darko@gmail.com\",\n\t\"password\":\"cs428Pass123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/user/login",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.3 Delete User",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emailId\":\"darko@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/user/deleteUser",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"deleteUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.4 Get Current User",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emailId\":\"darko@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/user/checkEmailExists",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"checkEmailExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.5 Check Email Exists",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emailId\":\"darko@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/user/checkEmailExists",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"checkEmailExists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.6 Change Notifications",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emailId\":\"darko@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/user/changeNotifications",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"changeNotifications"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "1.7 Password Reset Link",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emailId\":\"darko@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/user/generatePasswordResetLink",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"user",
+						"generatePasswordResetLink"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.1 Fetch All Events",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/food/getEvents",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"food",
+						"getEvents"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.2 Create Event",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n        \"eventTitle\":\"test final event\",\n        \"emailId\": \"Darko123@gmail.com\",\n        \"school\": \"UIUC\",\n        \"description\": \"Spread Awareness.\",\n        \"location\": \"DCL\",\n        \"isActive\": true,\n        \"image\": \"\",\n        \"postedTime\": \"2020-03-29T20:28:34.100Z\",\n        \"duration\": \"you don't need to come\",\n        \"category\": \"Food\"\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/food/addEvent",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"food",
+						"addEvent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.3 Update Event",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t    \"_id\": \"5e84013457d56e0017f2082e\",\n        \"eventTitle\":\"test final event\",\n        \"emailId\": \"Darko123@gmail.com\",\n        \"school\": \"UIUC\",\n        \"description\": \"Spread Awareness.\",\n        \"location\": \"DCL\",\n        \"isActive\": true,\n        \"image\": \"\",\n        \"postedTime\": \"2020-03-29T20:28:34.100Z\",\n        \"duration\": \"you don't need to come\",\n        \"category\": \"Food\"\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/food/addEvent",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"food",
+						"addEvent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "2.4 Update Event",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t    \"_id\": \"5e84013457d56e0017f2082e\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/food/deleteEvent",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"food",
+						"deleteEvent"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.1 Post Comment",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"eventId\": \"5e83d7b01ed1c835cffc0f15\", \n\t\"emailId\" : \"Darko12345@gmail.com\", \n\t\"comment\": \"Hurry up. One last offer.\",\n\t\"postedTime\": \"2020-04-12 23:44:04.344574\"\n\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/comment",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "3.2 Get comments by Event ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/comment/5e83d7b01ed1c835cffc0f15",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"comment",
+						"5e83d7b01ed1c835cffc0f15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.1 Post Votes",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"eventId\": \"5e879f2e9b0c280017f52431\", \n\t\"emailId\" : \"Darko12@gmail.com\", \n\t\"vote\": -1\n\t\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/vote",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"vote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.2 Get Votes by Event ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/vote/eventPoints?eventId=5e879f2e9b0c280017f52431",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"vote",
+						"eventPoints"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "5e879f2e9b0c280017f52431"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.3 Get Points for User ID",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/vote/userPoints?emailId=robertb4@illinois.edu",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"vote",
+						"userPoints"
+					],
+					"query": [
+						{
+							"key": "emailId",
+							"value": "robertb4@illinois.edu"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "4.4 Get the status of the vote before posting",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/api/vote/info?eventId=5e8abb1d39c5ef0017b441c4&emailId=robertb4@illinois.edu",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"api",
+						"vote",
+						"info"
+					],
+					"query": [
+						{
+							"key": "eventId",
+							"value": "5e8abb1d39c5ef0017b441c4"
+						},
+						{
+							"key": "emailId",
+							"value": "robertb4@illinois.edu"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.2 Admin - Change Password",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userId\":\"darko@gmail.com\",\n\t\"password\":\"cs428Pass123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/admin/api/user/changePassword",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"admin",
+						"api",
+						"user",
+						"changePassword"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "5.1 Admin - Check if email token exist",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "value",
+							"value": "389f780d0d3a9b4c84f5bc06",
+							"type": "string"
+						},
+						{
+							"key": "key",
+							"value": "api_token",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"emailId\":\"darko@gmail.com\",\n\t\"token\":\"cs428Pass123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://finesse-nation.herokuapp.com/admin/api/user/checkEmailTokenExists",
+					"protocol": "http",
+					"host": [
+						"finesse-nation",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"admin",
+						"api",
+						"user",
+						"checkEmailTokenExists"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

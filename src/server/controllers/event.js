@@ -1,5 +1,4 @@
 const {body, validationResult} = require("express-validator");
-
 const Event = require("../model/event");
 
 exports.getEvents = function(req, res) {
@@ -23,9 +22,7 @@ exports.addEvent = [
                 errors: errors.array()
             });
         }
-
         const {eventTitle, emailId, school, description, location, isActive, image, postedTime, duration, category} = req.body;
-
         let newEvent = new Event({
             "eventTitle": eventTitle,
             "emailId": emailId,
@@ -38,7 +35,6 @@ exports.addEvent = [
             "duration": duration,
             "category" : category
         });
-
         await newEvent.save(function(err) {
             if(err) { return next(err); }
             let logMessage = "Success: added new event = " + eventTitle;

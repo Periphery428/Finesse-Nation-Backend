@@ -1,5 +1,4 @@
 const {body, validationResult} = require("express-validator");
-
 const Comment = require("../model/comment");
 
 exports.getComments = function(req, res) {
@@ -26,9 +25,7 @@ exports.addComment = [
                 errors: errors.array()
             });
         }
-
         const {eventId, emailId, comment, postedTime} = req.body;
-
         let newComment = new Comment({
             "eventId": eventId,
             "emailId": emailId,

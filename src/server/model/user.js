@@ -30,5 +30,3 @@ const mongoose = require("mongoose"),
 // Export model user with UserSchema
 // Finesse_Nation_Users => Mongo is Case Sensitive
 module.exports = mongoose.model("finesse_nation_users", UserSchema);
-
-// Module.exports = mongoose.model("user", UserSchema);
